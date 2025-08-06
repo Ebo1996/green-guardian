@@ -48,6 +48,11 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         padding: 24px;
       }
+      
+      /* Added green label style */
+      .green-label {
+        color: #28a745; /* Green color */
+      }
     </style>
   </head>
   <body id="recommendations">
@@ -63,15 +68,15 @@
             <div class="disease-info-box">
               <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
                 <label class="flex flex-col min-w-40 flex-1">
-                  <p class="text-[#111418] text-base font-medium leading-normal pb-2">Disease</p>
+                  <p class="green-label text-base font-medium leading-normal pb-2">Disease</p> <!-- Made this label green -->
                   <input
                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f5] focus:border-none h-14 placeholder:text-[#60748a] p-4 text-base font-normal leading-normal"
                     value="Asthma"
                   />
                 </label>
               </div>
+            </div>
           
-            
             <!-- Treatment Options Box -->
             <div class="treatment-section">
               <h2 class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Recommendations</h2>
@@ -89,7 +94,9 @@
               </div>
               <div id="organic-details" class="treatment-details">
                 <ul class="list-disc pl-5 mt-2">
-               
+                  <li>Use honey and ginger mixture to soothe throat</li>
+                  <li>Try steam inhalation with eucalyptus oil</li>
+                  <li>Drink turmeric milk to reduce inflammation</li>
                 </ul>
               </div>
               
@@ -106,7 +113,9 @@
               </div>
               <div id="chemical-details" class="treatment-details">
                 <ul class="list-disc pl-5 mt-2">
-                 
+                  <li>Inhaled corticosteroids (e.g., fluticasone)</li>
+                  <li>Short-acting beta agonists (e.g., albuterol)</li>
+                  <li>Leukotriene modifiers (e.g., montelukast)</li>
                 </ul>
               </div>
               
@@ -123,7 +132,9 @@
               </div>
               <div id="environmental-details" class="treatment-details">
                 <ul class="list-disc pl-5 mt-2">
-                 
+                  <li>Use air purifiers to reduce allergens</li>
+                  <li>Keep living spaces clean and dust-free</li>
+                  <li>Avoid exposure to smoke and strong fumes</li>
                 </ul>
               </div>
             </div>
@@ -133,11 +144,13 @@
               <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-end">
                 <button
                   class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f0f2f5] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#e0e2e5] transition-colors"
+                  onclick="deleteRecommendation()"
                 >
                   <span class="truncate">Delete</span>
                 </button>
                 <button
                   class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0d78f2] text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#0b6ad8] transition-colors"
+                  onclick="saveRecommendation()"
                 >
                   <span class="truncate">Save</span>
                 </button>
@@ -163,6 +176,36 @@
           detailsElement.style.display = 'block';
         }
       }
+      
+      // Added interactive functions for buttons
+      function saveRecommendation() {
+        alert('Recommendation saved successfully!');
+        // Here you would typically add code to actually save the data
+      }
+      
+      function deleteRecommendation() {
+        if (confirm('Are you sure you want to delete this recommendation?')) {
+          alert('Recommendation deleted!');
+          // Here you would typically add code to actually delete the data
+        }
+      }
+      
+      // Make the treatment options interactive with keyboard
+      document.addEventListener('DOMContentLoaded', function() {
+        const treatmentOptions = document.querySelectorAll('.treatment-option');
+        
+        treatmentOptions.forEach(option => {
+          option.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              const onclick = this.getAttribute('onclick');
+              if (onclick) eval(onclick);
+            }
+          });
+          
+          // Add tabindex for keyboard accessibility
+          option.setAttribute('tabindex', '0');
+        });
+      });
     </script>
   </body>
 </html>
