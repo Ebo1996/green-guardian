@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenGuardians | Full Report</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .report-card {
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            border: none;
+            background: white;
+        }
+        .scanned-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            object-fit: contain;
+            border: 1px solid #e9ecef;
+        }
+        .healthy-status {
+            color: #28a745;
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+        .infected-status {
+            color: #dc3545;
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        .accuracy-badge {
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 50px;
+        }
+        .disease-badge {
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 50px;
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .header-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #d4edda;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+        .disease-section {
+            border-left: 4px solid #dc3545;
+            padding-left: 15px;
+            margin: 20px 0;
+        }
+        .treatment-card {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+        }
+        .treatment-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        .share-buttons .btn {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Header -->
+                <div class="text-center mb-5">
+                    <div class="header-icon">
+                        <i class="bi bi-file-earmark-medical-fill text-success fs-4"></i>
+                    </div>
+                    <h1 class="text-success fw-bold mb-3">GreenGuardians Full Report</h1>
+                    <p class="text-muted">Complete diagnosis and treatment plan</p>
+                </div>
+                
+                <!-- Image Section -->
+                <div class="text-center mb-5">
+                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         alt="Scanned plant" 
+                         class="scanned-image img-thumbnail mb-3">
+                </div>
+                
+                <!-- Results Card -->
+                <div class="card report-card mb-4 p-4">
+                    <div class="card-body">
+                        <!-- Accuracy -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0 fw-medium">Detection Accuracy:</h5>
+                            <span class="badge bg-success bg-opacity-10 text-success accuracy-badge fw-normal">
+                                <i class="bi bi-check-circle-fill me-2"></i>94%
+                            </span>
+                        </div>
+                        
+                        <!-- Status -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0 fw-medium">Plant Status:</h5>
+                            <span class="badge infected-status accuracy-badge fw-normal">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>Infected
+                            </span>
+                        </div>
+                        
+                        <!-- Disease Info -->
+                        <div class="disease-section">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0 fw-medium">Disease Identified:</h5>
+                                <span class="badge disease-badge fw-normal">
+                                    <i class="bi bi-bug-fill me-2"></i>Early Blight (Alternaria solani)
+                                </span>
+                            </div>
+                            <p class="mb-0">
+                                Early blight is a common fungal disease that affects tomatoes, potatoes, and other plants in the nightshade family. 
+                                It causes dark concentric rings on leaves that resemble targets, often starting with older leaves. 
+                                The disease thrives in warm, humid conditions and can significantly reduce yield if left untreated.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Treatments Section -->
+                <div class="card report-card mb-4 p-4">
+                    <div class="card-body">
+                        <h4 class="fw-bold mb-4 text-success">
+                            <i class="bi bi-prescription2 treatment-icon"></i>Recommended Treatments
+                        </h4>
+                        
+                        <!-- Organic Treatment -->
+                        <div class="card treatment-card mb-3">
+                            <div class="card-body">
+                                <h5 class="fw-medium">
+                                    <i class="bi bi-leaf-fill text-success treatment-icon"></i>Organic Treatment
+                                </h5>
+                                <ul>
+                                    <li>Apply neem oil spray every 7-10 days</li>
+                                    <li>Use baking soda spray (1 tbsp baking soda + 1 tsp vegetable oil + 1/2 tsp soap in 1 gallon water)</li>
+                                    <li>Apply compost tea to strengthen plant immunity</li>
+                                    <li>Remove and destroy infected plant material</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Environmental Treatment -->
+                        <div class="card treatment-card mb-3">
+                            <div class="card-body">
+                                <h5 class="fw-medium">
+                                    <i class="bi bi-tree-fill text-success treatment-icon"></i>Environmental Management
+                                </h5>
+                                <ul>
+                                    <li>Improve air circulation by proper plant spacing</li>
+                                    <li>Water at the base of plants (avoid wetting leaves)</li>
+                                    <li>Use mulch to prevent soil splashing onto leaves</li>
+                                    <li>Rotate crops annually (3-year rotation recommended)</li>
+                                    <li>Remove weeds that may harbor the fungus</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Chemical Treatment -->
+                        <div class="card treatment-card">
+                            <div class="card-body">
+                                <h5 class="fw-medium">
+                                    <i class="bi bi-droplet-fill text-success treatment-icon"></i>Chemical Treatment
+                                </h5>
+                                <ul>
+                                    <li>Apply copper-based fungicides (follow label instructions)</li>
+                                    <li>Use chlorothalonil-based products for severe infections</li>
+                                    <li>Apply fungicides preventatively before symptoms appear</li>
+                                    <li>Rotate between different fungicide classes to prevent resistance</li>
+                                </ul>
+                                <div class="alert alert-warning mt-3">
+                                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                    Always follow manufacturer instructions when using chemical treatments
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Share Section -->
+                <div class="card report-card p-4 mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="fw-medium mb-3">Share this report:</h5>
+                        <div class="share-buttons">
+                            <a href="#" class="btn btn-primary">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="#" class="btn btn-info text-white">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                            <a href="#" class="btn btn-success">
+                                <i class="bi bi-whatsapp"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="bi bi-envelope-fill"></i>
+                            </a>
+                            <a href="#" class="btn btn-secondary">
+                                <i class="bi bi-link-45deg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="#" class="btn btn-outline-secondary px-4 py-2 rounded-pill">
+                        <i class="bi bi-arrow-left me-2"></i>Back to Results
+                    </a>
+                    <a href="#" class="btn btn-success px-4 py-2 rounded-pill">
+                        <i class="bi bi-printer-fill me-2"></i>Print Report
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-success bg-opacity-10 py-3 mt-5 text-center">
+        <small class="text-muted">© 2025 GreenGuardians Technologies</small>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
