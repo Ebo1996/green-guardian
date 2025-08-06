@@ -1,342 +1,563 @@
-<html>
-  <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
-    />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgriScan - Smart Plant Disease Detection</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-      @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0px); }
-      }
-      .floating { animation: float 3s ease-in-out infinite; }
-      .hover-grow { transition: transform 0.3s ease; }
-      .hover-grow:hover { transform: scale(1.05); }
-      .feature-card:hover { box-shadow: 0 10px 25px -5px rgba(84, 210, 45, 0.3); }
-      .pulse { animation: pulse 2s infinite; }
-      @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(84, 210, 45, 0.7); }
-        70% { box-shadow: 0 0 0 10px rgba(84, 210, 45, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(84, 210, 45, 0); }
-      }
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                  url('https://images.unsplash.com/photo-1593305841991-05c297ba4575') no-repeat center center/cover;
+      text-align: center;
+      padding: 120px 20px;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .btn-learn {
+      display: inline-block;
+      margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 500px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 30px;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-learn:hover {
+      background-color: #218838;
+    }
+
+    .how-it-works {
+      padding: 80px 20px;
+      text-align: center;
+      background: #e9f8ec;
+      display: none; /* hidden initially */
+    }
+
+    .how-it-works h2 {
+      font-size: 2.3rem;
+      margin-bottom: 40px;
+      color: #2d6a4f;
+    }
+
+    .steps-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+     .btn-learn{
+          text-align: center;
+        }
+    .step {
+      background: #ffffff;
+      border: 2px solid #e0f4e4;
+      border-radius: 16px;
+      padding: 20px;
+      width: 260px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: 0.3s ease;
+    }
+
+    .step:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .step h3 {
+      color: #40916c;
+      margin-bottom: 10px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+        :root {
+            --primary-green: #54d22d;
+            --dark-green: #3cb021;
+            --light-green: #ebf2e9;
+            --text-dark: #121a0f;
+            --text-light: #639155;
+            --bg-light: #f9fbf9;
+        }
+        
+        body {
+            font-family: 'Manrope', 'Noto Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+        
+        .navbar {
+            background-color: var(--bg-light);
+            border-bottom: 1px solid var(--light-green);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+            color: var(--text-dark);
+            font-weight: bold;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+        
+        .btn-secondary {
+            background-color: var(--light-green);
+            border-color: var(--light-green);
+            color: var(--text-dark);
+            font-weight: bold;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #d4e5d0;
+            border-color: #d4e5d0;
+        }
+        
+        .hero-section {
+            background-size: cover;
+            background-position: center;
+            min-height: 480px;
+            border-radius: 0.5rem;
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(84, 210, 45, 0.1);
+        }
+        
+        .feature-card:hover .card-title {
+            color: var(--primary-green);
+        }
+        
+        .feature-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--primary-green);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+        
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-green);
+            color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .stats-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            height: 100%;
+        }
+        
+        .testimonial-quote {
+            font-size: 2rem;
+            color: var(--primary-green);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        
+        .mission-section {
+            background-color: var(--light-green);
+            border-radius: 0.5rem;
+            padding: 3rem 1rem;
+        }
+       
+        .social-icon {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: var(--primary-green);
+            transform: scale(1.2);
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(84, 210, 45, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(84, 210, 45, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(84, 210, 45, 0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 400px;
+            }
+            
+            .navbar-brand img {
+                height: 30px;
+            }
+            
+            .step-container {
+                flex-direction: column;
+            }
+            
+            .step-connector {
+                display: none;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-[#f9fbf9] group/design-root overflow-x-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
-      <!-- Animated background elements -->
-      <div class="absolute top-20 left-10 w-16 h-16 rounded-full bg-[#54d22d] opacity-10 animate-pulse"></div>
-      <div class="absolute bottom-1/4 right-20 w-24 h-24 rounded-full bg-[#54d22d] opacity-5 animate-pulse" style="animation-delay: 0.5s;"></div>
-      
-      <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ebf2e9] px-10 py-3 sticky top-0 bg-[#f9fbf9] z-50">
-          <div class="flex items-center gap-4 text-[#121a0f] hover-grow">
-            <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <svg viewBox="0 0 48 48" width="24" height="24" fill="#121a0f" class="me-2">
+                    <path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"></path>
+                </svg>
+                <span class="fw-bold">AgriScan</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Scan Page</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Result Page</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Recommendation Page</a></li>
+                     <li class="nav-item"><a class="nav-link" href="#">Report page</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Portal</a></li>
+                </ul>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-primary" href="scanning-page">Get Started</button>
+                   
+                </div>
             </div>
-            <h2 class="text-[#121a0f] text-lg font-bold leading-tight tracking-[-0.015em]">AgriScan</h2>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <div class="flex items-center gap-9">
-              <a class="text-[#121a0f] text-sm font-medium leading-normal hover:text-[#54d22d] transition-colors" href="#">Home</a>
-              <a class="text-[#121a0f] text-sm font-medium leading-normal hover:text-[#54d22d] transition-colors" href="#">Scan Page</a>
-              <a class="text-[#121a0f] text-sm font-medium leading-normal hover:text-[#54d22d] transition-colors" href="#">Result Page</a>
-              <a class="text-[#121a0f] text-sm font-medium leading-normal hover:text-[#54d22d] transition-colors" href="#">Recommendation Page</a>
-              <a class="text-[#121a0f] text-sm font-medium leading-normal hover:text-[#54d22d] transition-colors" href="#">Portal</a>
-            </div>
-            <div class="flex gap-2">
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#54d22d] text-[#121a0f] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#3cb021] transition-colors hover-grow"
-              >
-                <span class="truncate">Get Started</span>
-              </button>
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#ebf2e9] text-[#121a0f] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#d4e5d0] transition-colors hover-grow"
-              >
-                <span class="truncate">Try a Scan</span>
-              </button>
-            </div>
-          </div>
-        </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <div class="@container">
-              <div class="@[480px]:p-4">
-                <div
-                  class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-start justify-end px-4 pb-10 @[480px]:px-10 relative overflow-hidden"
-                  style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAw8JCo785NjqKhIbp46oaHjKahFuOUIF69WxWwCKQfHR51-2tiYtPx3NCTpkMQePJFbF6LuEZZIi8iX5HIrcaBHo7qtZVIF2ump-eVS9ZzMWJkRiJe8Ump9v4xshmHIM5VWDMrmJk9H77jsrWGSLgm7wzvZHli7tPPrRVgt28-P0bqIg6TTUMvlY8sPe5aUy4_VAwawlKWh8iUwk39be6y32VAgjGkMPf5sCyWw_YC-34EywOYFG6ndaxglsqsEJmocF17Yvb-dNQ8");'
-                >
-                  <!-- Animated floating leaves -->
-                  <div class="absolute top-10 right-10 w-16 h-16 floating" style="animation-delay: 0.2s;">
-                    <svg viewBox="0 0 64 64" fill="#54d22d" opacity="0.7">
-                      <path d="M32,2C15.4,2,2,15.4,2,32s13.4,30,30,30s30-13.4,30-30S48.6,2,32,2z M32,56C18.7,56,8,45.3,8,32S18.7,8,32,8 s24,10.7,24,24S45.3,56,32,56z"/>
-                      <path d="M32,12c-11,0-20,9-20,20s9,20,20,20s20-9,20-20S43,12,32,12z M32,46c-7.7,0-14-6.3-14-14s6.3-14,14-14s14,6.3,14,14 S39.7,46,32,46z"/>
-                    </svg>
-                  </div>
-                  <div class="absolute bottom-20 left-20 w-12 h-12 floating" style="animation-delay: 0.5s;">
-                    <svg viewBox="0 0 64 64" fill="#54d22d" opacity="0.7">
-                      <path d="M32,2C15.4,2,2,15.4,2,32s13.4,30,30,30s30-13.4,30-30S48.6,2,32,2z M32,56C18.7,56,8,45.3,8,32S18.7,8,32,8 s24,10.7,24,24S45.3,56,32,56z"/>
-                    </svg>
-                  </div>
-                  
-                  <div class="flex flex-col gap-2 text-left relative z-10 animate__animated animate__fadeInUp">
-                    <h1
-                      class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
-                    >
-                      Empowering Farmers with Smart Plant Disease Detection
-                    </h1>
-                    <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                      Scan. Detect. Act. Grow healthy crops with confidence.
-                    </h2>
-                  </div>
-                  <div class="flex-wrap gap-3 flex relative z-10 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
-                    <button
-                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#54d22d] text-[#121a0f] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#3cb021] transition-colors hover-grow pulse"
-                    >
-                      <span class="truncate">Get Started</span>
-                    </button>
-                    <button
-                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#ebf2e9] text-[#121a0f] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d4e5d0] transition-colors hover-grow"
-                    >
-                      <span class="truncate">Try a Scan</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <h2 class="text-[#121a0f] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 animate__animated animate__fadeIn">Core Features</h2>
-            <div class="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-4">
-              <div class="flex items-stretch p-4 gap-3">
-                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 feature-card bg-white p-4 transition-all duration-300 hover-grow">
-                  <div
-                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col overflow-hidden"
-                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAnPZ5lYRxDgX0BSTFxRnkGnrLPGyZCljjH8dD5PsN7y16rBNc9-MbtZIAmIBqqPGrKPenOi2rBebFxJdREYRB8SGqY1TTMQORG6Dp2nHqhid9tSUcyvzZKEhfkugU1D5NdpS7IyMRhOz9usNztaZGf3b9wvQaSUXgJwOKDko8oHwCdF4-LwOyQzshOSkB-4pMoAH9oVyttZH59x8Dx3xauUTFrybgEh5AiSjGkJJgThVCeDvvCh9WjFnSlb5D5xut1OTNEwKV91dID");'
-                  >
-                    <div class="bg-[#54d22d] text-white text-xs font-bold px-2 py-1 rounded-br-lg absolute">AI-Powered</div>
-                  </div>
-                  <div>
-                    <p class="text-[#121a0f] text-base font-medium leading-normal">Image-based Plant Disease Detection</p>
-                    <p class="text-[#639155] text-sm font-normal leading-normal">Accurate and rapid identification of plant diseases using advanced image analysis.</p>
-                  </div>
-                </div>
-                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 feature-card bg-white p-4 transition-all duration-300 hover-grow">
-                  <div
-                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col overflow-hidden"
-                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD7XxIzzGqgLIyqybdNOH1zG_CY3ZLnHfxNDAOrxYvD03SB8KFh6yJt_jOUQ5kEa5NJBDah0_xt9PBSNae7KXpxgtGoUBJ1ipn-Y8K3SyQFmiBqevRg5-ZcfJmT3_o2irTXXM9GsRemCc9RVqo9lBqrtwZ_JTOtksERVBs7kEA0Oul-u8huELLF_Aj0XOqHFQGlH4fJe_zYDtCMtlTgEE-ladDLJBRokRgxC9vZA6B6aPvRKJ4q5AGY8c-XQtY7AkJLXH84f0f2rHMj");'
-                  >
-                    <div class="bg-[#54d22d] text-white text-xs font-bold px-2 py-1 rounded-br-lg absolute">Smart</div>
-                  </div>
-                  <div>
-                    <p class="text-[#121a0f] text-base font-medium leading-normal">Personalized Crop Recommendations</p>
-                    <p class="text-[#639155] text-sm font-normal leading-normal">Tailored recommendations for crop management based on detected diseases and plant health.</p>
-                  </div>
-                </div>
-                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 feature-card bg-white p-4 transition-all duration-300 hover-grow">
-                  <div
-                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col overflow-hidden"
-                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALWgIifIIxNasw2YsH6ax6J1BvIh07vSB11fYSu1JSbqgaJhPv3tIrShL92j2tpRFnTCs2g3zTiChT0NFWTfq4ma-FEEuj4zWES9-8ixGX14rZT3SgjTyoN6VnBDWSG8ejobNrdBW_kiQLvWhF98UNzC_yhF6CI-joiArGOgq6Wc5ZO8JwdqiVgCyOzXKmVR3rb6ztAd6rmllqFkrf1gJzGvGbBGs3yXAWrxbDjRKZBOYqr-RdmAwcFOPrrVovWire8_aS9sd--fOP");'
-                  >
-                    <div class="bg-[#54d22d] text-white text-xs font-bold px-2 py-1 rounded-br-lg absolute">Easy-to-Use</div>
-                  </div>
-                  <div>
-                    <p class="text-[#121a0f] text-base font-medium leading-normal">Farmer-friendly Interface</p>
-                    <p class="text-[#639155] text-sm font-normal leading-normal">Intuitive and easy-to-use platform designed for farmers of all technical backgrounds.</p>
-                  </div>
-                </div>
-                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 feature-card bg-white p-4 transition-all duration-300 hover-grow">
-                  <div
-                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col overflow-hidden"
-                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-LN0Ki0X9ELqx5GLPBY3f5ZeiER0akIjoAQ--ZFIi7Xc4fI9kN60LDmQKLBp-I2EEnBRQnAc-wIvYBUJ7eAQmL_6eOM5zDvMSNx8-twpdXSHHl5JM4vik3T60AdA4TPH3aMoXHWPSUMOV1vW9xkT1K01c1KKjrzReLckF3Soua31ko_YOyLhRXdjymVaAGTmlvKhbY81TdqsdV1PDeX1MjgGntAWIHUIFfbugQvyGdpr10o2qKcC2X4Qmirye-0FnB7-WL3WrQ4gT");'
-                  >
-                    <div class="bg-[#54d22d] text-white text-xs font-bold px-2 py-1 rounded-br-lg absolute">Real-time</div>
-                  </div>
-                  <div>
-                    <p class="text-[#121a0f] text-base font-medium leading-normal">Real-time Smart Insights</p>
-                    <p class="text-[#639155] text-sm font-normal leading-normal">Receive instant alerts and actionable insights to address plant health issues promptly.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <h2 class="text-[#121a0f] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 animate__animated animate__fadeIn">How It Works</h2>
-            <div class="grid grid-cols-[40px_1fr] gap-x-2 px-4 animate__animated animate__fadeIn">
-              <div class="flex flex-col items-center gap-1 pt-3">
-                <div class="text-[#54d22d] bg-[#ebf2e9] p-2 rounded-full" data-icon="Camera" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM128,88a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,128,160Z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="w-[1.5px] bg-[#d6e5d2] h-2 grow"></div>
-              </div>
-              <div class="flex flex-1 flex-col py-3">
-                <p class="text-[#121a0f] text-base font-medium leading-normal">Step 1: Scan</p>
-                <p class="text-[#639155] text-base font-normal leading-normal">Capture images of your plants using your smartphone or device.</p>
-              </div>
-              <div class="flex flex-col items-center gap-1">
-                <div class="w-[1.5px] bg-[#d6e5d2] h-2"></div>
-                <div class="text-[#54d22d] bg-[#ebf2e9] p-2 rounded-full" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="w-[1.5px] bg-[#d6e5d2] h-2 grow"></div>
-              </div>
-              <div class="flex flex-1 flex-col py-3">
-                <p class="text-[#121a0f] text-base font-medium leading-normal">Step 2: Results</p>
-                <p class="text-[#639155] text-base font-normal leading-normal">Receive a detailed analysis of potential diseases and plant health status.</p>
-              </div>
-              <div class="flex flex-col items-center gap-1 pb-3">
-                <div class="w-[1.5px] bg-[#d6e5d2] h-2"></div>
-                <div class="text-[#54d22d] bg-[#ebf2e9] p-2 rounded-full" data-icon="Plant" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M247.63,39.89a8,8,0,0,0-7.52-7.52c-51.76-3-93.32,12.74-111.18,42.22-11.8,19.49-11.78,43.16-.16,65.74a71.34,71.34,0,0,0-14.17,27L98.33,151c7.82-16.33,7.52-33.35-1-47.49-13.2-21.79-43.67-33.47-81.5-31.25a8,8,0,0,0-7.52,7.52c-2.23,37.83,9.46,68.3,31.25,81.5A45.82,45.82,0,0,0,63.44,168,54.58,54.58,0,0,0,87,162.33l25,25V216a8,8,0,0,0,16,0V186.51a55.61,55.61,0,0,1,12.27-35,73.91,73.91,0,0,0,33.31,8.4,60.9,60.9,0,0,0,31.83-8.86C234.89,133.21,250.67,91.65,247.63,39.89ZM47.81,147.6C32.47,138.31,23.79,116.32,24,88c28.32-.24,50.31,8.47,59.6,23.81,4.85,8,5.64,17.33,2.46,26.94L61.65,114.34a8,8,0,0,0-11.31,11.31l24.41,24.41C65.14,153.24,55.82,152.45,47.81,147.6Zm149.31-10.22c-13.4,8.11-29.15,8.73-45.15,2l53.69-53.7a8,8,0,0,0-11.31-11.31L140.65,128c-6.76-16-6.15-31.76,2-45.15,13.94-23,47-35.82,89.33-34.83C232.94,90.34,220.14,123.44,197.12,137.38Z"
-                    ></path>
-                  </svg>
-                </div>
-              </div>
-              <div class="flex flex-1 flex-col py-3">
-                <p class="text-[#121a0f] text-base font-medium leading-normal">Step 3: Recommendations</p>
-                <p class="text-[#639155] text-base font-normal leading-normal">Get personalized recommendations for treatment and crop management.</p>
-              </div>
-            </div>
-            
-            <!-- Stats Section -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 py-8 animate__animated animate__fadeIn">
-              <div class="bg-white rounded-lg p-6 text-center hover-grow">
-                <div class="text-[#54d22d] text-3xl font-bold">91.2%</div>
-                <div class="text-[#639155] text-sm">Accuracy Rate</div>
-              </div>
-              <div class="bg-white rounded-lg p-6 text-center hover-grow">
-                <div class="text-[#54d22d] text-3xl font-bold">10K+</div>
-                <div class="text-[#639155] text-sm">Farmers Served</div>
-              </div>
-              <div class="bg-white rounded-lg p-6 text-center hover-grow">
-                <div class="text-[#54d22d] text-3xl font-bold">5+</div>
-                <div class="text-[#639155] text-sm">Plant Diseases</div>
-              </div>
-              <div class="bg-white rounded-lg p-6 text-center hover-grow">
-                <div class="text-[#54d22d] text-3xl font-bold">24/7</div>
-                <div class="text-[#639155] text-sm">Support</div>
-              </div>
-            </div>
-            
-            <div class="@container animate__animated animate__fadeIn">
-              <div class="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:px-10 @[480px]:py-20 bg-[#ebf2e9] rounded-lg">
-                <div class="flex flex-col gap-2 text-center">
-                  <h1
-                    class="text-[#121a0f] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px] mx-auto"
-                  >
-                    We're on a mission to revolutionize agriculture with technology, making farming more efficient and sustainable.
-                  </h1>
-                </div>
-                <div class="flex flex-1 justify-center">
-                  <div class="flex justify-center hover-grow">
-                    <button
-                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#54d22d] text-[#121a0f] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] grow hover:bg-[#3cb021] transition-colors"
-                    >
-                      <span class="truncate">Learn More</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-  
-            
-            <footer class="flex flex-col gap-6 px-5 py-10 text-center @container animate__animated animate__fadeIn">
-              <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-                <a class="text-[#639155] text-base font-normal leading-normal min-w-40 hover:text-[#54d22d] transition-colors" href="#">About Us</a>
-                <a class="text-[#639155] text-base font-normal leading-normal min-w-40 hover:text-[#54d22d] transition-colors" href="#">Services</a>
-                <a class="text-[#639155] text-base font-normal leading-normal min-w-40 hover:text-[#54d22d] transition-colors" href="#">Contact</a>
-                <a class="text-[#639155] text-base font-normal leading-normal min-w-40 hover:text-[#54d22d] transition-colors" href="#">Privacy Policy</a>
-              </div>
-              <div class="flex flex-wrap justify-center gap-4">
-                <a href="#" class="hover-grow">
-                  <div class="text-[#639155] hover:text-[#54d22d] transition-colors" data-icon="TwitterLogo" data-size="24px" data-weight="regular">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                      <path
-                        d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z"
-                      ></path>
-                    </svg>
-                  </div>
-                </a>
-                <a href="#" class="hover-grow">
-                  <div class="text-[#639155] hover:text-[#54d22d] transition-colors" data-icon="FacebookLogo" data-size="24px" data-weight="regular">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                      <path
-                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"
-                      ></path>
-                    </svg>
-                  </div>
-                </a>
-                <a href="#" class="hover-grow">
-                  <div class="text-[#639155] hover:text-[#54d22d] transition-colors" data-icon="InstagramLogo" data-size="24px" data-weight="regular">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                      <path
-                        d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"
-                      ></path>
-                    </svg>
-                  </div>
-                </a>
-              </div>
-              <p class="text-[#639155] text-base font-normal leading-normal">© 2024 AgriScan. All rights reserved.</p>
-            </footer>
-          </div>
         </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container my-4">
+        <div class="hero-section position-relative p-4 p-md-5 d-flex align-items-end" 
+             style="background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAw8JCo785NjqKhIbp46oaHjKahFuOUIF69WxWwCKQfHR51-2tiYtPx3NCTpkMQePJFbF6LuEZZIi8iX5HIrcaBHo7qtZVIF2ump-eVS9ZzMWJkRiJe8Ump9v4xshmHIM5VWDMrmJk9H77jsrWGSLgm7wzvZHli7tPPrRVgt28-P0bqIg6TTUMvlY8sPe5aUy4_VAwawlKWh8iUwk39be6y32VAgjGkMPf5sCyWw_YC-34EywOYFG6ndaxglsqsEJmocF17Yvb-dNQ8');">
+            <!-- Floating decorative elements -->
+            <div class="position-absolute top-0 end-0 floating" style="animation-delay: 0.2s;">
+                <svg viewBox="0 0 64 64" width="60" height="60" fill="#54d22d" opacity="0.7">
+                    <path d="M32,2C15.4,2,2,15.4,2,32s13.4,30,30,30s30-13.4,30-30S48.6,2,32,2z M32,56C18.7,56,8,45.3,8,32S18.7,8,32,8 s24,10.7,24,24S45.3,56,32,56z"/>
+                    <path d="M32,12c-11,0-20,9-20,20s9,20,20,20s20-9,20-20S43,12,32,12z M32,46c-7.7,0-14-6.3-14-14s6.3-14,14-14s14,6.3,14,14 S39.7,46,32,46z"/>
+                </svg>
+            </div>
+            
+            <div class="position-absolute bottom-20 start-20 floating" style="animation-delay: 0.5s;">
+                <svg viewBox="0 0 64 64" width="50" height="50" fill="#54d22d" opacity="0.7">
+                    <path d="M32,2C15.4,2,2,15.4,2,32s13.4,30,30,30s30-13.4,30-30S48.6,2,32,2z M32,56C18.7,56,8,45.3,8,32S18.7,8,32,8 s24,10.7,24,24S45.3,56,32,56z"/>
+                </svg>
+            </div>
+            
+            <div class="position-relative text-white">
+                <h1 class="display-4 fw-bold mb-3">Empowering Farmers with Smart Plant Disease Detection</h1>
+                <p class="lead mb-4">Scan. Detect. Act. Grow healthy crops with confidence.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <button class="btn btn-primary btn-lg pulse">Get Started</button>
+        
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features -->
+    <section class="container my-5">
+        <h2 class="fw-bold mb-4">Core Features</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card card h-100">
+                    <div class="position-relative">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnPZ5lYRxDgX0BSTFxRnkGnrLPGyZCljjH8dD5PsN7y16rBNc9-MbtZIAmIBqqPGrKPenOi2rBebFxJdREYRB8SGqY1TTMQORG6Dp2nHqhid9tSUcyvzZKEhfkugU1D5NdpS7IyMRhOz9usNztaZGf3b9wvQaSUXgJwOKDko8oHwCdF4-LwOyQzshOSkB-4pMoAH9oVyttZH59x8Dx3xauUTFrybgEh5AiSjGkJJgThVCeDvvCh9WjFnSlb5D5xut1OTNEwKV91dID" 
+                             class="card-img-top" alt="Plant Disease Detection">
+                        <span class="feature-badge">AI-Powered</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Image-based Plant Disease Detection</h5>
+                        <p class="card-text text-muted">Accurate and rapid identification of plant diseases using advanced image analysis.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card card h-100">
+                    <div class="position-relative">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7XxIzzGqgLIyqybdNOH1zG_CY3ZLnHfxNDAOrxYvD03SB8KFh6yJt_jOUQ5kEa5NJBDah0_xt9PBSNae7KXpxgtGoUBJ1ipn-Y8K3SyQFmiBqevRg5-ZcfJmT3_o2irTXXM9GsRemCc9RVqo9lBqrtwZ_JTOtksERVBs7kEA0Oul-u8huELLF_Aj0XOqHFQGlH4fJe_zYDtCMtlTgEE-ladDLJBRokRgxC9vZA6B6aPvRKJ4q5AGY8c-XQtY7AkJLXH84f0f2rHMj" 
+                             class="card-img-top" alt="Crop Recommendations">
+                        <span class="feature-badge">Smart</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Personalized Crop Recommendations</h5>
+                        <p class="card-text text-muted">Tailored recommendations for crop management based on detected diseases and plant health.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card card h-100">
+                    <div class="position-relative">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuALWgIifIIxNasw2YsH6ax6J1BvIh07vSB11fYSu1JSbqgaJhPv3tIrShL92j2tpRFnTCs2g3zTiChT0NFWTfq4ma-FEEuj4zWES9-8ixGX14rZT3SgjTyoN6VnBDWSG8ejobNrdBW_kiQLvWhF98UNzC_yhF6CI-joiArGOgq6Wc5ZO8JwdqiVgCyOzXKmVR3rb6ztAd6rmllqFkrf1gJzGvGbBGs3yXAWrxbDjRKZBOYqr-RdmAwcFOPrrVovWire8_aS9sd--fOP" 
+                             class="card-img-top" alt="Farmer Interface">
+                        <span class="feature-badge">Easy-to-Use</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Farmer-friendly Interface</h5>
+                        <p class="card-text text-muted">Intuitive and easy-to-use platform designed for farmers of all technical backgrounds.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card card h-100">
+                    <div class="position-relative">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-LN0Ki0X9ELqx5GLPBY3f5ZeiER0akIjoAQ--ZFIi7Xc4fI9kN60LDmQKLBp-I2EEnBRQnAc-wIvYBUJ7eAQmL_6eOM5zDvMSNx8-twpdXSHHl5JM4vik3T60AdA4TPH3aMoXHWPSUMOV1vW9xkT1K01c1KKjrzReLckF3Soua31ko_YOyLhRXdjymVaAGTmlvKhbY81TdqsdV1PDeX1MjgGntAWIHUIFfbugQvyGdpr10o2qKcC2X4Qmirye-0FnB7-WL3WrQ4gT" 
+                             class="card-img-top" alt="Real-time Insights">
+                        <span class="feature-badge"></span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Soil Nutrient & pH Detection</h5>
+                        <p class="card-text text-muted">Detect soil nutrients (NPK) and pH level to classify soil type and suggest the best crops to grow."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Stats Section -->
+    <section class="container my-5">
+        <div class="row g-4">
+            <div class="col-6 col-md-3">
+                <div class="stats-card">
+                    <h3 class="text-primary">91.3%</h3>
+                    <p class="text-muted mb-0">Accuracy Rate</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stats-card">
+                    <h3 class="text-primary">10K+</h3>
+                    <p class="text-muted mb-0">Farmers Served</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stats-card">
+                    <h3 class="text-primary">50+</h3>
+                    <p class="text-muted mb-0">Plant Diseases</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stats-card">
+                    <h3 class="text-primary">24/7</h3>
+                    <p class="text-muted mb-0">Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Mission Section -->
+    <section class="container my-5">
+        <div class="mission-section text-center p-4 p-md-5">
+            <h2 class="display-5 fw-bold mb-4">We're on a mission to revolutionize agriculture with technology, making farming more efficient and sustainable.</h2>
+           
+        </div>
+         <button href="#how-it-works" class="btn btn-primary btn-lg btn-learn" onclick="showHowItWorks()"  >Learn More</button>
+     <section id="how-it-works" class="how-it-works">
+    <h2>How AgriScan Works</h2>
+    <div class="steps-container">
+      <div class="step">
+        <h3>1. Take a Photo</h3>
+        <p>Snap or upload a picture of your crop or soil.</p>
+      </div>
+      <div class="step">
+        <h3>2. Let AI Analyze</h3>
+        <p>We detect diseases, nutrient levels & classify the pH.</p>
+      </div>
+      <div class="step">
+        <h3>3. View the Results</h3>
+        <p>See affected areas, nutrient % and soil condition.</p>
+      </div>
+      <div class="step">
+        <h3>4. Get Treatment Advice</h3>
+        <p>Choose between organic, chemical, or eco-friendly solutions.</p>
       </div>
     </div>
+  </section>
+
+  <script>
+    function showHowItWorks() {
+      const section = document.getElementById("how-it-works");
+      section.style.display = "block";
+      section.scrollIntoView({ behavior: "smooth" });
+    }</script>
+    <!-- Footer -->
+<footer class="bg-success py-5" style="--bs-bg-opacity: 0.05;">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3 mb-md-0">
+                <h5 class="fw-bold mb-3 text-success">AgriScan</h5>
+                <p class="text-success" style="--bs-text-opacity: 0.8;">Empowering farmers with smart plant disease detection technology.</p>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <h6 class="fw-bold mb-3 text-success">Quick Links</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">About Us</a></li>
+                    <li class="mb-2"><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">Services</a></li>
+                    <li class="mb-2"><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">Contact</a></li>
+                    <li><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <h6 class="fw-bold mb-3 text-success">Resources</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">Blog</a></li>
+                    <li class="mb-2"><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">FAQs</a></li>
+                    <li><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">Support</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6 class="fw-bold mb-3 text-success">Connect With Us</h6>
+                <div class="d-flex gap-3">
+                    <a href="#" class="social-icon text-success" style="--bs-text-opacity: 0.8;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon text-success" style="--bs-text-opacity: 0.8;"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon text-success" style="--bs-text-opacity: 0.8;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon text-success" style="--bs-text-opacity: 0.8;"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4" style="opacity: 0.1;">
+        <div class="text-center text-success" style="--bs-text-opacity: 0.8;">
+            <p class="mb-0">© 2024 AgriScan. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
+    <!-- Custom JavaScript -->
     <script>
-      // Simple animation trigger on scroll
-      document.addEventListener('DOMContentLoaded', function() {
-        const animateElements = document.querySelectorAll('.animate__animated');
-        
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add(entry.target.dataset.animate);
-              observer.unobserve(entry.target);
-            }
-          });
-        }, {
-          threshold: 0.1
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation for feature cards on scroll
+            const featureCards = document.querySelectorAll('.feature-card');
+            const statsCards = document.querySelectorAll('.stats-card');
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            
+            const animateOnScroll = function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+            
+            const observer = new IntersectionObserver(animateOnScroll, {
+                threshold: 0.1
+            });
+            
+            featureCards.forEach(card => observer.observe(card));
+            statsCards.forEach(card => observer.observe(card));
+            testimonialCards.forEach(card => observer.observe(card));
+            
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-sm');
+                } else {
+                    navbar.classList.remove('shadow-sm');
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Mobile menu close on click
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {toggle: false});
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 992) {
+                        bsCollapse.hide();
+                    }
+                });
+            });
         });
-        
-        animateElements.forEach(element => {
-          observer.observe(element);
-        });
-        
-        // Add hover effect to feature cards
-        const featureCards = document.querySelectorAll('.feature-card');
-        featureCards.forEach(card => {
-          card.addEventListener('mouseenter', () => {
-            card.querySelector('p:first-child').classList.add('text-[#54d22d]');
-          });
-          card.addEventListener('mouseleave', () => {
-            card.querySelector('p:first-child').classList.remove('text-[#54d22d]');
-          });
-        });
-      });
     </script>
-  </body>
+</body>
 </html>
