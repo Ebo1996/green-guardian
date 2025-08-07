@@ -160,52 +160,6 @@
         </div>
       </div>
     </div>
-
-    <script>
-      function toggleTreatment(type) {
-        const detailsElement = document.getElementById(`${type}-details`);
-        const isVisible = detailsElement.style.display === 'block';
-        
-        // Hide all treatment details first
-        document.querySelectorAll('.treatment-details').forEach(el => {
-          el.style.display = 'none';
-        });
-        
-        // If the clicked one wasn't visible, show it
-        if (!isVisible) {
-          detailsElement.style.display = 'block';
-        }
-      }
       
-      // Added interactive functions for buttons
-      function saveRecommendation() {
-        alert('Recommendation saved successfully!');
-        // Here you would typically add code to actually save the data
-      }
-      
-      function deleteRecommendation() {
-        if (confirm('Are you sure you want to delete this recommendation?')) {
-          alert('Recommendation deleted!');
-          // Here you would typically add code to actually delete the data
-        }
-      }
-      
-      // Make the treatment options interactive with keyboard
-      document.addEventListener('DOMContentLoaded', function() {
-        const treatmentOptions = document.querySelectorAll('.treatment-option');
-        
-        treatmentOptions.forEach(option => {
-          option.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-              const onclick = this.getAttribute('onclick');
-              if (onclick) eval(onclick);
-            }
-          });
-          
-          // Add tabindex for keyboard accessibility
-          option.setAttribute('tabindex', '0');
-        });
-      });
-    </script>
   </body>
 </html>

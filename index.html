@@ -101,7 +101,9 @@
             --text-light: #639155;
             --bg-light: #f9fbf9;
         }
-        
+        .mb-4{
+            margin-top: 100px;
+        }
         body {
             font-family: 'Manrope', 'Noto Sans', sans-serif;
             background-color: var(--bg-light);
@@ -162,7 +164,7 @@
         
         .feature-badge {
             position: absolute;
-            top: 10px;
+            top: 30px;
             left: 10px;
             background-color: var(--primary-green);
             color: white;
@@ -181,7 +183,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }
         
         .stats-card {
@@ -503,64 +505,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animation for feature cards on scroll
-            const featureCards = document.querySelectorAll('.feature-card');
-            const statsCards = document.querySelectorAll('.stats-card');
-            const testimonialCards = document.querySelectorAll('.testimonial-card');
-            
-            const animateOnScroll = function(entries, observer) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            };
-            
-            const observer = new IntersectionObserver(animateOnScroll, {
-                threshold: 0.1
-            });
-            
-            featureCards.forEach(card => observer.observe(card));
-            statsCards.forEach(card => observer.observe(card));
-            testimonialCards.forEach(card => observer.observe(card));
-            
-            // Navbar scroll effect
-            const navbar = document.querySelector('.navbar');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('shadow-sm');
-                } else {
-                    navbar.classList.remove('shadow-sm');
-                }
-            });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // Mobile menu close on click
-            const navLinks = document.querySelectorAll('.nav-link');
-            const navbarCollapse = document.querySelector('.navbar-collapse');
-            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {toggle: false});
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth < 992) {
-                        bsCollapse.hide();
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
