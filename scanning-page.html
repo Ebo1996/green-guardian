@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head >
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenGuardians | Smart Farming Solution</title>
@@ -45,6 +45,9 @@
             z-index: 2000;
             justify-content: center;
             align-items: center;
+        }
+        .action-buttons {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -102,6 +105,13 @@
                 </ul>
             </div>
             
+            <!-- View Results Button (Initially hidden) -->
+            <div id="viewResultsBtn" class="action-buttons" style="display: none;">
+                <a href="results.html" class="btn btn-outline-success px-4 py-2 rounded-pill shadow mt-3">
+                    <i class="bi bi-clipboard-data me-2"></i>View Analysis Results
+                </a>
+            </div>
+            
             <!-- Hidden file input for upload option -->
             <input type="file" id="fileInput" accept="image/*" style="display: none;">
         </div>
@@ -130,6 +140,7 @@
         const imagePreview = document.getElementById('imagePreview');
         const fileInput = document.getElementById('fileInput');
         const loadingSpinner = document.getElementById('loadingSpinner');
+        const viewResultsBtn = document.getElementById('viewResultsBtn');
         
         // Google API configuration (replace with your own credentials)
         const GOOGLE_API_CONFIG = {
@@ -357,8 +368,10 @@
             // Simulate processing delay
             showLoading(true);
             setTimeout(() => {
-                alert('Image processing complete! In a real app, this would show analysis results.');
+                alert('Image processing complete!');
                 showLoading(false);
+                // Show the View Results button after processing
+                viewResultsBtn.style.display = 'block';
             }, 2000);
         }
     </script>
