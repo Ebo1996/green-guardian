@@ -26,9 +26,49 @@
             line-height: 1.6;
         }
         
-        .header {
-            background: linear-gradient(135deg, var(--light-green) 0%, white 100%);
-            border-bottom: 3px solid var(--primary-green);
+        /* COMPLETELY REDESIGNED HERO SECTION */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.9) 0%, rgba(27, 94, 32, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 0;
+            text-align: center;
+            color: white;
+            border-bottom: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .hero-cta {
+            background: white;
+            color: var(--primary-green);
+            font-weight: 600;
+            padding: 0.75rem 2.5rem;
+            border-radius: 30px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
         
         .language-selector {
@@ -39,9 +79,9 @@
         }
         
         .lang-btn {
-            border: 1px solid var(--primary-green);
-            color: var(--primary-green);
-            background: white;
+            border: 1px solid white;
+            color: white;
+            background: transparent;
             margin-left: 8px;
             padding: 5px 15px;
             border-radius: 20px;
@@ -50,21 +90,14 @@
         }
         
         .lang-btn:hover, .lang-btn.active {
-            background: var(--primary-green);
-            color: white;
-            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.2);
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Poppins', sans-serif;
+            background: white;
             color: var(--primary-green);
         }
         
-        .main-title {
-            font-weight: 700;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        /* REST OF THE STYLES REMAIN THE SAME */
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-green);
         }
         
         .step-section {
@@ -173,29 +206,13 @@
             border-left: 4px solid #F44336;
         }
         
-        .footer {
-            background: var(--primary-green);
-            color: white;
-            padding: 3rem 0;
-        }
-        
-        .cta-button {
-            background: white;
-            color: var(--primary-green);
-            font-weight: 600;
-            padding: 0.75rem 2rem;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        
         @media (max-width: 768px) {
-            .main-title {
-                font-size: 2rem;
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
             }
             
             .step-title {
@@ -216,26 +233,27 @@
     </style>
 </head>
 <body>
-    <!-- Header with Language Selector -->
-    <header class="header py-5 position-relative">
+    <!-- COMPLETELY REDESIGNED HERO SECTION -->
+    <header class="hero-section position-relative">
+        <div class="language-selector">
+            <button class="lang-btn active" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="or">Afaan Oromoo</button>
+            <button class="lang-btn" data-lang="am">አማርኛ</button>
+        </div>
+        
         <div class="container">
-            <div class="language-selector">
-                <button class="lang-btn active" data-lang="en">English</button>
-                <button class="lang-btn" data-lang="or">Afaan Oromoo</button>
-                <button class="lang-btn" data-lang="am">አማርኛ</button>
-            </div>
-            
-            <div class="text-center">
-                <h1 class="main-title">GreenGuardians</h1>
-                <p class="lead fs-4">The Complete Guide to Plant Health Analysis & Treatment</p>
-            </div>
+            <h1 class="hero-title">GreenGuardians: The Complete Guide</h1>
+            <p class="hero-subtitle">The Complete Guide to Plant Health Analysis & Treatment</p>
+            <a href="#step1" class="btn hero-cta">
+                <i class="fas fa-seedling me-2"></i> Start Protecting Your Crops
+            </a>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="container py-5">
         <section class="intro-section mb-5">
-            <p class="lead text-center mb-4">This comprehensive guide explains every step of using (or building) GreenGuardians — an AI-powered agricultural assistant that helps farmers diagnose plant diseases, analyze soil conditions, and receive treatment recommendations.</p>
+            <p class="lead text-center mb-4">This comprehensive guide explains every step of using GreenGuardians — an AI-powered agricultural assistant that helps farmers diagnose plant diseases, analyze soil conditions, and receive treatment recommendations.</p>
             
             <div class="row">
                 <div class="col-md-10 mx-auto">
@@ -251,11 +269,11 @@
             </div>
         </section>
 
-        <!-- Step 1 -->
+        <!-- Step 1 with UPDATED PHOTO -->
         <section id="step1" class="step-section">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Take a Photo" class="img-fluid step-image">
+                    <img src="https://images.unsplash.com/photo-1585016394189-0ec5e9d5d839?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Farmer taking photo of plant" class="img-fluid step-image">
                 </div>
                 <div class="col-lg-6">
                     <h2 class="mb-4">
@@ -284,24 +302,16 @@
                             </li>
                             <li><strong>Upload Existing Photos:</strong> Already have images? Upload from your gallery</li>
                         </ol>
-                        
-                        <div class="tech-box mt-4">
-                            <h5 class="tech-title">Technical Insight (For Developers)</h5>
-                            <ul class="mb-0">
-                                <li><strong>Image Processing:</strong> The system uses edge detection to enhance blurry images</li>
-                                <li><strong>Minimum Resolution:</strong> 1024×768 pixels for accurate AI analysis</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Step 2 -->
+        <!-- Step 2 with UPDATED PHOTO -->
         <section id="step2" class="step-section">
             <div class="row align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="AI Analysis" class="img-fluid step-image">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="AI analyzing plant health" class="img-fluid step-image">
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <h2 class="mb-4">
@@ -338,24 +348,16 @@
                         <p><span class="risk-level risk-low">✅ Low risk</span> (monitor)</p>
                         <p><span class="risk-level risk-medium">⚠️ Moderate</span> (take action)</p>
                         <p><span class="risk-level risk-high">❌ Critical</span> (urgent treatment needed)</p>
-                        
-                        <div class="tech-box mt-4">
-                            <h5 class="tech-title">For Developers: How the AI Works</h5>
-                            <ul class="mb-0">
-                                <li><strong>Model:</strong> Custom CNN (Convolutional Neural Network) trained on Ethiopian crop varieties</li>
-                                <li><strong>Open-Source Alternative:</strong> TensorFlow Lite for mobile deployment</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Step 3 -->
+        <!-- Step 3 with UPDATED PHOTO -->
         <section id="step3" class="step-section">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="View Results" class="img-fluid step-image">
+                    <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Farmer viewing results" class="img-fluid step-image">
                 </div>
                 <div class="col-lg-6">
                     <h2 class="mb-4">
@@ -389,24 +391,16 @@
                             <li><strong>Prioritize Actions:</strong> Treat the most affected plants first</li>
                             <li><strong>Share with Experts:</strong> Export PDF reports to agronomists</li>
                         </ul>
-                        
-                        <div class="tech-box mt-4">
-                            <h5 class="tech-title">Technical Deep Dive</h5>
-                            <ul class="mb-0">
-                                <li><strong>Data Formats:</strong> JSON API for integration with farm management software</li>
-                                <li><strong>Offline Mode:</strong> Stores last 50 scans locally</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Step 4 -->
+        <!-- Step 4 with UPDATED PHOTO -->
         <section id="step4" class="step-section">
             <div class="row align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Treatment Advice" class="img-fluid step-image">
+                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Farmer applying treatment" class="img-fluid step-image">
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <h2 class="mb-4">
@@ -454,6 +448,7 @@
                             <li><strong>Low-Cost Options:</strong> Highlights DIY remedies (e.g., garlic/chili sprays)</li>
                             <li><strong>Local Availability:</strong> Recommends products available in Ethiopian markets</li>
                         </ul>
+<<<<<<< Updated upstream:how to use.html
                         
                         <div class="tech-box mt-4">
                             <h5 class="tech-title">Building the Recommendation Engine</h5>
@@ -462,14 +457,19 @@
                                 <li><strong>Dynamic Pricing:</strong> Pulls real-time data from local agro-input dealers</li>
                             </ul>
                         </div>
+=======
+>>>>>>> Stashed changes:learn.html
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+<<<<<<< Updated upstream:how to use.html
    
 
+=======
+>>>>>>> Stashed changes:learn.html
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -477,6 +477,7 @@
         // Language Switching Functionality
         document.addEventListener('DOMContentLoaded', function() {
             const langButtons = document.querySelectorAll('.lang-btn');
+<<<<<<< Updated upstream:how to use.html
             const translations = {
                 'en': {
                     // Header
@@ -780,232 +781,44 @@
                     'docs': 'የልማት ሰነዶች',
                     'footer_text': 'በ12 ቋንቋዎች ይገኛል | በ2G ኔትዎርክ ይሰራል | ለትንሽ አርሶ አደሮች 100% ነፃ'
                 }
+=======
+            const titles = {
+                'en': 'GreenGuardians: The Complete Guide',
+                'or': 'GreenGuardians: Qorannoo Guutaa',
+                'am': 'GreenGuardians: ሙሉ መመርያ'
+>>>>>>> Stashed changes:learn.html
             };
-
-            // Helper function to update element text or HTML
-            function updateElement(selector, content, isHTML = false) {
-                const element = document.querySelector(selector);
-                if (element) {
-                    if (isHTML) {
-                        element.innerHTML = content;
-                    } else {
-                        element.textContent = content;
-                    }
-                }
-            }
-
-            // Helper function to update list items
-            function updateListItems(parentSelector, items, isHTML = false) {
-                const parent = document.querySelector(parentSelector);
-                if (parent) {
-                    parent.querySelectorAll('li').forEach((li, index) => {
-                        if (items[index]) {
-                            if (isHTML) {
-                                li.innerHTML = items[index];
-                            } else {
-                                li.textContent = items[index];
-                            }
-                        }
-                    });
-                }
-            }
-
-            // Function to update image alt texts
-            function updateImageAlts(alts) {
-                Object.keys(alts).forEach(step => {
-                    const img = document.querySelector(`#${step} img`);
-                    if (img) {
-                        img.setAttribute('alt', alts[step]);
-                    }
-                });
-            }
-
-            // Function to handle language switch
-            function switchLanguage(lang) {
-                const t = translations[lang];
-                if (!t) return;
-
-                // Update active button
-                langButtons.forEach(btn => {
-                    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-                });
-
-                // Header updates
-                updateElement('.main-title', t.title);
-                updateElement('.lead.fs-4', t.subtitle);
-                updateElement('.intro-section .lead', t.intro);
-                updateElement('.alert-heading', t.why_matters);
-                
-                // Alert list items
-                updateListItems('.alert ul', [
-                    `<strong>${t.saves_crops.split(':')[0]}:</strong> ${t.saves_crops.split(':')[1]}`,
-                    `<strong>${t.reduces_costs.split(':')[0]}:</strong> ${t.reduces_costs.split(':')[1]}`,
-                    `<strong>${t.empowers.split(':')[0]}:</strong> ${t.empowers.split(':')[1]}`
-                ], true);
-
-                // Step 1 updates
-                updateElement('#step1 .step-title', t.step1);
-                updateElement('#step1 h4:nth-of-type(1)', t.step1_matters);
-                updateElement('#step1 h4:nth-of-type(1) + p', t.step1_matters_text);
-                updateElement('#step1 h4:nth-of-type(2)', t.step1_howto);
-                
-                updateListItems('#step1 ol', [
-                    `<strong>${t.step1_howto1.split(':')[0]}:</strong> ${t.step1_howto1.split(':')[1]}`,
-                    `<strong>${t.step1_howto2.split(':')[0]}:</strong> ${t.step1_howto2.split(':')[1]}`,
-                    `<strong>${t.step1_howto3.split(':')[0]}:</strong> ${t.step1_howto3.split(':')[1]}`,
-                    `<strong>${t.step1_howto4.split(':')[0]}:</strong> ${t.step1_howto4.split(':')[1]}`
-                ], true);
-                
-                updateListItems('#step1 ol li:nth-child(2) ul', [
-                    t.step1_lighting1,
-                    t.step1_lighting2
-                ]);
-                
-                updateListItems('#step1 ol li:nth-child(3) ul', [
-                    `<strong>${t.step1_focus1.split(':')[0]}:</strong> ${t.step1_focus1.split(':')[1]}`,
-                    `<strong>${t.step1_focus2.split(':')[0]}:</strong> ${t.step1_focus2.split(':')[1]}`
-                ], true);
-                
-                updateElement('#step1 .tech-title', t.step1_tech);
-                updateListItems('#step1 .tech-box ul', [
-                    `<strong>${t.step1_tech1.split(':')[0]}:</strong> ${t.step1_tech1.split(':')[1]}`,
-                    `<strong>${t.step1_tech2.split(':')[0]}:</strong> ${t.step1_tech2.split(':')[1]}`
-                ], true);
-
-                // Step 2 updates
-                updateElement('#step2 .step-title', t.step2);
-                updateElement('#step2 h4:nth-of-type(1)', t.step2_behind);
-                
-                const step2ListItems = [
-                    `<strong>${t.step2_disease.split(':')[0]}:</strong>`,
-                    `<strong>${t.step2_soil.split(':')[0]}:</strong>`,
-                    `<strong>${t.step2_realtime.split(':')[0]}:</strong>`
-                ];
-                updateListItems('#step2 ol', step2ListItems, true);
-                
-                updateListItems('#step2 ol li:nth-child(1) ul', [t.step2_disease1, t.step2_disease2]);
-                updateListItems('#step2 ol li:nth-child(2) ul', [t.step2_soil1, t.step2_soil2]);
-                updateListItems('#step2 ol li:nth-child(3) ul', [t.step2_realtime1]);
-                
-                updateElement('#step2 h4:nth-of-type(2)', t.step2_friendly);
-                updateElement('#step2 p:nth-of-type(1)', `<i class="fas fa-comment-alt me-2"></i> <strong>${t.step2_alerts.split(':')[0]}:</strong> ${t.step2_alerts.split(':')[1]}`, true);
-                updateElement('#step2 p:nth-of-type(2)', `<i class="fas fa-exclamation-triangle me-2"></i> <strong>${t.step2_risks.split(':')[0]}:</strong>`, true);
-                updateElement('#step2 p:nth-of-type(3)', `<span class="risk-level risk-low">${t.step2_risk_low}</span>`, true);
-                updateElement('#step2 p:nth-of-type(4)', `<span class="risk-level risk-medium">${t.step2_risk_medium}</span>`, true);
-                updateElement('#step2 p:nth-of-type(5)', `<span class="risk-level risk-high">${t.step2_risk_high}</span>`, true);
-                
-                updateElement('#step2 .tech-title', t.step2_tech);
-                updateListItems('#step2 .tech-box ul', [
-                    `<strong>${t.step2_tech1.split(':')[0]}:</strong> ${t.step2_tech1.split(':')[1]}`,
-                    `<strong>${t.step2_tech2.split(':')[0]}:</strong> ${t.step2_tech2.split(':')[1]}`
-                ], true);
-
-                // Step 3 updates
-                updateElement('#step3 .step-title', t.step3);
-                updateElement('#step3 h4:nth-of-type(1)', t.step3_features);
-                
-                const step3ListItems = [
-                    `<strong>${t.step3_heatmaps.split(':')[0]}:</strong>`,
-                    `<strong>${t.step3_nutrient.split(':')[0]}:</strong>`,
-                    `<strong>${t.step3_tracking.split(':')[0]}:</strong>`
-                ];
-                updateListItems('#step3 ol', step3ListItems, true);
-                
-                updateListItems('#step3 ol li:nth-child(1) ul', [t.step3_heatmaps1, t.step3_heatmaps2]);
-                updateListItems('#step3 ol li:nth-child(2) ul', [t.step3_nutrient1]);
-                updateListItems('#step3 ol li:nth-child(3) ul', [t.step3_tracking1]);
-                
-                updateElement('#step3 h4:nth-of-type(2)', t.step3_usage);
-                updateListItems('#step3 ul', [
-                    `<strong>${t.step3_usage1.split(':')[0]}:</strong> ${t.step3_usage1.split(':')[1]}`,
-                    `<strong>${t.step3_usage2.split(':')[0]}:</strong> ${t.step3_usage2.split(':')[1]}`
-                ], true);
-                
-                updateElement('#step3 .tech-title', t.step3_tech);
-                updateListItems('#step3 .tech-box ul', [
-                    `<strong>${t.step3_tech1.split(':')[0]}:</strong> ${t.step3_tech1.split(':')[1]}`,
-                    `<strong>${t.step3_tech2.split(':')[0]}:</strong> ${t.step3_tech2.split(':')[1]}`
-                ], true);
-
-                // Step 4 updates
-                updateElement('#step4 .step-title', t.step4);
-                updateElement('#step4 h4:nth-of-type(1)', t.step4_tailored);
-                
-                // Organic treatment card
-                updateElement('#step4 .organic h5', `<i class="fas fa-leaf me-2"></i> ${t.step4_organic}`, true);
-                updateElement('#step4 .organic p', `<strong>${t.step4_organic_ex.split(':')[0]}:</strong> ${t.step4_organic_ex.split(':')[1]}`, true);
-                updateListItems('#step4 .organic ul', [t.step4_organic1, t.step4_organic2]);
-                
-                // Chemical treatment card
-                updateElement('#step4 .chemical h5', `<i class="fas fa-flask me-2"></i> ${t.step4_chemical}`, true);
-                updateElement('#step4 .chemical p', `<strong>${t.step4_chemical_ex.split(':')[0]}:</strong> ${t.step4_chemical_ex.split(':')[1]}`, true);
-                updateListItems('#step4 .chemical ul', [t.step4_chemical1, t.step4_chemical2]);
-                
-                // Preventive measures card
-                updateElement('#step4 .treatment-card:not(.organic):not(.chemical) h5', `<i class="fas fa-shield-alt me-2"></i> ${t.step4_preventive}`, true);
-                updateListItems('#step4 .treatment-card:not(.organic):not(.chemical) ul', [t.step4_preventive1, t.step4_preventive2]);
-                
-                updateElement('#step4 h4:nth-of-type(2)', t.step4_filters);
-                updateListItems('#step4 ul:not(.treatment-card ul)', [
-                    `<strong>${t.step4_filters1.split(':')[0]}:</strong> ${t.step4_filters1.split(':')[1]}`,
-                    `<strong>${t.step4_filters2.split(':')[0]}:</strong> ${t.step4_filters2.split(':')[1]}`
-                ], true);
-                
-                updateElement('#step4 .tech-title', t.step4_tech);
-                updateListItems('#step4 .tech-box ul', [
-                    `<strong>${t.step4_tech1.split(':')[0]}:</strong> ${t.step4_tech1.split(':')[1]}`,
-                    `<strong>${t.step4_tech2.split(':')[0]}:</strong> ${t.step4_tech2.split(':')[1]}`
-                ], true);
-
-                // Developer section updates
-                updateElement('#developer .card-header h3', `<i class="fas fa-code me-2"></i> ${t.dev_title}`, true);
-                updateListItems('#developer .list-group', [
-                    `<strong>${t.dev_phase1.split(':')[0]}:</strong> ${t.dev_phase1.split(':')[1]}`,
-                    `<strong>${t.dev_phase2.split(':')[0]}:</strong> ${t.dev_phase2.split(':')[1]}`,
-                    `<strong>${t.dev_phase3.split(':')[0]}:</strong> ${t.dev_phase3.split(':')[1]}`
-                ], true);
-
-                // Footer updates
-                updateElement('.footer h3', t.footer_title);
-                updateElement('.cta-button', `<i class="fas fa-download me-2"></i> ${t.download}`, true);
-                updateElement('.btn-outline-light', `<i class="fas fa-book me-2"></i> ${t.docs}`, true);
-                updateElement('.footer p', t.footer_text);
-
-                // Update image alt texts
-                updateImageAlts({
-                    'step1': t.img_step1_alt,
-                    'step2': t.img_step2_alt,
-                    'step3': t.img_step3_alt,
-                    'step4': t.img_step4_alt
-                });
-            }
-
-            // Handle language button clicks
+            
+            const subtitles = {
+                'en': 'The Complete Guide to Plant Health Analysis & Treatment',
+                'or': 'Qorannoo Fayyaa Biqilaa fi Cinaa Guutuu',
+                'am': 'ሙሉ የእፅዋት ጤና ትንታኔ እና ሕክምና መመርያ'
+            };
+            
+            // Handle language switch
             langButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const lang = this.getAttribute('data-lang');
-                    if (translations[lang]) {
-                        switchLanguage(lang);
-                    }
+                    
+                    // Update active button
+                    langButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update title and subtitle
+                    document.querySelector('.hero-title').textContent = titles[lang];
+                    document.querySelector('.hero-subtitle').textContent = subtitles[lang];
                 });
             });
-
+            
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
-
-            // Initialize with English (default)
-            switchLanguage('en');
         });
     </script>
 </body>
