@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
@@ -8,10 +9,27 @@
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
     />
 
-    <title>Stitch Design</title>
+    <title>AgriRec Crop Recommendation</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      .shake {
+        animation: shake 0.5s;
+      }
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        20%, 60% { transform: translateX(-5px); }
+        40%, 80% { transform: translateX(5px); }
+      }
+    </style>
   </head>
   <body>
     <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Work Sans", "Noto Sans", sans-serif;'>
@@ -35,6 +53,7 @@
             </div>
             <button
               class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f4f2] text-[#111714] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+              id="help-btn"
             >
               <div class="text-[#111714]" data-icon="Question" data-size="20px" data-weight="regular">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
@@ -45,8 +64,9 @@
               </div>
             </button>
             <div
-              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 cursor-pointer"
               style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBqAYp1VG6e2TyKwXfEP0WmCQnqSAiFlDdZeP11yZ-ZFo8u351G0iD-CBr2ff1xl3Ly3MeFFWqDnHGgJUcNX9IocRRKB3eTvHg4AcJJesRAloEQsB0TV2ZUJuWA3NOcMVHUVnkHbUc5-GDZh2UbsHg5bXwLnPUwaeDPNRZEJASYb8tpqWebDXEruvc2MOpdv41KdHDNeuU6eNDqmTY_6dtFny3JABWD9f48uz7TATWjC7gjkmZYsn0iqesB_zHxzS7EamciaDkL_HU");'
+              id="profile-btn"
             ></div>
           </div>
         </header>
@@ -55,8 +75,8 @@
             <div class="p-4 @container">
               <div class="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start">
                 <div
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl cursor-pointer"
+                  id="soil-image"
                   style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0NHNjYBS4dFF_aoW9Sru01wcm_nbJJ1zHannzPpFQbGneBBM3eav1YkSRFjnseRxq7xb3XFH-D-QGLoJBsdglXaMu6Np_e5ysu0IkmEWJT2duP1BSlStQ-xM3bvUviFiIpgFL429WuHqoLWjfW4sBE_lnR0PCERahip3YXfvS4WTk8MlYTHRGolReHT72M7qfUdrgToFEWfPWYGe2OfdZM0Cp-KWUnNRsTmj6ZG3ufA0aI6GiUJdpMW9OG-Fs-XGjKWKUEItdOQ8");'
                 ></div>
                 <div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-4 @xl:px-4">
@@ -65,6 +85,7 @@
                     <p class="text-[#648772] text-base font-normal leading-normal">Enter numeric value</p>
                     <button
                       class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#169c4e] text-white text-sm font-medium leading-normal"
+                      id="nitrogen-btn"
                     >
                       <span class="truncate">Enter amount of N (Nitrogen) mg/kg</span>
                     </button>
@@ -79,6 +100,8 @@
                     placeholder="45"
                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#dce5e0] h-14 placeholder:text-[#648772] p-[15px] rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal"
                     value=""
+                    type="number"
+                    id="nitrogen-input"
                   />
                   <div
                     class="text-[#648772] flex border border-[#dce5e0] bg-white items-center justify-center pr-[15px] rounded-r-xl border-l-0"
@@ -103,6 +126,8 @@
                     placeholder="12"
                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#dce5e0] h-14 placeholder:text-[#648772] p-[15px] rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal"
                     value=""
+                    type="number"
+                    id="phosphorus-input"
                   />
                   <div
                     class="text-[#648772] flex border border-[#dce5e0] bg-white items-center justify-center pr-[15px] rounded-r-xl border-l-0"
@@ -110,7 +135,6 @@
                     data-size="24px"
                     data-weight="regular"
                   >
-
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
                       <path
                         d="M221.69,199.77,160,96.92V40h8a8,8,0,0,0,0-16H88a8,8,0,0,0,0,16h8V96.92L34.31,199.77A16,16,0,0,0,48,224H208a16,16,0,0,0,13.72-24.23ZM110.86,103.25A7.93,7.93,0,0,0,112,99.14V40h32V99.14a7.93,7.93,0,0,0,1.14,4.11L183.36,167c-12,2.37-29.07,1.37-51.75-10.11-15.91-8.05-31.05-12.32-45.22-12.81ZM48,208l28.54-47.58c14.25-1.74,30.31,1.85,47.82,10.72,19,9.61,35,12.88,48,12.88a69.89,69.89,0,0,0,19.55-2.7L208,208Z"
@@ -128,6 +152,8 @@
                     placeholder="30"
                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#dce5e0] h-14 placeholder:text-[#648772] p-[15px] rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal"
                     value=""
+                    type="number"
+                    id="potassium-input"
                   />
                   <div
                     class="text-[#648772] flex border border-[#dce5e0] bg-white items-center justify-center pr-[15px] rounded-r-xl border-l-0"
@@ -150,8 +176,8 @@
             <div class="p-4 @container">
               <div class="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start">
                 <div
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAFK9MjlN-w01srKnPT-DCfWdm-UujkvLsF1VURbhOBXklSVlg2RLLjiehqOza8xbg4u3y3LztjY20Df-WGHhc-fzufzUEX0sPcOpjl_wlsd72aIxJHjVSoeHmnyGqrGzTYaOqxAgrZ2YBPCWaBXBZGyrRcwYzKW0sCdzhI4STh_a3cWLiA7T_mluSVSOCf143-DaYOHUHfJbKU13wMWGsTDSfcgA-Yinnd82bhDtskEx9kFqfnriJz0k6bv471HDL_tgvYNgZN22U");'
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl cursor-pointer"
+                  id="environment-image"
                 ></div>
                 <div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-4 @xl:px-4">
                   <p class="text-[#111714] text-lg font-bold leading-tight tracking-[-0.015em]">Environment</p>
@@ -159,13 +185,13 @@
                     <p class="text-[#648772] text-base font-normal leading-normal">Enter numeric value</p>
                     <button
                       class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#169c4e] text-white text-sm font-medium leading-normal"
+                      id="rainfall-btn"
                     >
                       <span class="truncate">Enter amount of Rainfall (mm)</span>
                     </button>
                   </div>
                 </div>
               </div>
-
             </div>
             <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label class="flex flex-col min-w-40 flex-1">
@@ -174,6 +200,8 @@
                     placeholder="400"
                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#dce5e0] h-14 placeholder:text-[#648772] p-[15px] rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal"
                     value=""
+                    type="number"
+                    id="rainfall-input"
                   />
                   <div
                     class="text-[#648772] flex border border-[#dce5e0] bg-white items-center justify-center pr-[15px] rounded-r-xl border-l-0"
@@ -198,6 +226,8 @@
                     placeholder="65"
                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#dce5e0] h-14 placeholder:text-[#648772] p-[15px] rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal"
                     value=""
+                    type="number"
+                    id="humidity-input"
                   />
                   <div
                     class="text-[#648772] flex border border-[#dce5e0] bg-white items-center justify-center pr-[15px] rounded-r-xl border-l-0"
@@ -222,9 +252,10 @@
                     placeholder="24"
                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#dce5e0] h-14 placeholder:text-[#648772] p-[15px] rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal"
                     value=""
+                    type="number"
+                    id="temperature-input"
                   />
                   <div
-
                     class="text-[#648772] flex border border-[#dce5e0] bg-white items-center justify-center pr-[15px] rounded-r-xl border-l-0"
                     data-icon="Thermometer"
                     data-size="24px"
@@ -247,6 +278,8 @@
                     placeholder="8"
                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#dce5e0] h-14 placeholder:text-[#648772] p-[15px] rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal"
                     value=""
+                    type="number"
+                    id="ph-input"
                   />
                   <div
                     class="text-[#648772] flex border border-[#dce5e0] bg-white items-center justify-center pr-[15px] rounded-r-xl border-l-0"
@@ -267,12 +300,14 @@
             <div class="flex justify-stretch">
               <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-between">
                 <button
-                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-[#169c4e] text-white text-base font-bold leading-normal tracking-[0.015em]"
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-[#169c4e] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[#128a43] transition-colors"
+                  id="submit-btn"
                 >
                   <span class="truncate">Submit</span>
                 </button>
                 <button
-                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-transparent text-[#111714] text-base font-bold leading-normal tracking-[0.015em]"
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-transparent text-[#111714] text-base font-bold leading-normal tracking-[0.015em] hover:bg-[#f0f4f2] transition-colors"
+                  id="clear-btn"
                 >
                   <span class="truncate">Clear</span>
                 </button>
@@ -281,18 +316,19 @@
             <div class="p-4 @container">
               <div class="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start">
                 <div
-
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl cursor-pointer"
+                  id="crop-image"
                   style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-vW9JWSFWUFw5SazFs4jko3njdyTVsVzqTG-EMHUn94nIY3rwuUqdMaFeDs5Dhd-A_jtWiuSg3WcOGWfrRJMtvzIVLv6d-z8Bafha0MMZezuxdeaMhyGDmUWU1K5c8zBw6EKVk6UyQegfxRXHfNQ6_p71J2s1wdXyzGXTqsCEcg8KlK_BSbZg2RPToMmlPX2vilOU_yV29r2-PUzZt8RqayzBEJcY5HpaBfpTYARAb9Sjbt2oEilxn1E2TMuArrGAFdulHP0_WKE");'
                 ></div>
                 <div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-4 @xl:px-4">
                   <p class="text-[#111714] text-lg font-bold leading-tight tracking-[-0.015em]">Recommended Crop</p>
                   <div class="flex items-end gap-3 justify-between">
-                    <p class="text-[#648772] text-base font-normal leading-normal">No recommendation yet - enter soil &amp; environment data and click Submit.</p>
+                    <p class="text-[#648772] text-base font-normal leading-normal" id="recommendation-text">No recommendation yet - enter soil &amp; environment data and click Submit.</p>
                     <button
-                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#169c4e] text-white text-sm font-medium leading-normal"
+                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#169c4e] text-white text-sm font-medium leading-normal hidden"
+                      id="recommendation-btn"
                     >
-                      <span class="truncate">Crop Name (Confidence %)</span>
+                      <span class="truncate" id="recommendation-crop">Crop Name (Confidence %)</span>
                     </button>
                   </div>
                 </div>
@@ -302,5 +338,145 @@
         </div>
       </div>
     </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get all input elements
+        const nitrogenInput = document.getElementById('nitrogen-input');
+        const phosphorusInput = document.getElementById('phosphorus-input');
+        const potassiumInput = document.getElementById('potassium-input');
+        const rainfallInput = document.getElementById('rainfall-input');
+        const humidityInput = document.getElementById('humidity-input');
+        const temperatureInput = document.getElementById('temperature-input');
+        const phInput = document.getElementById('ph-input');
+        
+        // Get all buttons
+        const submitBtn = document.getElementById('submit-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const helpBtn = document.getElementById('help-btn');
+        const profileBtn = document.getElementById('profile-btn');
+        const nitrogenBtn = document.getElementById('nitrogen-btn');
+        const rainfallBtn = document.getElementById('rainfall-btn');
+        
+        // Get image elements
+        const soilImage = document.getElementById('soil-image');
+        const environmentImage = document.getElementById('environment-image');
+        const cropImage = document.getElementById('crop-image');
+        
+        // Get recommendation elements
+        const recommendationText = document.getElementById('recommendation-text');
+        const recommendationBtn = document.getElementById('recommendation-btn');
+        const recommendationCrop = document.getElementById('recommendation-crop');
+        
+        // Sample crop data (in a real app, this would come from an API)
+        const cropData = [
+          { name: "Rice", confidence: 85, image: "https://images.unsplash.com/photo-1604977046806-1c4d08fe61e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmljZSUyMGZpZWxkfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" },
+          { name: "Wheat", confidence: 78, image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2hlYXR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" },
+          { name: "Maize", confidence: 92, image: "https://images.unsplash.com/photo-1601593768797-7a1b0b19b0e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFpemV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" },
+          { name: "Soybean", confidence: 65, image: "https://images.unsplash.com/photo-1631452180539-96aca7c5f32b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c295YmVhbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" }
+        ];
+        
+        // Button click handlers
+        submitBtn.addEventListener('click', function() {
+          // Validate inputs
+          if (!nitrogenInput.value || !phosphorusInput.value || !potassiumInput.value || 
+              !rainfallInput.value || !humidityInput.value || !temperatureInput.value || !phInput.value) {
+            shakeEmptyInputs();
+            return;
+          }
+          
+          // Simulate getting a recommendation (in a real app, this would be an API call)
+          const randomCrop = cropData[Math.floor(Math.random() * cropData.length)];
+          
+          // Update recommendation
+          recommendationText.textContent = `Based on your soil and environment data, we recommend:`;
+          recommendationCrop.textContent = `${randomCrop.name} (${randomCrop.confidence}% confidence)`;
+          recommendationBtn.classList.remove('hidden');
+          
+          // Update crop image
+          cropImage.style.backgroundImage = `url("${randomCrop.image}")`;
+          cropImage.classList.add('fade-in');
+          
+          // Remove fade-in class after animation completes
+          setTimeout(() => {
+            cropImage.classList.remove('fade-in');
+          }, 500);
+        });
+        
+        clearBtn.addEventListener('click', function() {
+          // Clear all inputs
+          nitrogenInput.value = '';
+          phosphorusInput.value = '';
+          potassiumInput.value = '';
+          rainfallInput.value = '';
+          humidityInput.value = '';
+          temperatureInput.value = '';
+          phInput.value = '';
+          
+          // Reset recommendation
+          recommendationText.textContent = 'No recommendation yet - enter soil & environment data and click Submit.';
+          recommendationBtn.classList.add('hidden');
+          cropImage.style.backgroundImage = 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-vW9JWSFWUFw5SazFs4jko3njdyTVsVzqTG-EMHUn94nIY3rwuUqdMaFeDs5Dhd-A_jtWiuSg3WcOGWfrRJMtvzIVLv6d-z8Bafha0MMZezuxdeaMhyGDmUWU1K5c8zBw6EKVk6UyQegfxRXHfNQ6_p71J2s1wdXyzGXTqsCEcg8KlK_BSbZg2RPToMmlPX2vilOU_yV29r2-PUzZt8RqayzBEJcY5HpaBfpTYARAb9Sjbt2oEilxn1E2TMuArrGAFdulHP0_WKE")';
+        });
+        
+        helpBtn.addEventListener('click', function() {
+          alert('Please enter your soil and environment data to get a crop recommendation. All fields are required.');
+        });
+        
+        profileBtn.addEventListener('click', function() {
+          alert('Profile options would appear here in a real application.');
+        });
+        
+        nitrogenBtn.addEventListener('click', function() {
+          nitrogenInput.focus();
+        });
+        
+        rainfallBtn.addEventListener('click', function() {
+          rainfallInput.focus();
+        });
+        
+        // Remove environment image when clicked (as requested)
+        environmentImage.addEventListener('click', function() {
+          environmentImage.style.backgroundImage = 'none';
+          environmentImage.style.backgroundColor = '#f0f4f2';
+        });
+        
+        // Soil image click handler
+        soilImage.addEventListener('click', function() {
+          // In a real app, this might open a larger view or change the image
+          alert('Soil image clicked. In a real app, this might show more details.');
+        });
+        
+        // Crop image click handler
+        cropImage.addEventListener('click', function() {
+          if (recommendationBtn.classList.contains('hidden')) return;
+          alert(`More details about ${recommendationCrop.textContent} would appear here.`);
+        });
+        
+        // Recommendation button click handler
+        recommendationBtn.addEventListener('click', function() {
+          alert(`You selected ${recommendationCrop.textContent}. In a real app, this might save your selection or show more details.`);
+        });
+        
+        // Helper function to shake empty inputs
+        function shakeEmptyInputs() {
+          const inputs = [nitrogenInput, phosphorusInput, potassiumInput, rainfallInput, humidityInput, temperatureInput, phInput];
+          
+          inputs.forEach(input => {
+            if (!input.value) {
+              input.classList.add('shake');
+              input.focus();
+              
+              // Remove shake class after animation completes
+              setTimeout(() => {
+                input.classList.remove('shake');
+              }, 500);
+            }
+          });
+          
+          alert('Please fill in all fields before submitting.');
+        }
+      });
+    </script>
   </body>
 </html>
