@@ -1,0 +1,131 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f9fbf9] group/design-root overflow-x-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ebf2e9] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#121a0f]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-[#121a0f] text-lg font-bold leading-tight tracking-[-0.015em]">AgriWise</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#121a0f] text-sm font-medium leading-normal" href="#">Home</a>
+              <a class="text-[#121a0f] text-sm font-medium leading-normal" href="#">About</a>
+              <a class="text-[#121a0f] text-sm font-medium leading-normal" href="#">Services</a>
+              <a class="text-[#121a0f] text-sm font-medium leading-normal" href="#">Contact</a>
+            </div>
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#54d22d] text-[#121a0f] text-sm font-bold leading-normal tracking-[0.015em]"
+            >
+              <span class="truncate">Get Started</span>
+            </button>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <p class="text-[#121a0f] tracking-light text-[32px] font-bold leading-tight min-w-72">Crop Recommendation</p>
+            </div>
+            <h3 class="text-[#121a0f] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Soil Properties</h3>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#121a0f] text-base font-medium leading-normal pb-2">Nitrogen (N) (ppm)</p>
+                <input
+                  placeholder="Enter Nitrogen level"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#121a0f] focus:outline-0 focus:ring-0 border border-[#d6e5d2] bg-[#f9fbf9] focus:border-[#d6e5d2] h-14 placeholder:text-[#639155] p-[15px] text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#121a0f] text-base font-medium leading-normal pb-2">Phosphorus (P) (ppm)</p>
+                <input
+                  placeholder="Enter Phosphorus level"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#121a0f] focus:outline-0 focus:ring-0 border border-[#d6e5d2] bg-[#f9fbf9] focus:border-[#d6e5d2] h-14 placeholder:text-[#639155] p-[15px] text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#121a0f] text-base font-medium leading-normal pb-2">Potassium (K) (ppm)</p>
+                <input
+                  placeholder="Enter Potassium level"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#121a0f] focus:outline-0 focus:ring-0 border border-[#d6e5d2] bg-[#f9fbf9] focus:border-[#d6e5d2] h-14 placeholder:text-[#639155] p-[15px] text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#121a0f] text-base font-medium leading-normal pb-2">Soil pH</p>
+                <input
+                  placeholder="Enter Soil pH"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#121a0f] focus:outline-0 focus:ring-0 border border-[#d6e5d2] bg-[#f9fbf9] focus:border-[#d6e5d2] h-14 placeholder:text-[#639155] p-[15px] text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <h3 class="text-[#121a0f] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Climate/Environment</h3>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#121a0f] text-base font-medium leading-normal pb-2">Rainfall (mm)</p>
+                <input
+                  placeholder="Enter Rainfall"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#121a0f] focus:outline-0 focus:ring-0 border border-[#d6e5d2] bg-[#f9fbf9] focus:border-[#d6e5d2] h-14 placeholder:text-[#639155] p-[15px] text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#121a0f] text-base font-medium leading-normal pb-2">Humidity (%)</p>
+                <input
+                  placeholder="Enter Humidity"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#121a0f] focus:outline-0 focus:ring-0 border border-[#d6e5d2] bg-[#f9fbf9] focus:border-[#d6e5d2] h-14 placeholder:text-[#639155] p-[15px] text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#121a0f] text-base font-medium leading-normal pb-2">Temperature (°C)</p>
+                <input
+                  placeholder="Enter Temperature"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#121a0f] focus:outline-0 focus:ring-0 border border-[#d6e5d2] bg-[#f9fbf9] focus:border-[#d6e5d2] h-14 placeholder:text-[#639155] p-[15px] text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <h2 class="text-[#121a0f] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Recommendation Result</h2>
+            <p class="text-[#121a0f] text-base font-normal leading-normal pb-3 pt-1 px-4">Based on the provided data, the recommended crop is: Wheat</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
