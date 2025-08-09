@@ -11,105 +11,28 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add Amharic font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-    .hero {
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                  url('https://images.unsplash.com/photo-1593305841991-05c297ba4575') no-repeat center center/cover;
-      text-align: center;
-      padding: 120px 20px;
-      color: white;
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-    }
-
-    .btn-learn {
-      display: inline-block;
-      margin-top: 30px;
-      margin-bottom: 30px;
-      background-color: #28a745;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 30px;
-      transition: 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn-learn:hover {
-      background-color: #218838;
-    }
-
-    .how-it-works {
-      padding: 80px 20px;
-      text-align: center;
-      background: #e9f8ec;
-      display: none; /* hidden initially */
-    }
-
-    .how-it-works h2 {
-      font-size: 2.3rem;
-      margin-bottom: 40px;
-      color: #2d6a4f;
-    }
-
-    .steps-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-    }
-     .btn-learn{
-          text-align: center;
-        }
-    .step {
-      background: #ffffff;
-      border: 2px solid #e0f4e4;
-      border-radius: 16px;
-      padding: 20px;
-      width: 260px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: 0.3s ease;
-    }
-
-    .step:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-    }
-
-    .step h3 {
-      color: #40916c;
-      margin-bottom: 10px;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
         :root {
-            --primary-green: #54d22d;
-            --dark-green: #3cb021;
-            --light-green: #ebf2e9;
-            --text-dark: #121a0f;
-            --text-light: #639155;
-            --bg-light: #f9fbf9;
-        }
-        .mb-4{
-            margin-top: 100px;
-        }
-        body {
-            font-family: 'Manrope', 'Noto Sans', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            --primary-green: #28a745;
+            --dark-green: #218838;
+            --light-green: #e8f5e9;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+            --transition: all 0.3s ease-in-out;
         }
         
-        /* Animated Navbar */
+        body {
+            font-family: 'Poppins', 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+        
+        /* Navigation - Preserved original style */
         .navbar {
             background-color: var(--bg-light);
             border-bottom: 1px solid var(--light-green);
@@ -155,160 +78,128 @@
         .navbar-brand {
             font-weight: 700;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
         }
         
         .navbar.scrolled .navbar-brand {
             transform: scale(0.95);
         }
         
+        .brand-icon {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        
+        .brand-icon.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Language dropdown */
+        .language-dropdown .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .language-dropdown .dropdown-item {
+            padding: 8px 16px;
+            transition: all 0.2s;
+        }
+        
+        .language-dropdown .dropdown-item:hover {
+            background-color: var(--light-green);
+            color: var(--primary-green);
+        }
+        
+        .language-dropdown .dropdown-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        .language-dropdown .dropdown-toggle:hover {
+            color: var(--primary-green);
+            background-color: rgba(0,0,0,0.05);
+        }
+        
+        .amharic-font {
+            font-family: 'Noto Sans Ethiopic', sans-serif;
+        }
+        
+        /* Hero Section with updated background */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80') no-repeat center center/cover;
+            text-align: center;
+            padding: 120px 20px;
+            color: white;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        /* Buttons - Improved while keeping original colors */
         .btn-primary {
             background-color: var(--primary-green);
             border-color: var(--primary-green);
-            color: var(--text-dark);
-            font-weight: bold;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: var(--transition);
         }
         
         .btn-primary:hover {
             background-color: var(--dark-green);
             border-color: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
         }
         
-        .btn-secondary {
-            background-color: var(--light-green);
-            border-color: var(--light-green);
-            color: var(--text-dark);
-            font-weight: bold;
+        .btn-outline-light {
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: var(--transition);
         }
         
-        .btn-secondary:hover {
-            background-color: #d4e5d0;
-            border-color: #d4e5d0;
+        .btn-outline-light:hover {
+            transform: translateY(-2px);
         }
         
-        /* Enhanced Hero Section */
-        .hero-section {
-            background-size: cover;
-            background-position: center 30%;
-            min-height: 600px;
-            border-radius: 0.5rem;
-            margin-top: 2rem;
-            margin-bottom: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            padding-top: 8rem;
-            padding-bottom: 4rem;
-        }
-        
-        .feature-card {
-            transition: all 0.3s ease;
-            border: none;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(84, 210, 45, 0.1);
-        }
-        
-        .feature-card:hover .card-title {
-            color: var(--primary-green);
-        }
-        
-        .feature-badge {
-            position: absolute;
-            top: 30px;
-            left: 10px;
-            background-color: var(--primary-green);
-            color: white;
-            font-size: 0.7rem;
-            font-weight: bold;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-        }
-        
-        .step-icon {
-            width: 40px;
-            height: 40px;
-            background-color: var(--light-green);
-            color: var(--primary-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-        
-        .stats-card {
-            background-color: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            margin-bottom: 1.5rem;
-        }
-        
-        .stats-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .testimonial-card {
-            background-color: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            height: 100%;
-        }
-        
-        .testimonial-quote {
-            font-size: 2rem;
-            color: var(--primary-green);
-            line-height: 1;
-            margin-bottom: 1rem;
-        }
-        
-        .mission-section {
-            background-color: var(--light-green);
-            border-radius: 0.5rem;
-            padding: 4rem 1rem;
-            margin: 4rem 0;
-        }
-       
-        .social-icon {
-            color: var(--text-light);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .social-icon:hover {
-            color: var(--primary-green);
-            transform: scale(1.2);
-        }
-        
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .btn-lg {
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
         }
         
         .pulse {
@@ -316,51 +207,185 @@
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(84, 210, 45, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(84, 210, 45, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(84, 210, 45, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
         }
         
-        /* Increased spacing between sections */
-        section {
-            margin-bottom: 5rem;
-            margin-top: 3rem;
+        /* Feature Cards - Improved while keeping structure */
+        .feature-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%;
         }
         
-        /* Responsive adjustments */
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .feature-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary-green);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .card-text {
+            color: var(--text-light);
+        }
+        
+        /* Stats Section - Improved */
+        .stats-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .stats-card h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Mission Section - Improved */
+        .mission-section {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            border-radius: 0.75rem;
+            padding: 4rem 2rem;
+            color: white;
+        }
+        
+        .mission-section h2 {
+            font-weight: 700;
+        }
+        
+        /* Footer - Updated style */
+        footer {
+            background-color: rgba(40, 167, 69, 0.05);
+            padding: 3rem 0;
+        }
+        
+        footer h5 {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        footer .nav-link {
+            color: var(--text-dark) !important;
+            padding: 0.25rem 0;
+        }
+        
+        footer .nav-link:hover {
+            color: var(--primary-green) !important;
+        }
+        
+        .social-icon {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            color: var(--primary-green);
+            transform: scale(1.2);
+        }
+        
+        footer p, footer a {
+            color: var(--text-dark) !important;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .hero-section {
-                min-height: 500px;
-                background-position: center 40%;
+            .hero {
+                min-height: 50vh;
+                padding: 80px 20px;
             }
             
-            .navbar-brand img {
-                height: 30px;
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                min-height: 60vh;
+                text-align: center;
             }
             
-            .step-container {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-lg {
+                display: block;
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .navbar-brand {
                 flex-direction: column;
+                align-items: flex-start;
             }
             
-            .step-connector {
-                display: none;
-            }
-            
-            section {
-                margin-bottom: 3rem;
-                margin-top: 2rem;
+            .brand-icon {
+                margin-bottom: 5px;
+                margin-right: 0;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation - Preserved original structure -->
     <nav class="navbar navbar-expand-lg sticky-top py-3" id="mainNavbar">
-        <div class="container">
+        <div class="container position-relative">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <svg viewBox="0 0 48 48" width="24" height="24" fill="#121a0f" class="me-2">
-                    <path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"></path>
-                </svg>
+                <img src="https://cdn.qwenlm.ai/output/076a6d91-8c80-4fcf-960a-5fd1f188c6cb/t2i/70ef825b-dad5-4ca0-98a8-06d98c496a69/1754742173.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiMDc2YTZkOTEtOGM4MC00ZmNmLTk2MGEtNWZkMWYxODhjNmNiIiwicmVzb3VyY2VfaWQiOiIxNzU0NzQyMTczIiwicmVzb3VyY2VfY2hhdF9pZCI6IjU1Njk1ZTliLTE2YjUtNGUxNS04ODQxLTc3NjFkMTU2YTQyZCJ9.GuDs8rWn9YmKucb6bjdrMvhdKT4kSxDQBNdY0DrOoeM" 
+                     alt="GreenGuardian Logo" class="brand-icon">
                 <span class="fw-bold">GreenGuardians</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -368,180 +393,175 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
-                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link" href="./scanning-page.html">Scan </a></li> -->
+                    <li class="nav-item"><a class="nav-link active" href="./index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="./result.html">Result</a></li>
                     <li class="nav-item"><a class="nav-link" href="./RecommendationPage.html">Recommendation</a></li>
-                     <li class="nav-item"><a class="nav-link" href="./report-page.html">Report</a></li>
-
+                    <li class="nav-item"><a class="nav-link" href="./report-page.html">Report</a></li>
                 </ul>
-                <div class="d-flex gap-2">
-
+                <div class="language-dropdown dropdown">
+                    <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-globe"></i> English
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item" href="#">English</a></li>
+                        <li><a class="dropdown-item amharic-font" href="#">አማርኛ</a></li>
+                        <li><a class="dropdown-item" href="#">Afaan Oromoo</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </nav>
 
-    
-    <section class="container my-5">
-        <div class="hero-section position-relative">
-            <div class="position-absolute top-0 end-0 floating" style="animation-delay: 0.2s;">
-                <svg viewBox="0 0 64 64" width="60" height="60" fill="#54d22d" opacity="0.7">
-                    <path d="M32,2C15.4,2,2,15.4,2,32s13.4,30,30,30s30-13.4,30-30S48.6,2,32,2z M32,56C18.7,56,8,45.3,8,32S18.7,8,32,8 s24,10.7,24,24S45.3,56,32,56z"/>
-                    <path d="M32,12c-11,0-20,9-20,20s9,20,20,20s20-9,20-20S43,12,32,12z M32,46c-7.7,0-14-6.3-14-14s6.3-14,14-14s14,6.3,14,14 S39.7,46,32,46z"/>
-                </svg>
-            </div>
-            
-            <div class="position-absolute bottom-20 start-20 floating" style="animation-delay: 0.5s;">
-                <svg viewBox="0 0 64 64" width="50" height="50" fill="#54d22d" opacity="0.7">
-                    <path d="M32,2C15.4,2,2,15.4,2,32s13.4,30,30,30s30-13.4,30-30S48.6,2,32,2z M32,56C18.7,56,8,45.3,8,32S18.7,8,32,8 s24,10.7,24,24S45.3,56,32,56z"/>
-                </svg>
-            </div>
-            
-            <div class="container hero-content">
-                <h1 class="display-4 fw-bold mb-3 text-white">Empowering Farmers with Smart Plant Disease Detection</h1>
-                <p class="lead mb-4 text-white">Scan. Detect. Act. Grow healthy crops with confidence.</p>
-                <div class="d-flex flex-wrap gap-3 justify-content-center">
-                    <a class="btn btn-primary btn-lg pulse" href="./scanning-page.html">Plant Detection</a>
-                    <a class="btn btn-primary btn-lg pulse" href="./crop-recomendation.html">Soil Detection</a>
-                </div>
+    <!-- Hero Section with original background -->
+    <div class="hero">
+        <div class="container">
+            <h1>Empowering Farmers with Smart Plant Disease Detection</h1>
+            <p>Scan. Detect. Act. Grow healthy crops with confidence.</p>
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+                <a class="btn btn-primary btn-lg pulse" href="./scanning-page.html">Plant Detection</a>
+                <a class="btn btn-outline-light btn-lg" href="./crop-recomendation.html">Soil Detection</a>
             </div>
         </div>
-    </section>
+    </div>
 
+    <!-- Features Section -->
     <section class="container my-5 py-4">
         <h2 class="fw-bold mb-5 text-center">Core Features</h2>
         <div class="row g-4">
             <div class="col-md-6 col-lg-3">
                 <div class="feature-card card h-100">
                     <div class="position-relative">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnPZ5lYRxDgX0BSTFxRnkGnrLPGyZCljjH8dD5PsN7y16rBNc9-MbtZIAmIBqqPGrKPenOi2rBebFxJdREYRB8SGqY1TTMQORG6Dp2nHqhid9tSUcyvzZKEhfkugU1D5NdpS7IyMRhOz9usNztaZGf3b9wvQaSUXgJwOKDko8oHwCdF4-LwOyQzshOSkB-4pMoAH9oVyttZH59x8Dx3xauUTFrybgEh5AiSjGkJJgThVCeDvvCh9WjFnSlb5D5xut1OTNEwKV91dID" 
-                             class="card-img-top" alt="Plant Disease Detection">
+                        <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" 
+                             class="card-img-top" alt="AI analyzing plant leaves for disease detection">
                         <span class="feature-badge">AI-Powered</span>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Image-based Plant Disease Detection</h5>
-                        <p class="card-text text-muted">Accurate and rapid identification of plant diseases using advanced image analysis.</p>
+                        <p class="card-text">Accurate and rapid identification of plant diseases using advanced image analysis.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="feature-card card h-100">
                     <div class="position-relative">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7XxIzzGqgLIyqybdNOH1zG_CY3ZLnHfxNDAOrxYvD03SB8KFh6yJt_jOUQ5kEa5NJBDah0_xt9PBSNae7KXpxgtGoUBJ1ipn-Y8K3SyQFmiBqevRg5-ZcfJmT3_o2irTXXM9GsRemCc9RVqo9lBqrtwZ_JTOtksERVBs7kEA0Oul-u8huELLF_Aj0XOqHFQGlH4fJe_zYDtCMtlTgEE-ladDLJBRokRgxC9vZA6B6aPvRKJ4q5AGY8c-XQtY7AkJLXH84f0f2rHMj" 
-                             class="card-img-top" alt="Crop Recommendations">
+                        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                             class="card-img-top" alt="Farmer receiving crop recommendations on tablet">
                         <span class="feature-badge">Smart</span>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Personalized Crop Recommendations</h5>
-                        <p class="card-text text-muted">Tailored recommendations for crop management based on detected diseases and plant health.</p>
+                        <p class="card-text">Tailored recommendations for crop management based on detected diseases and plant health.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="feature-card card h-100">
                     <div class="position-relative">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuALWgIifIIxNasw2YsH6ax6J1BvIh07vSB11fYSu1JSbqgaJhPv3tIrShL92j2tpRFnTCs2g3zTiChT0NFWTfq4ma-FEEuj4zWES9-8ixGX14rZT3SgjTyoN6VnBDWSG8ejobNrdBW_kiQLvWhF98UNzC_yhF6CI-joiArGOgq6Wc5ZO8JwdqiVgCyOzXKmVR3rb6ztAd6rmllqFkrf1gJzGvGbBGs3yXAWrxbDjRKZBOYqr-RdmAwcFOPrrVovWire8_aS9sd--fOP" 
-                             class="card-img-top" alt="Farmer Interface">
+                        <img src="https://images.unsplash.com/photo-1605007493699-af65834f8a05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" 
+                             class="card-img-top" alt="Farmer using mobile app in field">
                         <span class="feature-badge">Easy-to-Use</span>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Farmer-friendly Interface</h5>
-                        <p class="card-text text-muted">Intuitive and easy-to-use platform designed for farmers of all technical backgrounds.</p>
+                        <p class="card-text">Intuitive and easy-to-use platform designed for farmers of all technical backgrounds.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="feature-card card h-100">
                     <div class="position-relative">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-LN0Ki0X9ELqx5GLPBY3f5ZeiER0akIjoAQ--ZFIi7Xc4fI9kN60LDmQKLBp-I2EEnBRQnAc-wIvYBUJ7eAQmL_6eOM5zDvMSNx8-twpdXSHHl5JM4vik3T60AdA4TPH3aMoXHWPSUMOV1vW9xkT1K01c1KKjrzReLckF3Soua31ko_YOyLhRXdjymVaAGTmlvKhbY81TdqsdV1PDeX1MjgGntAWIHUIFfbugQvyGdpr10o2qKcC2X4Qmirye-0FnB7-WL3WrQ4gT" 
-                             class="card-img-top" alt="Real-time Insights">
-                        <span class="feature-badge"></span>
+                        <img src="https://images.unsplash.com/photo-1605001011156-cbf0b0f67a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" 
+                             class="card-img-top" alt="Soil testing with digital device">
+                        <span class="feature-badge">Precision</span>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Soil Nutrient & pH Detection</h5>
-                        <p class="card-text text-muted">Detect soil nutrients (NPK) and pH level to classify soil type and suggest the best crops to grow."</p>
+                        <p class="card-text">Detect soil nutrients (NPK) and pH level to classify soil type and suggest the best crops to grow.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Stats Section -->
     <section class="container my-5 py-4">
         <div class="row g-4">
             <div class="col-6 col-md-3">
                 <div class="stats-card">
-                    <h3 class="text-primary">91.3%</h3>
-                    <p class="text-muted mb-0">Accuracy Rate</p>
+                    <h3>91.3%</h3>
+                    <p class="mb-0">Accuracy Rate</p>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="stats-card">
-                    <h3 class="text-primary">10K+</h3>
-                    <p class="text-muted mb-0">Farmers Served</p>
+                    <h3>10K+</h3>
+                    <p class="mb-0">Farmers Served</p>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="stats-card">
-                    <h3 class="text-primary">5+</h3>
-                    <p class="text-muted mb-0">Plant Diseases</p>
+                    <h3>5+</h3>
+                    <p class="mb-0">Plant Diseases</p>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="stats-card">
-                    <h3 class="text-primary">24/7</h3>
-                    <p class="text-muted mb-0">Support</p>
+                    <h3>24/7</h3>
+                    <p class="mb-0">Support</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Mission Section -->
     <section class="container my-5 py-5">
         <div class="mission-section text-center p-4 p-md-5">
-            <h2 class="display-5 fw-bold mb-4">We're on a mission to revolutionize agriculture with technology, making farming more efficient and sustainable.</h2>
+            <h2 class="display-5 fw-bold mb-0">We're on a mission to revolutionize agriculture with technology, making farming more efficient and sustainable.</h2>
         </div>
     </section>
 
-    <div class="text-center mb-5">
-        <a href="./how-to-use.html" class="btn btn-primary btn-lg btn-learn" onclick="showHowItWorks()">Learn More</a>
+    <!-- CTA Section -->
+    <div class="text-center my-5 py-3">
+        <a href="./how-to-use.html" class="btn btn-primary btn-lg px-5">Learn More</a>
     </div>
    
+    <!-- Footer - Updated structure -->
     <footer class="bg-success py-5" style="--bs-bg-opacity: 0.05;">
         <div class="container">
             <div class="row mb-4">
                 <div class="col-md-3 mb-3 mb-md-0">
-                    <h5 class="fw-bold mb-3 text-success">GreenGuardians</h5>
-                    <p class="text-success" style="--bs-text-opacity: 0.8;">Empowering farmers with smart plant disease detection technology.</p>
+                    <h5 class="fw-bold mb-3">GreenGuardians</h5>
+                    <p>Empowering farmers with smart plant disease detection technology.</p>
                 </div>
                 <div class="col-md-3 mb-3 mb-md-0">
-                    <h6 class="fw-bold mb-3 text-success">Quick Links</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">About Us</a></li>
-                        <li class="mb-2"><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">Services</a></li>
-                        <li class="mb-2"><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">Contact</a></li>
-                        <li><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">Privacy Policy</a></li>
+                    <h6 class="fw-bold mb-3">Quick Links</h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">About Us</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Services</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Contact</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-3 mb-md-0">
-                    <h6 class="fw-bold mb-3 text-success">Resources</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">Blog</a></li>
-                        <li class="mb-2"><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">FAQs</a></li>
-                        <li><a href="#" class="text-success text-decoration-none" style="--bs-text-opacity: 0.8;">Support</a></li>
+                    <h6 class="fw-bold mb-3">Resources</h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Blog</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">FAQs</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0">Support</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
-                    <h6 class="fw-bold mb-3 text-success">Connect With Us</h6>
+                    <h6 class="fw-bold mb-3">Connect With Us</h6>
                     <div class="d-flex gap-3">
-                        <a href="#" class="social-icon text-success" style="--bs-text-opacity: 0.8;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon text-success" style="--bs-text-opacity: 0.8;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon text-success" style="--bs-text-opacity: 0.8;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon text-success" style="--bs-text-opacity: 0.8;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
             <hr class="my-4" style="opacity: 0.1;">
-            <div class="text-center text-success" style="--bs-text-opacity: 0.8;">
+            <div class="text-center">
                 <p class="mb-0">© 2025 Greenguardians. All rights reserved.</p>
             </div>
         </div>
@@ -560,22 +580,32 @@
             }
         });
         
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // Add active class to current page in navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if(link.href === window.location.href) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            }
+        });
+        
+        // Make brand icon visible with animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const brandIcon = document.querySelector('.brand-icon');
+            setTimeout(() => {
+                brandIcon.classList.add('visible');
+            }, 300);
+            
+            // Update language dropdown text when an option is selected
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const dropdownToggle = document.querySelector('.dropdown-toggle');
+                    const icon = dropdownToggle.querySelector('i');
+                    const text = this.textContent;
+                    dropdownToggle.innerHTML = `${icon.outerHTML} ${text}`;
                 });
             });
         });
-        
-        function showHowItWorks() {
-            const section = document.querySelector('.how-it-works');
-            section.style.display = 'block';
-            section.scrollIntoView({ behavior: 'smooth' });
-        }
     </script>
 </body>
 </html>
