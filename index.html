@@ -386,26 +386,26 @@
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="https://cdn.qwenlm.ai/output/076a6d91-8c80-4fcf-960a-5fd1f188c6cb/t2i/70ef825b-dad5-4ca0-98a8-06d98c496a69/1754742173.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiMDc2YTZkOTEtOGM4MC00ZmNmLTk2MGEtNWZkMWYxODhjNmNiIiwicmVzb3VyY2VfaWQiOiIxNzU0NzQyMTczIiwicmVzb3VyY2VfY2hhdF9pZCI6IjU1Njk1ZTliLTE2YjUtNGUxNS04ODQxLTc3NjFkMTU2YTQyZCJ9.GuDs8rWn9YmKucb6bjdrMvhdKT4kSxDQBNdY0DrOoeM" 
                      alt="GreenGuardian Logo" class="brand-icon">
-                <span class="fw-bold">GreenGuardians</span>
+                <span class="fw-bold" data-translate="brand">GreenGuardians</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
-                    <li class="nav-item"><a class="nav-link active" href="./index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./crop-recomendation.html">Crop Recommendation</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./recommendation-pag.html">Recommendation</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./report-page.html">Report</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="./index.html" data-translate="home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./crop-recomendation.html" data-translate="crop_recommendation">Crop Recommendation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./recommendation-pag.html" data-translate="recommendation">Recommendation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./report-page.html" data-translate="report">Report</a></li>
                 </ul>
                 <div class="language-dropdown dropdown">
                     <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-globe"></i> English
+                        <i class="fas fa-globe"></i> <span data-translate="language">English</span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                        <li><a class="dropdown-item" href="#">English</a></li>
-                        <li><a class="dropdown-item amharic-font" href="#">አማርኛ</a></li>
-                        <li><a class="dropdown-item" href="#">Afaan Oromoo</a></li>
+                        <li><a class="dropdown-item language-option" href="#" data-lang="en">English</a></li>
+                        <li><a class="dropdown-item amharic-font language-option" href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a class="dropdown-item language-option" href="#" data-lang="om">Afaan Oromoo</a></li>
                     </ul>
                 </div>
             </div>
@@ -415,29 +415,29 @@
     <!-- Hero Section with original background -->
     <div class="hero">
         <div class="container">
-            <h1>Empowering Farmers with Smart Plant Disease Detection</h1>
-            <p>Scan. Detect. Act. Grow healthy crops with confidence.</p>
+            <h1 data-translate="hero_title">Empowering Farmers with Smart Plant Disease Detection</h1>
+            <p data-translate="hero_subtitle">Scan. Detect. Act. Grow healthy crops with confidence.</p>
             <div class="d-flex flex-wrap gap-3 justify-content-center">
-                <a class="btn btn-primary btn-lg pulse" href="./scanning-page.html">Plant Detection</a>
-                <a class="btn btn-outline-light btn-lg" href="./crop-recomendation.html">Soil Detection</a>
+                <a class="btn btn-primary btn-lg pulse" href="./scanning-page.html" data-translate="plant_detection">Plant Detection</a>
+                <a class="btn btn-outline-light btn-lg" href="./crop-recomendation.html" data-translate="soil_detection">Soil Detection</a>
             </div>
         </div>
     </div>
 
     <!-- Features Section -->
     <section class="container my-5 py-4">
-        <h2 class="fw-bold mb-5 text-center">Core Features</h2>
+        <h2 class="fw-bold mb-5 text-center" data-translate="core_features">Core Features</h2>
         <div class="row g-4">
             <div class="col-md-6 col-lg-3">
                 <div class="feature-card card h-100">
                     <div class="position-relative">
                         <img src="https://cdn3.saiwa.ai/Blog/plant_disease_detection_using_image_processing_featured_image_5cbddca5_a831_4b39_b9c8_e9b02a914f4c_9818cf5400.jpg" 
                              class="card-img-top" alt="AI analyzing plant leaves for disease detection">
-                        <span class="feature-badge">AI-Powered</span>
+                        <span class="feature-badge" data-translate="ai_powered">AI-Powered</span>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Image-based Plant Disease Detection</h5>
-                        <p class="card-text">Accurate and rapid identification of plant diseases using advanced image analysis.</p>
+                        <h5 class="card-title" data-translate="feature1_title">Image-based Plant Disease Detection</h5>
+                        <p class="card-text" data-translate="feature1_text">Accurate and rapid identification of plant diseases using advanced image analysis.</p>
                     </div>
                 </div>
             </div>
@@ -446,11 +446,11 @@
                     <div class="position-relative">
                         <img src="https://camo.githubusercontent.com/1bdf0f0577d91db85f8f22e7f8ed20e301498a172302c0d4455b58669114195c/68747470733a2f2f6d656469612e6c6963646e2e636f6d2f646d732f696d6167652f76322f4335313132415145366466527a5633454a74412f61727469636c652d636f7665725f696d6167652d736872696e6b5f3630305f323030302f61727469636c652d636f7665725f696d6167652d736872696e6b5f3630305f323030302f302f313535373738373830353739393f653d3231343734383336343726763d6265746126743d5f33394447695868377236307046704a4176486c756454794652344d726143616e4c325353377532787255"
                              class="card-img-top" alt="Farmer receiving crop recommendations on tablet">
-                        <span class="feature-badge">Smart</span>
+                        <span class="feature-badge" data-translate="smart">Smart</span>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Personalized Crop Recommendations</h5>
-                        <p class="card-text">Tailored recommendations for crop management based on detected diseases and plant health.</p>
+                        <h5 class="card-title" data-translate="feature2_title">Personalized Crop Recommendations</h5>
+                        <p class="card-text" data-translate="feature2_text">Tailored recommendations for crop management based on detected diseases and plant health.</p>
                     </div>
                 </div>
             </div>
@@ -459,11 +459,11 @@
                     <div class="position-relative">
                         <img src="https://www.csm.tech/storage/uploads/news/65c1bdcab8b9c1707195850Thumb.jpg"
                              class="card-img-top" alt="Farmer using mobile app in field">
-                        <span class="feature-badge">Easy-to-Use</span>
+                        <span class="feature-badge" data-translate="easy_to_use">Easy-to-Use</span>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Farmer-friendly Interface</h5>
-                        <p class="card-text">Intuitive and easy-to-use platform designed for farmers of all technical backgrounds.</p>
+                        <h5 class="card-title" data-translate="feature3_title">Farmer-friendly Interface</h5>
+                        <p class="card-text" data-translate="feature3_text">Intuitive and easy-to-use platform designed for farmers of all technical backgrounds.</p>
                     </div>
                 </div>
             </div>
@@ -472,11 +472,11 @@
                     <div class="position-relative">
                         <img src="https://orchardly.co/grow/wp-content/uploads/2023/09/ph-1024x587.jpg.webp"
                              class="card-img-top" alt="Soil testing with digital device">
-                        <span class="feature-badge">Precision</span>
+                        <span class="feature-badge" data-translate="precision">Precision</span>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Soil Nutrient & pH Detection</h5>
-                        <p class="card-text">The user enters the soil ingredient values, and the system will classify the soil type and suggest the best crops to grow.</p>
+                        <h5 class="card-title" data-translate="feature4_title">Soil Nutrient & pH Detection</h5>
+                        <p class="card-text" data-translate="feature4_text">The user enters the soil ingredient values, and the system will classify the soil type and suggest the best crops to grow.</p>
                     </div>
                 </div>
             </div>
@@ -489,25 +489,25 @@
             <div class="col-6 col-md-3">
                 <div class="stats-card">
                     <h3>91.3%</h3>
-                    <p class="mb-0">Accuracy Rate</p>
+                    <p class="mb-0" data-translate="accuracy_rate">Accuracy Rate</p>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="stats-card">
                     <h3>10K+</h3>
-                    <p class="mb-0">Farmers Served</p>
+                    <p class="mb-0" data-translate="farmers_served">Farmers Served</p>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="stats-card">
                     <h3>5+</h3>
-                    <p class="mb-0">Plant Diseases</p>
+                    <p class="mb-0" data-translate="plant_diseases">Plant Diseases</p>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="stats-card">
                     <h3>24/7</h3>
-                    <p class="mb-0">Support</p>
+                    <p class="mb-0" data-translate="support">Support</p>
                 </div>
             </div>
         </div>
@@ -516,13 +516,13 @@
     <!-- Mission Section -->
     <section class="container my-5 py-5">
         <div class="mission-section text-center p-4 p-md-5">
-            <h2 class="display-5 fw-bold mb-0">We're on a mission to revolutionize agriculture with technology, making farming more efficient and sustainable.</h2>
+            <h2 class="display-5 fw-bold mb-0" data-translate="mission_text">We're on a mission to revolutionize agriculture with technology, making farming more efficient and sustainable.</h2>
         </div>
     </section>
 
     <!-- CTA Section -->
     <div class="text-center my-5 py-3">
-        <a href="./how-to-use.html" class="btn btn-primary btn-lg px-5">Learn More</a>
+        <a href="./how-to-use.html" class="btn btn-primary btn-lg px-5" data-translate="learn_more">Learn More</a>
     </div>
    
     <!-- Footer - Updated structure -->
@@ -530,28 +530,28 @@
         <div class="container">
             <div class="row mb-4">
                 <div class="col-md-3 mb-3 mb-md-0">
-                    <h5 class="fw-bold mb-3">GreenGuardians</h5>
-                    <p>Empowering farmers with smart plant disease detection technology.</p>
+                    <h5 class="fw-bold mb-3" data-translate="brand">GreenGuardians</h5>
+                    <p data-translate="footer_description">Empowering farmers with smart plant disease detection technology.</p>
                 </div>
                 <div class="col-md-3 mb-3 mb-md-0">
-                    <h6 class="fw-bold mb-3">Quick Links</h6>
+                    <h6 class="fw-bold mb-3" data-translate="quick_links">Quick Links</h6>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">About Us</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Services</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Contact</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link p-0">Privacy Policy</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0" data-translate="about_us">About Us</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0" data-translate="services">Services</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0" data-translate="contact">Contact</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0" data-translate="privacy_policy">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-3 mb-md-0">
-                    <h6 class="fw-bold mb-3">Resources</h6>
+                    <h6 class="fw-bold mb-3" data-translate="resources">Resources</h6>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Blog</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">FAQs</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link p-0">Support</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0" data-translate="blog">Blog</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0" data-translate="faqs">FAQs</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0" data-translate="support">Support</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
-                    <h6 class="fw-bold mb-3">Connect With Us</h6>
+                    <h6 class="fw-bold mb-3" data-translate="connect_with_us">Connect With Us</h6>
                     <div class="d-flex gap-3">
                         <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
@@ -562,7 +562,7 @@
             </div>
             <hr class="my-4" style="opacity: 0.1;">
             <div class="text-center">
-                <p class="mb-0">© 2025 Greenguardians. All rights reserved.</p>
+                <p class="mb-0">© 2025 <span data-translate="brand">GreenGuardians</span>. <span data-translate="all_rights">All rights reserved</span>.</p>
             </div>
         </div>
     </footer>
@@ -570,6 +570,162 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // Translation data
+        const translations = {
+            en: {
+                brand: "GreenGuardians",
+                home: "Home",
+                crop_recommendation: "Crop Recommendation",
+                recommendation: "Recommendation",
+                report: "Report",
+                language: "English",
+                hero_title: "Empowering Farmers with Smart Plant Disease Detection",
+                hero_subtitle: "Scan. Detect. Act. Grow healthy crops with confidence.",
+                plant_detection: "Plant Detection",
+                soil_detection: "Soil Detection",
+                core_features: "Core Features",
+                ai_powered: "AI-Powered",
+                feature1_title: "Image-based Plant Disease Detection",
+                feature1_text: "Accurate and rapid identification of plant diseases using advanced image analysis.",
+                smart: "Smart",
+                feature2_title: "Personalized Crop Recommendations",
+                feature2_text: "Tailored recommendations for crop management based on detected diseases and plant health.",
+                easy_to_use: "Easy-to-Use",
+                feature3_title: "Farmer-friendly Interface",
+                feature3_text: "Intuitive and easy-to-use platform designed for farmers of all technical backgrounds.",
+                precision: "Precision",
+                feature4_title: "Soil Nutrient & pH Detection",
+                feature4_text: "The user enters the soil ingredient values, and the system will classify the soil type and suggest the best crops to grow.",
+                accuracy_rate: "Accuracy Rate",
+                farmers_served: "Farmers Served",
+                plant_diseases: "Plant Diseases",
+                support: "Support",
+                mission_text: "We're on a mission to revolutionize agriculture with technology, making farming more efficient and sustainable.",
+                learn_more: "Learn More",
+                footer_description: "Empowering farmers with smart plant disease detection technology.",
+                quick_links: "Quick Links",
+                about_us: "About Us",
+                services: "Services",
+                contact: "Contact",
+                privacy_policy: "Privacy Policy",
+                resources: "Resources",
+                blog: "Blog",
+                faqs: "FAQs",
+                connect_with_us: "Connect With Us",
+                all_rights: "All rights reserved"
+            },
+            am: {
+                brand: "ግሪንጋርዲያንስ",
+                home: "መነሻ",
+                crop_recommendation: "የእርሻ ምርት ምክር",
+                recommendation: "ምክር",
+                report: "ሪፖርት",
+                language: "አማርኛ",
+                hero_title: "አርሶ አደሮችን በአስተዋይ የእፅዋት በሽታ መለያ አጠቃቀም ማብቃት",
+                hero_subtitle: "ተቀዳጅ። ይለዩ። ይሥሩ። ጤናማ እርሻዎችን በተረጋጋ ያድጉ።",
+                plant_detection: "የእፅዋት መለያ",
+                soil_detection: "የአፈር መለያ",
+                core_features: "ዋና ባህሪያት",
+                ai_powered: "AI የሚሠራ",
+                feature1_title: "በምስር �ይ የእፅዋት በሽታ መለያ",
+                feature1_text: "የላቀ የምስር ትንተና በመጠቀም የእፅዋት በሽታዎችን ትክክለኛ እና ፈጣን መለያ።",
+                smart: "አስተዋይ",
+                feature2_title: "ብጁ የእርሻ ምክሮች",
+                feature2_text: "በተገኙት በሽታዎች እና የእፅዋት ጤና �ይ የተመሠረተ የእርሻ አስተዳደር ምክሮች።",
+                easy_to_use: "ለመጠቀም ቀላል",
+                feature3_title: "ለአርሶ አደሮች ተስማሚ በይነገጽ",
+                feature3_text: "ለሁሉም የቴክኒክ ደረጃ አርሶ አደሮች የተቀየሰ እና ለመጠቀም ቀላል መድረክ።",
+                precision: "ትክክለኛነት",
+                feature4_title: "የአፈር ምግብ ንጥረ ነገሮች እና pH መለያ",
+                feature4_text: "ተጠቃሚው የአፈር ንጥረ ነገሮችን ዋጋዎችን ያስገባል ፣ እና ስርዓቱ የአፈር አይነትን ይመድባል እና ሊያድጉት የሚገባውን ምርቶች ይመክራል።",
+                accuracy_rate: "የትክክለኛነት መጠን",
+                farmers_served: "የተገለገሉ አርሶ አደሮች",
+                plant_diseases: "የእፅዋት በሽታዎች",
+                support: "ድጋፍ",
+                mission_text: "በቴክኖሎጂ የእርሻ ልማትን ለመቀየር ተልከናል ፣ እርሻን የበለጠ ውጤታማ እና ተቀባይነት ያለው ለማድረግ።",
+                learn_more: "ተጨማሪ ይወቁ",
+                footer_description: "አርሶ አደሮችን በአስተዋይ የእፅዋት በሽታ መለያ ቴክኖሎጂ ማብቃት።",
+                quick_links: "ፈጣን አገናኞች",
+                about_us: "ስለ እኛ",
+                services: "አገልግሎቶች",
+                contact: "አግኙን",
+                privacy_policy: "የግላዊነት ፖሊሲ",
+                resources: "ሀብቶች",
+                blog: "ብሎግ",
+                faqs: "ተደጋጋሚ ጥያቄዎች",
+                connect_with_us: "ከእኛ ጋር ይገናኙ",
+                all_rights: "ሁሉም መብቶች የተጠበቁ ናቸው"
+            },
+            om: {
+                brand: "GreenGuardians",
+                home: "Mana",
+                crop_recommendation: "Gorsa Bineeldota",
+                recommendation: "Gorsa",
+                report: "Ripoortii",
+                language: "Afaan Oromoo",
+                hero_title: "Gargaarsa Gorsaa Bineeldota bal'inaan qabu",
+                hero_subtitle: "Miraawu. Addaan baasu. Hojjedhu. Bineeldota miidhagaa ta'an bal'inaan qabi.",
+                plant_detection: "Muuxannoo Bineeldota",
+                soil_detection: "Muuxannoo Biyyoo",
+                core_features: "Qooddannaa Bu'uuraa",
+                ai_powered: "AI Nga'e",
+                feature1_title: "Muuxannoo Dhukkubaa Bineeldota",
+                feature1_text: "Muuxannoo sirrii fi dhaabbataa dhukkubaa bineeldota qabu.",
+                smart: "Ogummaa Qabu",
+                feature2_title: "Gorsa Bineeldota",
+                feature2_text: "Gorsa sirrii fi gaarii bineeldota qabu.",
+                easy_to_use: "Fayyadamuuf Laafaa",
+                feature3_title: "Mata Duree Laafaa",
+                feature3_text: "Mata duree laafaa fi fayyadamuuf salphaa qopheessine.",
+                precision: "Sirrii Ta'uu",
+                feature4_title: "Muuxannoo Biyyoo",
+                feature4_text: "Muuxannoo sirrii fi gaarii biyyoo qabu.",
+                accuracy_rate: "Gatii Sirrii",
+                farmers_served: "Gargaarsa Qopheessine",
+                plant_diseases: "Dhukkubaa Bineeldota",
+                support: "Gargaarsa",
+                mission_text: "Gargaarsa gorsaa bineeldota bal'inaan qabu.",
+                learn_more: "Baradhu",
+                footer_description: "Gargaarsa gorsaa bineeldota bal'inaan qabu.",
+                quick_links: "Linkkii Dhiyeessaa",
+                about_us: "Waa'ee Keenya",
+                services: "Tajaajilaa",
+                contact: "Nu Qunnamuu",
+                privacy_policy: "Seera Iccitii",
+                resources: "Qabeenya",
+                blog: "Blogii",
+                faqs: "Gaaffiiwwan",
+                connect_with_us: "Nu Waliin Qunnamuu",
+                all_rights: "Mirgiiwwan hundi nuuf kenname"
+            }
+        };
+
+        // Function to change language
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update language dropdown text
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+            const icon = dropdownToggle.querySelector('i');
+            dropdownToggle.innerHTML = `${icon.outerHTML} ${translations[lang].language}`;
+            
+            // Add amharic font class if Amharic is selected
+            if (lang === 'am') {
+                document.body.classList.add('amharic-font');
+            } else {
+                document.body.classList.remove('amharic-font');
+            }
+            
+            // Store selected language in localStorage
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('mainNavbar');
@@ -595,16 +751,18 @@
                 brandIcon.classList.add('visible');
             }, 300);
             
-            // Update language dropdown text when an option is selected
-            document.querySelectorAll('.dropdown-item').forEach(item => {
+            // Language selection
+            document.querySelectorAll('.language-option').forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const dropdownToggle = document.querySelector('.dropdown-toggle');
-                    const icon = dropdownToggle.querySelector('i');
-                    const text = this.textContent;
-                    dropdownToggle.innerHTML = `${icon.outerHTML} ${text}`;
+                    const lang = this.getAttribute('data-lang');
+                    changeLanguage(lang);
                 });
             });
+            
+            // Check for saved language preference
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+            changeLanguage(savedLanguage);
         });
     </script>
 </body>
