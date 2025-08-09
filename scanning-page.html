@@ -10,12 +10,21 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5fef5 0%, #e8f5e9 100%);
+            min-height: 100vh;
         }
         #imagePreview {
             max-width: 100%;
             max-height: 300px;
             display: none;
             margin: 20px auto;
+            border: 3px solid #198754;
+            box-shadow: 0 4px 15px rgba(25, 135, 84, 0.2);
+            transition: all 0.3s ease;
+        }
+        #imagePreview:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(25, 135, 84, 0.3);
         }
         .camera-dialog {
             position: fixed;
@@ -33,6 +42,8 @@
         .camera-preview {
             max-width: 100%;
             max-height: 70vh;
+            border: 3px solid #198754;
+            border-radius: 10px;
         }
         .loading-spinner {
             display: none;
@@ -48,22 +59,138 @@
         }
         .scan-buttons {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             justify-content: center;
+            margin-bottom: 30px;
         }
         #viewResultBtn {
             display: none;
-            margin: 15px auto;
+            margin: 25px auto;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        #viewResultBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(25, 135, 84, 0.3);
+        }
+        .language-switcher {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid rgba(25, 135, 84, 0.2);
+        }
+        .language-btn {
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            margin: 0 2px;
+        }
+        .language-btn.active {
+            background-color: #198754;
+            color: white;
+            box-shadow: 0 2px 5px rgba(25, 135, 84, 0.3);
+        }
+        .language-btn:not(.active):hover {
+            background-color: rgba(25, 135, 84, 0.1);
+        }
+        .main-container {
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+        .btn-success {
+            background-color: #198754;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(25, 135, 84, 0.2);
+        }
+        .btn-success:hover {
+            background-color: #157347;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(25, 135, 84, 0.3);
+        }
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .dropdown-item {
+            transition: all 0.2s;
+        }
+        .dropdown-item:hover {
+            background-color: rgba(25, 135, 84, 0.1);
+        }
+        footer {
+            background: linear-gradient(to right, #198754, #2e8b57);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        footer small {
+            color: rgba(255,255,255,0.8) !important;
+        }
+        .ratio img {
+            object-fit: cover;
+            border-radius: 12px !important;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 3px solid white;
+        }
+        h1 {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+        h1:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: #198754;
+            border-radius: 3px;
         }
         @media (max-width: 576px) {
             .scan-buttons {
                 flex-direction: column;
+                gap: 10px;
+            }
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+                padding: 3px 8px;
+            }
+            .language-btn {
+                padding: 3px 8px;
+                font-size: 0.7rem;
+            }
+            .main-container {
+                padding-top: 70px;
+                padding-bottom: 70px;
             }
         }
     </style>
 </head>
-<body id="scanning-page" class="bg-success bg-opacity-10 vh-100 overflow-hidden">
-    <div class="container d-flex flex-column justify-content-center h-100 py-4">
+<body id="scanning-page">
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="language-btn active" data-lang="en">English</button>
+        <button class="language-btn" data-lang="am">አማርኛ</button>
+        <button class="language-btn" data-lang="om">Oromiffa</button>
+    </div>
+    
+    <div class="container main-container">
         <div class="mx-auto text-center" style="max-width: 600px">
             <!-- Header Image -->
             <div class="ratio ratio-16x9 mb-4">
@@ -73,8 +200,8 @@
             </div>
             
             <!-- Title and Subtitle -->
-            <h1 class="text-success fw-semibold mb-3 display-5">GreenGuardians</h1>
-            <p class="text-muted mb-4 lead">
+            <h1 class="text-success fw-semibold mb-3 display-5" data-translate="title">GreenGuardians</h1>
+            <p class="text-muted mb-4 lead" data-translate="subtitle">
                 Scan your crops or soil for instant analysis and smart farming recommendations.
             </p>
             
@@ -82,7 +209,7 @@
             <img id="imagePreview" class="img-thumbnail rounded">
             
             <!-- View Result Button (initially hidden) -->
-            <button id="viewResultBtn" class="btn btn-success px-4 py-3 rounded-pill shadow fs-5">
+            <button id="viewResultBtn" class="btn btn-success px-4 py-3 rounded-pill shadow fs-5" data-translate="view_result">
                 <i class="bi bi-eye me-2"></i> View Result
             </button>
             
@@ -93,7 +220,8 @@
                             type="button" 
                             id="scanDropdown" 
                             data-bs-toggle="dropdown" 
-                            aria-expanded="false">
+                            aria-expanded="false"
+                            data-translate="scan_soil">
                         <i class="bi bi-camera me-2"></i> Scan for soil
                     </button>
                     
@@ -102,21 +230,21 @@
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handleScanOption('photo')">
                                 <i class="bi bi-camera fs-5"></i>
-                                <span>Take Photo</span>
+                                <span data-translate="take_photo">Take Photo</span>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider my-0"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handleScanOption('upload')">
                                 <i class="bi bi-upload fs-5"></i>
-                                <span>Upload from Device</span>
+                                <span data-translate="upload_device">Upload from Device</span>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider my-0"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handleScanOption('drive')">
                                 <i class="bi bi-cloud-arrow-up fs-5"></i>
-                                <span>Google Drive</span>
+                                <span data-translate="google_drive">Google Drive</span>
                             </a>
                         </li>
                     </ul>
@@ -128,7 +256,8 @@
                             type="button" 
                             id="plantScanDropdown" 
                             data-bs-toggle="dropdown" 
-                            aria-expanded="false">
+                            aria-expanded="false"
+                            data-translate="scan_plant">
                         <i class="bi bi-flower2 me-2"></i> Scan Plant
                     </button>
                     
@@ -137,21 +266,21 @@
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handlePlantScanOption('photo')">
                                 <i class="bi bi-camera fs-5"></i>
-                                <span>Take Photo</span>
+                                <span data-translate="take_photo">Take Photo</span>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider my-0"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handlePlantScanOption('upload')">
                                 <i class="bi bi-upload fs-5"></i>
-                                <span>Upload from Device</span>
+                                <span data-translate="upload_device">Upload from Device</span>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider my-0"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handlePlantScanOption('drive')">
                                 <i class="bi bi-cloud-arrow-up fs-5"></i>
-                                <span>Google Drive</span>
+                                <span data-translate="google_drive">Google Drive</span>
                             </a>
                         </li>
                     </ul>
@@ -172,8 +301,8 @@
     </div>
     
     <!-- Footer -->
-    <footer class="fixed-bottom bg-success bg-opacity-10 py-2 text-center">
-        <small class="text-muted">© 2025 GreenGuardians Technologies</small>
+    <footer class="bg-success bg-opacity-10 py-3 text-center">
+        <small class="text-muted" data-translate="copyright">© 2025 GreenGuardians Technologies</small>
     </footer>
 
     <!-- Bootstrap JS Bundle with Popper -->
@@ -182,6 +311,69 @@
     <!-- Google Picker API -->
     <script src="https://apis.google.com/js/api.js"></script>
     <script>
+        // Language translations
+        const translations = {
+            en: {
+                title: "GreenGuardians",
+                subtitle: "Scan your crops or soil for instant analysis and smart farming recommendations.",
+                view_result: "View Result",
+                scan_soil: "Scan for soil",
+                scan_plant: "Scan Plant",
+                take_photo: "Take Photo",
+                upload_device: "Upload from Device",
+                google_drive: "Google Drive",
+                copyright: "© 2025 GreenGuardians Technologies",
+                result_alert: "Results are ready! Here would be your analysis and recommendations."
+            },
+            am: {
+                title: "GreenGuardians",
+                subtitle: "የእርሻዎን ምርት ወይም አፈር ለፈጣን ትንታኔ እና ዘመናዊ ርዶ ምክሮች ይቃኙ።",
+                view_result: "ውጤቱን ይመልከቱ",
+                scan_soil: "ለአፈር ይቃኙ",
+                scan_plant: "የተክሉን ይቃኙ",
+                take_photo: "ፎቶ ይቅረጹ",
+                upload_device: "ከመሣሪያዎ ይስቀሉ",
+                google_drive: "ጉግል ድራይቭ",
+                copyright: "© 2025 GreenGuardians ቴክኖሎጂዎች",
+                result_alert: "ውጤቶቹ ዝግጁ ናቸው! እዚህ የእርስዎ ትንታኔ እና ምክሮች ይኖራሉ።"
+            },
+            om: {
+                title: "GreenGuardians",
+                subtitle: "Biyyoo keessanii yookiin midhaan keessan fayyadamaa fi gorsa qonnaa beekumsaa ta'eef saaqaa.",
+                view_result: "Deebii ilaalaa",
+                scan_soil: "Biyyoo saaqaa",
+                scan_plant: "Biyyee saaqaa",
+                take_photo: "Suuraa fakkenni",
+                upload_device: "Meeshii irraa kaasaa",
+                google_drive: "Google Drive",
+                copyright: "© 2025 GreenGuardians Technologies",
+                result_alert: "Deebiin ni qophaa'e! Asii gama keessanii fi gorsa keessanii ta'a."
+            }
+        };
+
+        // Function to change language
+        function changeLanguage(lang) {
+            // Update active button
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update alert message language
+            alertMessage = translations[lang].result_alert;
+        }
+
         // Function to handle soil scan options
         function handleScanOption(option) {
             console.log(`Soil scan option selected: ${option}`);
@@ -232,6 +424,9 @@
                 
                 // Show the View Result button
                 document.getElementById('viewResultBtn').style.display = 'block';
+                
+                // Scroll to the image preview
+                document.getElementById('imagePreview').scrollIntoView({ behavior: 'smooth' });
             }, 2000);
         }
         
@@ -253,6 +448,9 @@
                 
                 // Show the View Result button
                 document.getElementById('viewResultBtn').style.display = 'block';
+                
+                // Scroll to the image preview
+                document.getElementById('imagePreview').scrollIntoView({ behavior: 'smooth' });
             }, 2000);
         }
         
@@ -288,10 +486,14 @@
                 
                 // Show the View Result button
                 document.getElementById('viewResultBtn').style.display = 'block';
+                
+                // Scroll to the image preview
+                document.getElementById('imagePreview').scrollIntoView({ behavior: 'smooth' });
             }, 2000);
         }
         
         // Add click handler for View Result button
+        let alertMessage = translations.en.result_alert;
         document.getElementById('viewResultBtn').addEventListener('click', function() {
             // Show loading spinner
             document.getElementById('loadingSpinner').style.display = 'flex';
@@ -301,11 +503,8 @@
                 // Hide loading spinner
                 document.getElementById('loadingSpinner').style.display = 'none';
                 
-                // For demo purposes, show an alert
-                alert('Results are ready! Here would be your analysis and recommendations.');
-                
-                // In a real app, you would redirect to results page or show results here
-                // window.location.href = 'results.html';
+                // Show an alert in the current language
+                alert(alertMessage);
             }, 1500);
         });
         
@@ -317,6 +516,13 @@
         // Load Google API client and then initialize Picker
         window.onload = function() {
             gapi.load('client', {'callback': initGooglePicker});
+            
+            // Set up language switcher event listeners
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    changeLanguage(this.dataset.lang);
+                });
+            });
         };
     </script>
 </body>
