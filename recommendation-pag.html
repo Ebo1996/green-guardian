@@ -1,252 +1,280 @@
-<html>
-  <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
-    />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthWise Recommendations</title>
 
-    <title>HealthWise Recommendations</title>
-     <link rel="icon" type="image/png" href="https://cdn.qwenlm.ai/output/076a6d91-8c80-4fcf-960a-5fd1f188c6cb/t2i/70ef825b-dad5-4ca0-98a8-06d98c496a69/1754742173.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiMDc2YTZkOTEtOGM4MC00ZmNmLTk2MGEtNWZkMWYxODhjNmNiIiwicmVzb3VyY2VfaWQiOiIxNzU0NzQyMTczIiwicmVzb3VyY2VfY2hhdF9pZCI6IjU1Njk1ZTliLTE2YjUtNGUxNS04ODQxLTc3NjFkMTU2YTQyZCJ9.GuDs8rWn9YmKucb6bjdrMvhdKT4kSxDQBNdY0DrOoeM">
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-      /* Recommendation Card Styling */
-      .recommendation-card {
-        transition: all 0.3s ease;
-        min-height: 500px; /* Bigger box */
-        background-color: #000; /* Solid black */
-        border-radius: 12px;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        color: #fff; /* White text for contrast */
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.8);
-      }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic&display=swap">
 
-      .recommendation-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9);
-      }
+  <!-- Tailwind (optional) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-      /* Content Area Styling */
-      .content-area {
-        min-height: 400px; /* Increased to match bigger box */
-        padding: 2rem;
-        color: #fff; /* White text so it's readable on black */
-      }
+  <style>
+    /* Green Theme */
+    .recommendation-card {
+      transition: all 0.3s ease;
+      min-height: 500px;
+      background-color: #006400;
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: #fff;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.8);
+    }
 
-      /* Primary Button Styling */
-      .btn-primary {
-        transition: all 0.3s ease;
-        background-color: #28a745; /* Green by default */
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
-        cursor: pointer;
-      }
+    .recommendation-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9);
+    }
 
-      .btn-primary:hover {
-        background-color: #0d80f2; /* Blue on hover */
-      }
+    .btn-primary {
+      transition: all 0.3s ease;
+      background-color: #008000;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
 
-      /* Loading Spinner */
-      .loading-spinner {
-        display: none;
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: #fff;
-        animation: spin 1s ease-in-out infinite;
-      }
+    .btn-primary:hover {
+      background-color: #006400;
+    }
 
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
+    .language-btn {
+      margin: 0 5px;
+      border-radius: 20px;
+      font-weight: bold;
+      transition: all 0.3s;
+      background-color: #008000;
+      color: white;
+      border: 1px solid #008000;
+    }
 
-      /* Recommendation items */
-      .recommendation-item {
-        padding: 1rem;
-        margin-bottom: 1rem;
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-      }
-      .text-center{
-        
-      }
-    </style>
-  </head>
-  <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
-      <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f5] px-10 py-3">
-          <div class="flex items-center gap-4 text-[#111418]">
-            <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M39.5563 34.1455V13.8546C39.5563 15.708 36.8773 17.3437 32.7927 18.3189C30.2914 18.916 27.263 19.2655 24 19.2655C20.737 19.2655 17.7086 18.916 15.2073 18.3189C11.1227 17.3437 8.44365 15.708 8.44365 13.8546V34.1455C8.44365 35.9988 11.1227 37.6346 15.2073 38.6098C17.7086 39.2069 20.737 39.5564 24 39.5564C27.263 39.5564 30.2914 39.2069 32.7927 38.6098C36.8773 37.6346 39.5563 35.9988 39.5563 34.1455Z"
-                  fill="currentColor"
-                ></path>
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M10.4485 13.8519C10.4749 13.9271 10.6203 14.246 11.379 14.7361C12.298 15.3298 13.7492 15.9145 15.6717 16.3735C18.0007 16.9296 20.8712 17.2655 24 17.2655C27.1288 17.2655 29.9993 16.9296 32.3283 16.3735C34.2508 15.9145 35.702 15.3298 36.621 14.7361C37.3796 14.246 37.5251 13.9271 37.5515 13.8519C37.5287 13.7876 37.4333 13.5973 37.0635 13.2931C36.5266 12.8516 35.6288 12.3647 34.343 11.9175C31.79 11.0295 28.1333 10.4437 24 10.4437C19.8667 10.4437 16.2099 11.0295 13.657 11.9175C12.3712 12.3647 11.4734 12.8516 10.9365 13.2931C10.5667 13.5973 10.4713 13.7876 10.4485 13.8519ZM37.5563 18.7877C36.3176 19.3925 34.8502 19.8839 33.2571 20.2642C30.5836 20.9025 27.3973 21.2655 24 21.2655C20.6027 21.2655 17.4164 20.9025 14.7429 20.2642C13.1498 19.8839 11.6824 19.3925 10.4436 18.7877V34.1275C10.4515 34.1545 10.5427 34.4867 11.379 35.027C12.298 35.6207 13.7492 36.2054 15.6717 36.6644C18.0007 37.2205 20.8712 37.5564 24 37.5564C27.1288 37.5564 29.9993 37.2205 32.3283 36.6644C34.2508 36.2054 35.702 35.6207 36.621 35.027C37.4573 34.4867 37.5485 34.1546 37.5563 34.1275V18.7877ZM41.5563 13.8546V34.1455C41.5563 36.1078 40.158 37.5042 38.7915 38.3869C37.3498 39.3182 35.4192 40.0389 33.2571 40.5551C30.5836 41.1934 27.3973 41.5564 24 41.5564C20.6027 41.5564 17.4164 41.1934 14.7429 40.5551C12.5808 40.0389 10.6502 39.3182 9.20848 38.3869C7.84205 37.5042 6.44365 36.1078 6.44365 34.1455L6.44365 13.8546C6.44365 12.2684 7.37223 11.0454 8.39581 10.2036C9.43325 9.3505 10.8137 8.67141 12.343 8.13948C15.4203 7.06909 19.5418 6.44366 24 6.44366C28.4582 6.44366 32.5797 7.06909 35.657 8.13948C37.1863 8.67141 38.5667 9.3505 39.6042 10.2036C40.6278 11.0454 41.5563 12.2684 41.5563 13.8546Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </div>
-            <h2 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">HealthWise</h2>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <div class="flex items-center gap-9">
-              <a class="text-[#111418] text-sm font-medium leading-normal hover:text-[#0d80f2] transition-colors" href="./index.html">Home</a>
-              <a class="text-[#111418] text-sm font-medium leading-normal hover:text-[#0d80f2] transition-colors" href="./how-to-use.html">Learnmore</a>
-            </div>
-            <button
-              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f5] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-[#e0e5eb] transition-colors"
-            >
-              <div class="text-[#111418]" data-icon="Bell" data-size="20px" data-weight="regular">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                  <path
-                    d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
-                  ></path>
-                </svg>
-              </div>
-            </button>
-          </div>
-        </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <h1 class="text-[#111418] tracking-light text-[32px] font-bold leading-tight px-4 text-center pb-3 pt-6">Recommendation Page</h1>
-            <div class="p-4">
-              <div
-                class="recommendation-card content-area"
-                id="recommendation-container"
-              >
-                <div class="flex w-full items-end justify-between gap-4 p-4">
-                  <div class="flex flex-1 flex-col gap-1">
-                    <p class="text-white tracking-light text-2xl font-bold leading-tight" id="recommendation-title">Loading recommendations...</p>
-                    <div class="text-white text-base font-medium leading-normal space-y-4" id="recommendation-content">
-                      <!-- Content will be populated by API -->
-                    </div>
-                  </div>
+    .language-btn:hover {
+      background-color: #006400;
+      border-color: #006400;
+    }
+
+    .language-btn.active {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      background-color: #006400;
+    }
+
+    .language-btn.btn-outline-primary {
+      background-color: transparent;
+      color: #008000;
+    }
+
+    .language-btn.btn-outline-primary:hover {
+      background-color: #008000;
+      color: white;
+    }
+
+    .loading-spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .recommendation-item {
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+    }
+
+    /* Fonts for languages */
+    .amharic-text {
+      font-family: 'Noto Sans Ethiopic', sans-serif;
+    }
+
+    .oromo-text {
+      font-family: 'Noto Sans', sans-serif;
+    }
+
+    /* Back to Home button */
+    .back-to-home {
+      position: fixed;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      background-color: #008000;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+      z-index: 2000;
+    }
+
+    .back-to-home:hover {
+      background-color: #006400;
+    }
+  </style>
+</head>
+<body class="bg-white" style="font-family: Inter, 'Noto Sans', sans-serif;">
+
+  <!-- Language Switcher -->
+  <div class="language-switcher position-absolute top-0 end-0 p-3">
+    <div class="btn-group" role="group">
+      <button type="button" class="language-btn btn btn-sm btn-primary active" data-lang="en">English</button>
+      <button type="button" class="language-btn btn btn-sm btn-outline-primary" data-lang="am">አማርኛ</button>
+      <button type="button" class="language-btn btn btn-sm btn-outline-primary" data-lang="om">Afaan Oromoo</button>
+    </div>
+  </div>
+
+  <!-- Back to Home -->
+  <a href="./index.html" class="back-to-home">⬅ Back to Home</a>
+
+  <!-- Page Content -->
+  <div class="layout-container flex h-full grow flex-col">
+    <div class="px-4 px-md-5 flex flex-1 justify-center py-5">
+      <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+        <h1 id="page-title" class="text-dark text-center pb-3 pt-6 fw-bold">Recommendation Page</h1>
+        <div class="p-4">
+          <div class="recommendation-card content-area" id="recommendation-container">
+            <div class="flex w-full items-end justify-between gap-4 p-4">
+              <div class="flex flex-1 flex-col gap-1">
+                <p id="recommendation-title" class="text-white fw-bold fs-4">Loading recommendations...</p>
+                <div id="recommendation-content" class="text-white fs-6">
+                  <!-- API content -->
                 </div>
               </div>
             </div>
-            <div class="flex px-4 py-3 justify-center">
-              <button
-                class="btn-primary flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 text-white text-sm font-bold leading-normal tracking-[0.015em]"
-                id="report-button"
-              >
-                <span class="truncate">Go to Report Page</span>
-                <div class="loading-spinner ml-2" id="loading-spinner"></div>
-              </button>
-            </div>
           </div>
+        </div>
+        <div class="flex px-4 py-3 justify-center">
+          <button id="report-button" class="btn-primary d-flex align-items-center">
+            <span id="report-button-text">Go to Report Page</span>
+            <div id="loading-spinner" class="loading-spinner ms-2"></div>
+          </button>
         </div>
       </div>
     </div>
+  </div>
 
-    <script>
-      // API Integration Ready
-      document.addEventListener('DOMContentLoaded', function() {
-        // Function to fetch recommendations from backend
-        async function fetchRecommendations() {
-          try {
-            // Replace with your actual API endpoint
-            const response = await fetch('https://your-api-endpoint.com/recommendations', {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                // Add any authentication headers if needed
-                // 'Authorization': 'Bearer your-token'
-              }
-            });
-            
-            if (!response.ok) {
-              throw new Error('Failed to fetch recommendations');
-            }
-            
-            const data = await response.json();
-            return data;
-          } catch (error) {
-            console.error('Error fetching recommendations:', error);
-            return {
-              title: "Error loading recommendations",
-              content: "We couldn't load your recommendations at this time. Please try again later."
-            };
-          }
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Language data
+    const translations = {
+      en: {
+        title: "Recommendation Page",
+        loading: "Loading recommendations...",
+        errorTitle: "Error loading recommendations",
+        errorContent: "We couldn't load your recommendations at this time. Please try again later.",
+        noRecommendations: "No specific recommendations available at this time.",
+        consultDoctor: "Please check back later or consult with your healthcare provider.",
+        reportButton: "Go to Report Page",
+        recommendations: [
+          { title: "Exercise Regularly", description: "Aim for at least 30 minutes of moderate exercise daily to improve cardiovascular health.", additionalInfo: "Suggested activities: brisk walking, swimming, cycling" },
+          { title: "Balanced Diet", description: "Include a variety of fruits, vegetables, whole grains, and lean proteins in your meals.", additionalInfo: "Try to reduce processed foods and sugars" },
+          { title: "Hydration", description: "Drink at least 8 glasses of water daily to maintain proper hydration.", additionalInfo: "Increase intake during hot weather or physical activity" }
+        ]
+      },
+      am: {
+        title: "የምክር ገጽ",
+        loading: "ምክሮች በመጫን ላይ...",
+        errorTitle: "ምክሮችን በማምጣት ላይ ስህተት",
+        errorContent: "በአሁኑ ጊዜ ምክሮችዎን ማምጣት አልቻልንም። እባክዎ ቆይተው እንደገና ይሞክሩ።",
+        noRecommendations: "በአሁኑ ጊዜ ምንም የተወሰኑ ምክሮች የሉም።",
+        consultDoctor: "እባክዎ ቆይተው እንደገና ይፈትሹ ወይም ከጤና አጠባበቅ ሰጪዎ ጋር ይወያዩ።",
+        reportButton: "ወደ ሪፖርት ገጽ ይሂዱ",
+        recommendations: [
+          { title: "በየጊዜው የአካል ብቃት እንቅስቃሴ", description: "የልብ ጤናን ለማሻሻል ቢያንስ በቀን 30 ደቂቃ የሚቆይ የአካል ብቃት ልመድ።", additionalInfo: "ፈጣን መራመድ፣ የማዳን፣ ብስክሌት መንዳት" },
+          { title: "ተመጣጣኝ ምግብ", description: "በምግብዎ ውስጥ የተለያዩ ፍራፍሬዎችን፣ አትክልቶችን፣ ሙሉ እህሎችን እና ከፍተኛ ፕሮቲን ያለው ምግብ ያካትቱ።", additionalInfo: "የተሰራ ምግብ እና ስኳር መቀነስ ይሞክሩ" },
+          { title: "የውሃ መጠጣት", description: "ቢያንስ 8 ብርጭቆ ውሃ በቀን ጠጥተው።", additionalInfo: "በሙቀት ወቅት ወይም በአካል ብቃት ዘንግተው መጠጣትን ይጨምሩ" }
+        ]
+      },
+      om: {
+        title: "Yaadaa Paajii",
+        loading: "Yaadaa kan argamsiifamu...",
+        errorTitle: "Dogoggora argamsiisuu yaadaa",
+        errorContent: "Yaadaa keessan argamsiifachuu hindandeenye. Mee irra deebi'ii yaalaa.",
+        noRecommendations: "Yaadaa mirkanaa'aa ykn adda addaa yeroo ammaa hin jirre.",
+        consultDoctor: "Mee irra deebi'ii ilaalaa ykn hojjataa fayyaa keessan waliin mari'achaa.",
+        reportButton: "Paajii Ripoortii Geessuu",
+        recommendations: [
+          { title: "Sochii Qaamaa Yeroo Yeroo", description: "Guyyaa guyyaatti daqiiqaa 30 sochii qaamaa gahaa gochaa.", additionalInfo: "Deemuu dhaabbataan, uffataa, baaskelii" },
+          { title: "Nyaata Walqixaa", description: "Miraa fiqqee, qoccoo, qamadii guutuu fi poroteenii gahaa nyaata keessatti hammachaa.", additionalInfo: "Nyaata hojjetamee fi suukkarrii hir'isu" },
+          { title: "Bishaan Dhuguu", description: "Guyyaa guyyaatti bishaan kophaa 8 dhugaa.", additionalInfo: "Yeroo qilleensaa ho'aatti bishaan dabalataa" }
+        ]
+      }
+    };
+
+    let currentLang = 'en';
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.language-btn').forEach(btn => {
+        if (btn.dataset.lang === lang) {
+          btn.classList.remove('btn-outline-primary');
+          btn.classList.add('btn-primary', 'active');
+        } else {
+          btn.classList.add('btn-outline-primary');
+          btn.classList.remove('btn-primary', 'active');
         }
-
-        // Function to display recommendations
-        function displayRecommendations(data) {
-          document.getElementById('recommendation-title').textContent = data.title || 'Your Recommendations';
-          
-          const contentContainer = document.getElementById('recommendation-content');
-          contentContainer.innerHTML = ''; // Clear loading message
-          
-          if (Array.isArray(data.content)) {
-            // If content is an array (multiple recommendations)
-            data.content.forEach(item => {
-              const recommendationItem = document.createElement('div');
-              recommendationItem.className = 'recommendation-item';
-              recommendationItem.innerHTML = `
-                <h3 class="font-bold mb-1">${item.title || 'Recommendation'}</h3>
-                <p>${item.description || ''}</p>
-                ${item.additionalInfo ? `<p class="text-sm opacity-80 mt-1">${item.additionalInfo}</p>` : ''}
-              `;
-              contentContainer.appendChild(recommendationItem);
-            });
-          } else if (typeof data.content === 'string') {
-            // If content is a simple string
-            contentContainer.innerHTML = `<p>${data.content}</p>`;
-          } else {
-            // Default fallback
-            contentContainer.innerHTML = `
-              <p>No specific recommendations available at this time.</p>
-              <p class="mt-2">Please check back later or consult with your healthcare provider.</p>
-            `;
-          }
-        }
-
-        // Load recommendations when page loads
-        fetchRecommendations()
-          .then(data => displayRecommendations(data))
-          .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('recommendation-title').textContent = "Error loading recommendations";
-            document.getElementById('recommendation-content').innerHTML = `
-              <p>We encountered an error loading your recommendations.</p>
-              <p class="mt-2">Please try refreshing the page or contact support if the problem persists.</p>
-            `;
-          });
-
-        // Button click handler
-        document.getElementById('report-button').addEventListener('click', function() {
-          const button = this;
-          const spinner = document.getElementById('loading-spinner');
-          
-          // Show loading spinner
-          button.disabled = true;
-          spinner.style.display = 'block';
-          
-          // In a real implementation, you might want to:
-          // 1. Save any state to backend
-          // 2. Then navigate to report page
-          
-          // Simulate API call delay
-          setTimeout(() => {
-            window.location.href = './report-page.html';
-          }, 1000);
-        });
       });
-    </script>
-  </body>
+      document.getElementById('page-title').textContent = translations[lang].title;
+      document.getElementById('report-button-text').textContent = translations[lang].reportButton;
+      displayRecommendations({ title: "Your Recommendations", content: translations[currentLang].recommendations });
+    }
+
+    function displayRecommendations(data) {
+      document.getElementById('recommendation-title').textContent = data.title;
+      const container = document.getElementById('recommendation-content');
+      container.innerHTML = '';
+      if (Array.isArray(data.content)) {
+        data.content.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'recommendation-item';
+          if (currentLang === 'am') div.classList.add('amharic-text');
+          if (currentLang === 'om') div.classList.add('oromo-text');
+          div.innerHTML = `<h3 class="fw-bold mb-1">${item.title}</h3>
+                           <p>${item.description}</p>
+                           ${item.additionalInfo ? `<p class="small opacity-75">${item.additionalInfo}</p>` : ''}`;
+          container.appendChild(div);
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      changeLanguage('en');
+      document.querySelectorAll('.language-btn').forEach(btn => {
+        btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
+      });
+      displayRecommendations({ title: "Your Recommendations", content: translations[currentLang].recommendations });
+
+      document.getElementById('report-button').addEventListener('click', () => {
+        const spinner = document.getElementById('loading-spinner');
+        document.getElementById('report-button').disabled = true;
+        spinner.style.display = 'block';
+        setTimeout(() => window.location.href = './report-page.html', 1000);
+      });
+    });
+  </script>
+</body>
 </html>
