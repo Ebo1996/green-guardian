@@ -46,13 +46,14 @@
             justify-content: center;
             align-items: center;
         }
-        .action-buttons {
-            margin-top: 20px;
-        }
         .scan-buttons {
             display: flex;
             gap: 10px;
             justify-content: center;
+        }
+        #viewResultBtn {
+            display: none;
+            margin: 15px auto;
         }
         @media (max-width: 576px) {
             .scan-buttons {
@@ -79,6 +80,11 @@
             
             <!-- Image Preview -->
             <img id="imagePreview" class="img-thumbnail rounded">
+            
+            <!-- View Result Button (initially hidden) -->
+            <button id="viewResultBtn" class="btn btn-success px-4 py-3 rounded-pill shadow fs-5">
+                <i class="bi bi-eye me-2"></i> View Result
+            </button>
             
             <!-- Scan Buttons with Dropdown -->
             <div class="scan-buttons">
@@ -150,13 +156,6 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-            
-            <!-- View Results Button (Initially hidden) -->
-            <div id="viewResultsBtn" class="action-buttons" style="display: none;">
-                <a href="results.html" class="btn btn-outline-success px-4 py-2 rounded-pill shadow mt-3">
-                    <i class="bi bi-clipboard-data me-2"></i>View Analysis Results
-                </a>
             </div>
             
             <!-- Hidden file inputs -->
@@ -231,8 +230,8 @@
                     ? 'https://via.placeholder.com/300x200?text=Soil+Scan' 
                     : 'https://via.placeholder.com/300x200?text=Plant+Scan';
                 
-                // Show view results button
-                document.getElementById('viewResultsBtn').style.display = 'block';
+                // Show the View Result button
+                document.getElementById('viewResultBtn').style.display = 'block';
             }, 2000);
         }
         
@@ -252,8 +251,8 @@
                     ? 'https://via.placeholder.com/300x200?text=Soil+From+Drive' 
                     : 'https://via.placeholder.com/300x200?text=Plant+From+Drive';
                 
-                // Show view results button
-                document.getElementById('viewResultsBtn').style.display = 'block';
+                // Show the View Result button
+                document.getElementById('viewResultBtn').style.display = 'block';
             }, 2000);
         }
         
@@ -287,10 +286,28 @@
                 document.getElementById('imagePreview').style.display = 'block';
                 document.getElementById('imagePreview').src = fileUrl;
                 
-                // Show view results button
-                document.getElementById('viewResultsBtn').style.display = 'block';
+                // Show the View Result button
+                document.getElementById('viewResultBtn').style.display = 'block';
             }, 2000);
         }
+        
+        // Add click handler for View Result button
+        document.getElementById('viewResultBtn').addEventListener('click', function() {
+            // Show loading spinner
+            document.getElementById('loadingSpinner').style.display = 'flex';
+            
+            // Simulate processing delay
+            setTimeout(() => {
+                // Hide loading spinner
+                document.getElementById('loadingSpinner').style.display = 'none';
+                
+                // For demo purposes, show an alert
+                alert('Results are ready! Here would be your analysis and recommendations.');
+                
+                // In a real app, you would redirect to results page or show results here
+                // window.location.href = 'results.html';
+            }, 1500);
+        });
         
         // Initialize Google Picker API
         function initGooglePicker() {
