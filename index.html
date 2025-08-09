@@ -622,7 +622,7 @@
                 report: "ሪፖርት",
                 language: "አማርኛ",
                 hero_title: "አርሶ አደሮችን በአስተዋይ የእፅዋት በሽታ መለያ አጠቃቀም ማብቃት",
-                hero_subtitle: "ተቀዳጅ። ይለዩ። ይሥሩ። ጤናማ እርሻዎችን በተረጋጋ ያድጉ።",
+                hero_subtitle: "ተቀዳጅ። �ለዩ። ይሥሩ። ጤናማ እርሻዎችን በተረጋጋ ያድጉ።",
                 plant_detection: "የእፅዋት መለያ",
                 soil_detection: "የአፈር መለያ",
                 core_features: "ዋና ባህሪያት",
@@ -760,9 +760,8 @@
                 });
             });
             
-            // Check for saved language preference
-            const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-            changeLanguage(savedLanguage);
+            // Set default language to English
+            changeLanguage('en');
         });
     </script>
 </body>
