@@ -63,14 +63,48 @@
             justify-content: center;
             margin-bottom: 30px;
         }
-        #viewResultBtn {
+        .image-action-buttons {
             display: none;
-            margin: 25px auto;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px auto;
+            flex-wrap: wrap;
         }
-        #viewResultBtn:hover {
+        .image-action-buttons button {
+            min-width: 120px;
+            padding: 10px 15px;
+            font-weight: 500;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        .image-action-buttons button i {
+            margin-right: 8px;
+        }
+        #cancelImageBtn {
+            background-color: #dc3545;
+            border: none;
+        }
+        #cancelImageBtn:hover {
+            background-color: #bb2d3b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
+        }
+        #cropImageBtn {
+            background-color: #ffc107;
+            border: none;
+            color: #212529;
+        }
+        #cropImageBtn:hover {
+            background-color: #ffca2c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 193, 7, 0.3);
+        }
+        #submitImageBtn {
+            background-color: #198754;
+            border: none;
+        }
+        #submitImageBtn:hover {
+            background-color: #157347;
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(25, 135, 84, 0.3);
         }
@@ -161,8 +195,169 @@
             background-color: #198754;
             border-radius: 3px;
         }
+        /* Cropping tool styles */
+        .crop-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .crop-box {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        #cropImage {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+        }
+        .crop-selection {
+            position: absolute;
+            border: 2px dashed #fff;
+            background-color: rgba(255,255,255,0.3);
+            cursor: move;
+        }
+        .crop-handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border: 1px solid #000;
+        }
+        .crop-handle-nw { top: -5px; left: -5px; cursor: nw-resize; }
+        .crop-handle-ne { top: -5px; right: -5px; cursor: ne-resize; }
+        .crop-handle-sw { bottom: -5px; left: -5px; cursor: sw-resize; }
+        .crop-handle-se { bottom: -5px; right: -5px; cursor: se-resize; }
+        .crop-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Results Page Styles */
+        #resultsPage {
+            display: none;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+        .result-card {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: none;
+            background: white;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-top: 4px solid #28a745;
+        }
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        .healthy-status {
+            color: #28a745;
+            background: linear-gradient(to right, rgba(40, 167, 69, 0.1), rgba(40, 167, 69, 0.05));
+            border-left: 4px solid #28a745;
+        }
+        .infected-status {
+            color: #dc3545;
+            background: linear-gradient(to right, rgba(220, 53, 69, 0.1), rgba(220, 53, 69, 0.05));
+            border-left: 4px solid #dc3545;
+        }
+        .accuracy-badge {
+            font-size: 1.1rem;
+            padding: 8px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .disease-badge {
+            font-size: 1rem;
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: linear-gradient(to right, #fff3cd, #ffe8a1);
+            color: #856404;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .header-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #d4edda, #a7e6b3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 8px 15px rgba(40, 167, 69, 0.2);
+            transform: rotate(5deg);
+        }
+        .header-icon i {
+            transform: rotate(-5deg);
+        }
+        .disease-section {
+            border-left: 4px solid #dc3545;
+            padding-left: 20px;
+            margin-top: 20px;
+            background: linear-gradient(to right, rgba(220, 53, 69, 0.03), transparent);
+            border-radius: 0 10px 10px 0;
+        }
+        .healthy-section {
+            border-left: 4px solid #28a745;
+            padding-left: 20px;
+            margin-top: 20px;
+            background: linear-gradient(to right, rgba(40, 167, 69, 0.03), transparent);
+            border-radius: 0 10px 10px 0;
+        }
+        .status-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        .section-title {
+            position: relative;
+            padding-left: 15px;
+        }
+        .section-title:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            height: 70%;
+            width: 4px;
+            background: #28a745;
+            border-radius: 2px;
+        }
+        .disease-section .section-title:before {
+            background: #dc3545;
+        }
+        .btn-outline-danger {
+            transition: all 0.3s ease;
+        }
+        .btn-outline-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+        }
+        .results-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         @media (max-width: 576px) {
             .scan-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .image-action-buttons {
                 flex-direction: column;
                 gap: 10px;
             }
@@ -190,7 +385,8 @@
         <button class="language-btn" data-lang="om">Oromiffa</button>
     </div>
     
-    <div class="container main-container">
+    <!-- Main Scanning Container (visible by default) -->
+    <div class="container main-container" id="scanningContainer">
         <div class="mx-auto text-center" style="max-width: 600px">
             <!-- Header Image -->
             <div class="ratio ratio-16x9 mb-4">
@@ -208,13 +404,21 @@
             <!-- Image Preview -->
             <img id="imagePreview" class="img-thumbnail rounded">
             
-            <!-- View Result Button (initially hidden) -->
-            <button id="viewResultBtn" class="btn btn-success px-4 py-3 rounded-pill shadow fs-5" data-translate="view_result">
-                <i class="bi bi-eye me-2"></i> View Result
-            </button>
+            <!-- Image Action Buttons -->
+            <div class="image-action-buttons">
+                <button id="cancelImageBtn" class="btn">
+                    <i class="bi bi-x-circle"></i> Cancel
+                </button>
+                <button id="cropImageBtn" class="btn">
+                    <i class="bi bi-crop"></i> Crop
+                </button>
+                <button id="submitImageBtn" class="btn">
+                    <i class="bi bi-check-circle"></i> Submit
+                </button>
+            </div>
             
             <!-- Scan Buttons with Dropdown -->
-            <div class="scan-buttons">
+            <div class="scan-buttons" id="scanButtonsContainer">
                 <div class="d-grid gap-2 d-md-block text-center position-relative">
                     <button class="btn btn-success px-4 py-3 rounded-pill shadow dropdown-toggle fs-5" 
                             type="button" 
@@ -228,7 +432,7 @@
                     <!-- Scan Options -->
                     <ul class="dropdown-menu shadow-lg p-0 mt-2 mx-auto" style="width: 200px">
                         <li>
-                            <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handleScanOption('photo')">
+                            <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" id="takePhotoBtn">
                                 <i class="bi bi-camera fs-5"></i>
                                 <span data-translate="take_photo">Take Photo</span>
                             </a>
@@ -264,7 +468,7 @@
                     <!-- Plant Scan Options -->
                     <ul class="dropdown-menu shadow-lg p-0 mt-2 mx-auto" style="width: 200px">
                         <li>
-                            <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handlePlantScanOption('photo')">
+                            <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" id="takePlantPhotoBtn">
                                 <i class="bi bi-camera fs-5"></i>
                                 <span data-translate="take_photo">Take Photo</span>
                             </a>
@@ -290,6 +494,97 @@
             <!-- Hidden file inputs -->
             <input type="file" id="soilFileInput" accept="image/*" style="display: none;">
             <input type="file" id="plantFileInput" accept="image/*" style="display: none;">
+            
+            <!-- Camera Dialog -->
+            <div id="cameraDialog" class="camera-dialog" style="display: none;">
+                <video id="cameraPreview" class="camera-preview" autoplay playsinline></video>
+                <div class="mt-3">
+                    <button id="captureBtn" class="btn btn-success btn-lg mx-2">
+                        <i class="bi bi-camera"></i> Capture
+                    </button>
+                    <button id="closeCameraBtn" class="btn btn-danger btn-lg mx-2">
+                        <i class="bi bi-x-lg"></i> Close
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Canvas for capturing photo -->
+            <canvas id="photoCanvas" style="display: none;"></canvas>
+        </div>
+    </div>
+    
+    <!-- Results Container (hidden by default) -->
+    <div class="container results-container py-5" id="resultsPage">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Header -->
+                <div class="text-center mb-5">
+                    <div class="header-icon">
+                        <i class="bi bi-tree-fill text-success fs-3"></i>
+                    </div>
+                    <h1 class="text-success fw-bold mb-3" data-translate="result_title">GreenGuardians Scan Results</h1>
+                    <p class="text-muted" data-translate="result_subtitle">Detailed analysis of your crop health</p>
+                </div>
+                
+                <div class="card result-card mb-5 p-4">
+                    <div> 
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0 fw-medium section-title" data-translate="accuracy">Accuracy:</h5>
+                            <span class="badge bg-success bg-opacity-10 text-success accuracy-badge fw-normal">
+                                <i class="bi bi-check-circle-fill me-2"></i>94%
+                            </span>
+                        </div>
+                        
+                        <!-- Status - Change this variable to switch between healthy/infected -->
+                        <div id="healthyResult" style="display: none;">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="mb-0 fw-medium section-title" data-translate="status">Plant Status:</h5>
+                                <span class="badge healthy-status accuracy-badge fw-normal">
+                                    <i class="bi bi-check-circle-fill status-icon"></i><span data-translate="healthy">Healthy</span>
+                                </span>
+                            </div>
+                            
+                            <div class="healthy-section text-center py-4">
+                                <i class="bi bi-emoji-smile-fill text-success fs-1 mb-3" style="text-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);"></i>
+                                <h4 class="text-success fw-bold" data-translate="healthy-title">Your plant looks healthy!</h4>
+                                <p class="text-muted" data-translate="healthy-message">No signs of disease detected</p>
+                            </div>
+                        </div>
+                        
+                        <div id="infectedResult" style="display: none;">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="mb-0 fw-medium section-title" data-translate="status">Plant Status:</h5>
+                                <span class="badge infected-status accuracy-badge fw-normal">
+                                    <i class="bi bi-exclamation-triangle-fill status-icon"></i><span data-translate="infected">Infected</span>
+                                </span>
+                            </div>
+                            
+                            <!-- Disease Info -->
+                            <div class="disease-section">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0 fw-medium section-title" data-translate="disease">Disease Detected:</h5>
+                                    <span class="badge disease-badge fw-normal">
+                                        <i class="bi bi-bug-fill me-2"></i><span data-translate="disease-name">Early Blight</span>
+                                    </span>
+                                </div>
+                                <!-- Treatment Button -->
+                                <div class="text-center mt-4">
+                                    <a href="#" class="btn btn-outline-danger px-4 py-2" data-translate="treatment">
+                                        <i class="bi bi-clipboard2-pulse me-2"></i>View Treatment Options
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Back Button -->
+                <div class="text-center mt-3">
+                    <button id="backToScannerBtn" class="btn btn-success px-4 py-2 rounded-pill">
+                        <i class="bi bi-arrow-left me-2"></i><span data-translate="back">Back to Scanner</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -297,6 +592,27 @@
     <div id="loadingSpinner" class="loading-spinner">
         <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
             <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    
+    <!-- Cropping Tool -->
+    <div class="crop-container" id="cropContainer">
+        <div class="crop-box">
+            <img id="cropImage" src="">
+            <div class="crop-selection" id="cropSelection" style="display: none;">
+                <div class="crop-handle crop-handle-nw"></div>
+                <div class="crop-handle crop-handle-ne"></div>
+                <div class="crop-handle crop-handle-sw"></div>
+                <div class="crop-handle crop-handle-se"></div>
+            </div>
+        </div>
+        <div class="crop-controls">
+            <button id="cancelCropBtn" class="btn btn-danger">
+                <i class="bi bi-x-circle"></i> Cancel
+            </button>
+            <button id="applyCropBtn" class="btn btn-success">
+                <i class="bi bi-check-circle"></i> Apply
+            </button>
         </div>
     </div>
     
@@ -311,43 +627,99 @@
     <!-- Google Picker API -->
     <script src="https://apis.google.com/js/api.js"></script>
     <script>
+        // Current image state
+        let currentImage = null;
+        let stream = null;
+        let isDragging = false;
+        let startX, startY;
+        let cropX, cropY, cropWidth, cropHeight;
+        let scanType = null; // 'soil' or 'plant'
+        
         // Language translations
         const translations = {
             en: {
                 title: "GreenGuardians",
                 subtitle: "Scan your crops or soil for instant analysis and smart farming recommendations.",
-                view_result: "View Result",
                 scan_soil: "Scan for soil",
                 scan_plant: "Scan Plant",
                 take_photo: "Take Photo",
                 upload_device: "Upload from Device",
                 google_drive: "Google Drive",
                 copyright: "© 2025 GreenGuardians Technologies",
-                result_alert: "Results are ready! Here would be your analysis and recommendations."
+                cancel: "Cancel",
+                crop: "Crop",
+                submit: "Submit",
+                capture: "Capture",
+                close: "Close",
+                // Results page translations
+                result_title: "GreenGuardians Scan Results",
+                result_subtitle: "Detailed analysis of your crop health",
+                accuracy: "Accuracy:",
+                status: "Plant Status:",
+                infected: "Infected",
+                healthy: "Healthy",
+                disease: "Disease Detected:",
+                "disease-name": "Early Blight",
+                treatment: "View Treatment Options",
+                "healthy-title": "Your plant looks healthy!",
+                "healthy-message": "No signs of disease detected",
+                back: "Back to Scanner"
             },
             am: {
                 title: "GreenGuardians",
                 subtitle: "የእርሻዎን ምርት ወይም አፈር ለፈጣን ትንታኔ እና ዘመናዊ ርዶ ምክሮች ይቃኙ።",
-                view_result: "ውጤቱን ይመልከቱ",
                 scan_soil: "ለአፈር ይቃኙ",
                 scan_plant: "የተክሉን ይቃኙ",
                 take_photo: "ፎቶ ይቅረጹ",
                 upload_device: "ከመሣሪያዎ ይስቀሉ",
                 google_drive: "ጉግል ድራይቭ",
                 copyright: "© 2025 GreenGuardians ቴክኖሎጂዎች",
-                result_alert: "ውጤቶቹ ዝግጁ ናቸው! እዚህ የእርስዎ ትንታኔ እና ምክሮች ይኖራሉ።"
+                cancel: "ሰርዝ",
+                crop: "ቆርጥ",
+                submit: "አስገባ",
+                capture: "ቅረጽ",
+                close: "ዝጋ",
+                // Results page translations
+                result_title: "የGreenGuardians የስክራን ውጤቶች",
+                result_subtitle: "የእርሻዎ ጤና ዝርዝር ትንተና",
+                accuracy: "ትክክለኛነት:",
+                status: "የእርሻ ሁኔታ:",
+                infected: "ተበከለ",
+                healthy: "ጤናማ",
+                disease: "የታወቀ በሽታ:",
+                "disease-name": "ፀደር ብላይት",
+                treatment: "የህክምና �ማራጮችን ይመልከቱ",
+                "healthy-title": "እርሻዎ ጤናማ ይመስላል!",
+                "healthy-message": "ምንም የበሽታ ምልክቶች አልታዩም",
+                back: "ወደ ስከን መሣሪያ ተመለስ"
             },
             om: {
                 title: "GreenGuardians",
                 subtitle: "Biyyoo keessanii yookiin midhaan keessan fayyadamaa fi gorsa qonnaa beekumsaa ta'eef saaqaa.",
-                view_result: "Deebii ilaalaa",
                 scan_soil: "Biyyoo saaqaa",
                 scan_plant: "Biyyee saaqaa",
                 take_photo: "Suuraa fakkenni",
                 upload_device: "Meeshii irraa kaasaa",
                 google_drive: "Google Drive",
                 copyright: "© 2025 GreenGuardians Technologies",
-                result_alert: "Deebiin ni qophaa'e! Asii gama keessanii fi gorsa keessanii ta'a."
+                cancel: "Dhiisi",
+                crop: "Qoodi",
+                submit: "Ergaa",
+                capture: "Qabsiisaa",
+                close: "Cufi",
+                // Results page translations
+                result_title: "GreenGuardians Xiyyeeffannoo Sa'aawaa",
+                result_subtitle: "Fayyaa qonnaa kee ilaalchisee xiinxala guutuu",
+                accuracy: "Sirna qabatamaa:",
+                status: "Haala qonnaa:",
+                infected: "Dhukkubaan qabe",
+                healthy: "Fayyaa",
+                disease: "Dhukkuba argame:",
+                "disease-name": "Blight Duraa",
+                treatment: "Filannoo raawwii ilaali",
+                "healthy-title": "Qonnaan kee fayyaa ta'ee jira!",
+                "healthy-message": "Mallattoo dhukkubaa hin argamne",
+                back: "Sa'aawaa irra deebi'i"
             }
         };
 
@@ -370,17 +742,121 @@
                 }
             });
             
-            // Update alert message language
-            alertMessage = translations[lang].result_alert;
+            // Update action buttons
+            if (translations[lang]) {
+                document.getElementById('cancelImageBtn').innerHTML = `<i class="bi bi-x-circle"></i> ${translations[lang].cancel || 'Cancel'}`;
+                document.getElementById('cropImageBtn').innerHTML = `<i class="bi bi-crop"></i> ${translations[lang].crop || 'Crop'}`;
+                document.getElementById('submitImageBtn').innerHTML = `<i class="bi bi-check-circle"></i> ${translations[lang].submit || 'Submit'}`;
+                document.getElementById('captureBtn').innerHTML = `<i class="bi bi-camera"></i> ${translations[lang].capture || 'Capture'}`;
+                document.getElementById('closeCameraBtn').innerHTML = `<i class="bi bi-x-lg"></i> ${translations[lang].close || 'Close'}`;
+                document.getElementById('cancelCropBtn').innerHTML = `<i class="bi bi-x-circle"></i> ${translations[lang].cancel || 'Cancel'}`;
+                document.getElementById('applyCropBtn').innerHTML = `<i class="bi bi-check-circle"></i> ${translations[lang].submit || 'Apply'}`;
+                document.getElementById('backToScannerBtn').innerHTML = `<i class="bi bi-arrow-left me-2"></i>${translations[lang].back || 'Back to Scanner'}`;
+            }
+        }
+
+        // Function to show image with action buttons and hide scan buttons
+        function showImageWithActions(imageSrc) {
+            const imagePreview = document.getElementById('imagePreview');
+            const actionButtons = document.querySelector('.image-action-buttons');
+            const scanButtons = document.getElementById('scanButtonsContainer');
+            
+            currentImage = imageSrc;
+            imagePreview.src = imageSrc;
+            imagePreview.style.display = 'block';
+            actionButtons.style.display = 'flex';
+            scanButtons.style.display = 'none';
+            
+            // Scroll to the image preview
+            imagePreview.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Function to hide image and show scan buttons
+        function hideImageAndShowScanButtons() {
+            const imagePreview = document.getElementById('imagePreview');
+            const actionButtons = document.querySelector('.image-action-buttons');
+            const scanButtons = document.getElementById('scanButtonsContainer');
+            
+            currentImage = null;
+            imagePreview.style.display = 'none';
+            actionButtons.style.display = 'none';
+            scanButtons.style.display = 'flex';
+        }
+
+        // Function to start camera
+        async function startCamera(type) {
+            try {
+                scanType = type; // Set the scan type
+                const cameraDialog = document.getElementById('cameraDialog');
+                const cameraPreview = document.getElementById('cameraPreview');
+                
+                cameraDialog.style.display = 'flex';
+                
+                // Stop any existing stream
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                }
+                
+                // Get user media
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        facingMode: type === 'plant' ? 'environment' : 'user',
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    } 
+                });
+                
+                cameraPreview.srcObject = stream;
+            } catch (err) {
+                console.error("Error accessing camera:", err);
+                alert("Could not access the camera. Please make sure you have granted camera permissions.");
+                document.getElementById('cameraDialog').style.display = 'none';
+            }
+        }
+
+        // Function to capture photo from camera
+        function capturePhoto() {
+            const cameraPreview = document.getElementById('cameraPreview');
+            const photoCanvas = document.getElementById('photoCanvas');
+            const ctx = photoCanvas.getContext('2d');
+            
+            // Set canvas dimensions to match video
+            photoCanvas.width = cameraPreview.videoWidth;
+            photoCanvas.height = cameraPreview.videoHeight;
+            
+            // Draw current video frame to canvas
+            ctx.drawImage(cameraPreview, 0, 0, photoCanvas.width, photoCanvas.height);
+            
+            // Convert canvas to data URL
+            const imageDataUrl = photoCanvas.toDataURL('image/jpeg');
+            
+            // Close camera dialog
+            closeCamera();
+            
+            // Show captured image
+            showImageWithActions(imageDataUrl);
+        }
+
+        // Function to close camera
+        function closeCamera() {
+            const cameraDialog = document.getElementById('cameraDialog');
+            
+            // Stop video stream
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+            }
+            
+            cameraDialog.style.display = 'none';
         }
 
         // Function to handle soil scan options
         function handleScanOption(option) {
             console.log(`Soil scan option selected: ${option}`);
+            scanType = 'soil';
             
             if (option === 'photo') {
-                // For demo purposes, we'll simulate taking a photo
-                simulatePhotoCapture('soil');
+                startCamera('soil');
             } else if (option === 'upload') {
                 // Trigger the file input click
                 document.getElementById('soilFileInput').click();
@@ -393,10 +869,10 @@
         // Function to handle plant scan options
         function handlePlantScanOption(option) {
             console.log(`Plant scan option selected: ${option}`);
+            scanType = 'plant';
             
             if (option === 'photo') {
-                // For demo purposes, we'll simulate taking a photo
-                simulatePhotoCapture('plant');
+                startCamera('plant');
             } else if (option === 'upload') {
                 // Trigger the file input click
                 document.getElementById('plantFileInput').click();
@@ -404,30 +880,6 @@
                 // For demo purposes, we'll simulate Google Drive selection
                 simulateDriveSelection('plant');
             }
-        }
-        
-        // Function to simulate photo capture
-        function simulatePhotoCapture(type) {
-            // Show loading spinner
-            document.getElementById('loadingSpinner').style.display = 'flex';
-            
-            // Simulate processing delay
-            setTimeout(() => {
-                // Hide loading spinner
-                document.getElementById('loadingSpinner').style.display = 'none';
-                
-                // Show image preview (for demo purposes)
-                document.getElementById('imagePreview').style.display = 'block';
-                document.getElementById('imagePreview').src = type === 'soil' 
-                    ? 'https://via.placeholder.com/300x200?text=Soil+Scan' 
-                    : 'https://via.placeholder.com/300x200?text=Plant+Scan';
-                
-                // Show the View Result button
-                document.getElementById('viewResultBtn').style.display = 'block';
-                
-                // Scroll to the image preview
-                document.getElementById('imagePreview').scrollIntoView({ behavior: 'smooth' });
-            }, 2000);
         }
         
         // Function to simulate Google Drive selection
@@ -440,29 +892,88 @@
                 // Hide loading spinner
                 document.getElementById('loadingSpinner').style.display = 'none';
                 
-                // Show image preview (for demo purposes)
-                document.getElementById('imagePreview').style.display = 'block';
-                document.getElementById('imagePreview').src = type === 'soil' 
+                // Show image with action buttons
+                showImageWithActions(type === 'soil' 
                     ? 'https://via.placeholder.com/300x200?text=Soil+From+Drive' 
-                    : 'https://via.placeholder.com/300x200?text=Plant+From+Drive';
-                
-                // Show the View Result button
-                document.getElementById('viewResultBtn').style.display = 'block';
-                
-                // Scroll to the image preview
-                document.getElementById('imagePreview').scrollIntoView({ behavior: 'smooth' });
+                    : 'https://via.placeholder.com/300x200?text=Plant+From+Drive');
             }, 2000);
+        }
+        
+        // Function to initialize cropping tool
+        function initCropping() {
+            const cropContainer = document.getElementById('cropContainer');
+            const cropImg = document.getElementById('cropImage');
+            const cropSelection = document.getElementById('cropSelection');
+            
+            // Set the image to crop
+            cropImg.src = currentImage;
+            cropContainer.style.display = 'flex';
+            
+            // Reset selection
+            cropSelection.style.display = 'none';
+            
+            // When image loads, initialize selection
+            cropImg.onload = function() {
+                // Set initial selection (center 50% of image)
+                const imgWidth = cropImg.clientWidth;
+                const imgHeight = cropImg.clientHeight;
+                
+                cropWidth = imgWidth * 0.5;
+                cropHeight = imgHeight * 0.5;
+                cropX = (imgWidth - cropWidth) / 2;
+                cropY = (imgHeight - cropHeight) / 2;
+                
+                updateCropSelection();
+            };
+        }
+        
+        // Update crop selection position and size
+        function updateCropSelection() {
+            const cropSelection = document.getElementById('cropSelection');
+            
+            cropSelection.style.left = cropX + 'px';
+            cropSelection.style.top = cropY + 'px';
+            cropSelection.style.width = cropWidth + 'px';
+            cropSelection.style.height = cropHeight + 'px';
+            cropSelection.style.display = 'block';
+        }
+        
+        // Apply crop to image
+        function applyCrop() {
+            const cropImg = document.getElementById('cropImage');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions to crop size
+            canvas.width = cropWidth;
+            canvas.height = cropHeight;
+            
+            // Draw cropped portion to canvas
+            ctx.drawImage(
+                cropImg, 
+                cropX, cropY, cropWidth, cropHeight, // source rectangle
+                0, 0, cropWidth, cropHeight         // destination rectangle
+            );
+            
+            // Convert canvas to data URL and update current image
+            currentImage = canvas.toDataURL('image/jpeg');
+            document.getElementById('imagePreview').src = currentImage;
+            
+            // Close crop tool
+            document.getElementById('cropContainer').style.display = 'none';
         }
         
         // Add event listeners for file inputs
         document.getElementById('soilFileInput').addEventListener('change', function(e) {
             if (e.target.files.length > 0) {
+                scanType = 'soil';
                 handleFileSelection(e.target.files[0], 'soil');
             }
         });
         
         document.getElementById('plantFileInput').addEventListener('change', function(e) {
             if (e.target.files.length > 0) {
+                scanType = 'plant';
                 handleFileSelection(e.target.files[0], 'plant');
             }
         });
@@ -480,38 +991,177 @@
                 // Create a URL for the selected file
                 const fileUrl = URL.createObjectURL(file);
                 
-                // Show image preview
-                document.getElementById('imagePreview').style.display = 'block';
-                document.getElementById('imagePreview').src = fileUrl;
-                
-                // Show the View Result button
-                document.getElementById('viewResultBtn').style.display = 'block';
-                
-                // Scroll to the image preview
-                document.getElementById('imagePreview').scrollIntoView({ behavior: 'smooth' });
+                // Show image with action buttons
+                showImageWithActions(fileUrl);
             }, 2000);
         }
         
-        // Add click handler for View Result button
-        let alertMessage = translations.en.result_alert;
-        document.getElementById('viewResultBtn').addEventListener('click', function() {
-            // Show loading spinner
-            document.getElementById('loadingSpinner').style.display = 'flex';
+        // Function to show results page
+        function showResultsPage() {
+            // Hide scanning container and show results container
+            document.getElementById('scanningContainer').style.display = 'none';
+            document.getElementById('resultsPage').style.display = 'block';
             
-            // Simulate processing delay
-            setTimeout(() => {
-                // Hide loading spinner
-                document.getElementById('loadingSpinner').style.display = 'none';
-                
-                // Show an alert in the current language
-                alert(alertMessage);
-            }, 1500);
-        });
+            // For demo purposes, randomly show healthy or infected result
+            const isHealthy = Math.random() > 0.5;
+            
+            if (isHealthy) {
+                document.getElementById('healthyResult').style.display = 'block';
+                document.getElementById('infectedResult').style.display = 'none';
+            } else {
+                document.getElementById('healthyResult').style.display = 'none';
+                document.getElementById('infectedResult').style.display = 'block';
+            }
+            
+            // Scroll to top of results
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Function to go back to scanner
+        function backToScanner() {
+            // Hide results container and show scanning container
+            document.getElementById('resultsPage').style.display = 'none';
+            document.getElementById('scanningContainer').style.display = 'block';
+            
+            // Reset image preview
+            hideImageAndShowScanButtons();
+            
+            // Scroll to top of scanner
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         
         // Initialize Google Picker API
         function initGooglePicker() {
             gapi.load('picker', {'callback': () => console.log('Google Picker API loaded')});
         }
+        
+        // Event listeners for action buttons
+        document.getElementById('cancelImageBtn').addEventListener('click', function() {
+            // Hide image and action buttons, show scan buttons
+            hideImageAndShowScanButtons();
+        });
+        
+        document.getElementById('cropImageBtn').addEventListener('click', function() {
+            if (currentImage) {
+                initCropping();
+            }
+        });
+        
+        document.getElementById('submitImageBtn').addEventListener('click', function() {
+            // Show loading spinner
+            document.getElementById('loadingSpinner').style.display = 'flex';
+            
+            // Simulate submission process
+            setTimeout(() => {
+                // Hide loading spinner
+                document.getElementById('loadingSpinner').style.display = 'none';
+                
+                // Show results page
+                showResultsPage();
+            }, 1500);
+        });
+        
+        // Camera dialog buttons
+        document.getElementById('captureBtn').addEventListener('click', capturePhoto);
+        document.getElementById('closeCameraBtn').addEventListener('click', closeCamera);
+        
+        // Take photo buttons
+        document.getElementById('takePhotoBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            handleScanOption('photo');
+        });
+        
+        document.getElementById('takePlantPhotoBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            handlePlantScanOption('photo');
+        });
+        
+        // Crop tool buttons
+        document.getElementById('cancelCropBtn').addEventListener('click', function() {
+            document.getElementById('cropContainer').style.display = 'none';
+        });
+        
+        document.getElementById('applyCropBtn').addEventListener('click', applyCrop);
+        
+        // Back to scanner button
+        document.getElementById('backToScannerBtn').addEventListener('click', backToScanner);
+        
+        // Crop selection interaction
+        const cropSelection = document.getElementById('cropSelection');
+        const cropImg = document.getElementById('cropImage');
+        
+        cropSelection.addEventListener('mousedown', function(e) {
+            if (e.target.classList.contains('crop-handle')) {
+                // Handle resize
+                const handle = e.target.classList[1];
+                const startWidth = cropWidth;
+                const startHeight = cropHeight;
+                const startX = cropX;
+                const startY = cropY;
+                const mouseStartX = e.clientX;
+                const mouseStartY = e.clientY;
+                
+                function handleResizeMove(e) {
+                    const dx = e.clientX - mouseStartX;
+                    const dy = e.clientY - mouseStartY;
+                    
+                    if (handle === 'crop-handle-nw') {
+                        cropWidth = Math.max(50, startWidth - dx);
+                        cropHeight = Math.max(50, startHeight - dy);
+                        cropX = startX + dx;
+                        cropY = startY + dy;
+                    } else if (handle === 'crop-handle-ne') {
+                        cropWidth = Math.max(50, startWidth + dx);
+                        cropHeight = Math.max(50, startHeight - dy);
+                        cropY = startY + dy;
+                    } else if (handle === 'crop-handle-sw') {
+                        cropWidth = Math.max(50, startWidth - dx);
+                        cropHeight = Math.max(50, startHeight + dy);
+                        cropX = startX + dx;
+                    } else if (handle === 'crop-handle-se') {
+                        cropWidth = Math.max(50, startWidth + dx);
+                        cropHeight = Math.max(50, startHeight + dy);
+                    }
+                    
+                    updateCropSelection();
+                }
+                
+                function stopResize() {
+                    document.removeEventListener('mousemove', handleResizeMove);
+                    document.removeEventListener('mouseup', stopResize);
+                }
+                
+                document.addEventListener('mousemove', handleResizeMove);
+                document.addEventListener('mouseup', stopResize);
+            } else {
+                // Handle move
+                isDragging = true;
+                startX = e.clientX - cropX;
+                startY = e.clientY - cropY;
+                
+                function handleMove(e) {
+                    if (!isDragging) return;
+                    
+                    cropX = e.clientX - startX;
+                    cropY = e.clientY - startY;
+                    
+                    // Constrain to image bounds
+                    cropX = Math.max(0, Math.min(cropImg.clientWidth - cropWidth, cropX));
+                    cropY = Math.max(0, Math.min(cropImg.clientHeight - cropHeight, cropY));
+                    
+                    updateCropSelection();
+                }
+                
+                function stopMove() {
+                    isDragging = false;
+                    document.removeEventListener('mousemove', handleMove);
+                    document.removeEventListener('mouseup', stopMove);
+                }
+                
+                document.addEventListener('mousemove', handleMove);
+                document.addEventListener('mouseup', stopMove);
+            }
+        });
         
         // Load Google API client and then initialize Picker
         window.onload = function() {
