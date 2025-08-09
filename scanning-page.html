@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenGuardians | Smart Farming Solution</title>
-     <link rel="icon" type="image/png" href="https://cdn.qwenlm.ai/output/076a6d91-8c80-4fcf-960a-5fd1f188c6cb/t2i/70ef825b-dad5-4ca0-98a8-06d98c496a69/1754742173.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiMDc2YTZkOTEtOGM4MC00ZmNmLTk2MGEtNWZkMWYxODhjNmNiIiwicmVzb3VyY2VfaWQiOiIxNzU0NzQyMTczIiwicmVzb3VyY2VfY2hhdF9pZCI6IjU1Njk1ZTliLTE2YjUtNGUxNS04ODQxLTc3NjFkMTU2YTQyZCJ9.GuDs8rWn9YmKucb6bjdrMvhdKT4kSxDQBNdY0DrOoeM">
+
+<link rel="icon" type="image/png" href="https://cdn.qwenlm.ai/output/076a6d91-8c80-4fcf-960a-5fd1f188c6cb/t2i/70ef825b-dad5-4ca0-98a8-06d98c496a69/1754742173.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiMDc2YTZkOTEtOGM4MC00ZmNmLTk2MGEtNWZkMWYxODhjNmNiIiwicmVzb3VyY2VfaWQiOiIxNzU0NzQyMTczIiwicmVzb3VyY2VfY2hhdF9pZCI6IjU1Njk1ZTliLTE2YjUtNGUxNS04ODQxLTc3NjFkMTU2YTQyZCJ9.GuDs8rWn9YmKucb6bjdrMvhdKT4kSxDQBNdY0DrOoeM">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -352,6 +354,37 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .recommendations-btn {
+            background: linear-gradient(135deg, #28a745, #218838);
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+        }
+        .recommendations-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4);
+        }
+        
+        /* Blank space styles */
+        .blank-space {
+            display: inline-block;
+            width: 100px;
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+        
+        .blank-space-lg {
+            width: 150px;
+        }
+        
+        .blank-space-btn {
+            width: 200px;
+            height: 40px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            margin: 0 auto;
+        }
         
         @media (max-width: 576px) {
             .scan-buttons {
@@ -529,51 +562,28 @@
                 
                 <div class="card result-card mb-5 p-4">
                     <div> 
+                        <!-- Disease Type -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0 fw-medium section-title" data-translate="disease_type">Disease Type:</h5>
+                            <span class="blank-space blank-space-lg" id="diseaseTypeResult"></span>
+                        </div>
+                        
+                        <!-- Accuracy -->
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h5 class="mb-0 fw-medium section-title" data-translate="accuracy">Accuracy:</h5>
-                            <span class="badge bg-success bg-opacity-10 text-success accuracy-badge fw-normal">
-                                <i class="bi bi-check-circle-fill me-2"></i>94%
-                            </span>
+                            <span class="blank-space" id="accuracyResult"></span>
                         </div>
                         
-                        <!-- Status - Change this variable to switch between healthy/infected -->
-                        <div id="healthyResult" style="display: none;">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h5 class="mb-0 fw-medium section-title" data-translate="status">Plant Status:</h5>
-                                <span class="badge healthy-status accuracy-badge fw-normal">
-                                    <i class="bi bi-check-circle-fill status-icon"></i><span data-translate="healthy">Healthy</span>
-                                </span>
-                            </div>
-                            
-                            <div class="healthy-section text-center py-4">
-                                <i class="bi bi-emoji-smile-fill text-success fs-1 mb-3" style="text-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);"></i>
-                                <h4 class="text-success fw-bold" data-translate="healthy-title">Your plant looks healthy!</h4>
-                                <p class="text-muted" data-translate="healthy-message">No signs of disease detected</p>
-                            </div>
+                        <!-- Plant Status -->
+                        <div id="plantStatusResult" class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0 fw-medium section-title" data-translate="status">Plant Status:</h5>
+                            <span class="blank-space" id="statusBadge"></span>
                         </div>
                         
-                        <div id="infectedResult" style="display: none;">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h5 class="mb-0 fw-medium section-title" data-translate="status">Plant Status:</h5>
-                                <span class="badge infected-status accuracy-badge fw-normal">
-                                    <i class="bi bi-exclamation-triangle-fill status-icon"></i><span data-translate="infected">Infected</span>
-                                </span>
-                            </div>
-                            
-                            <!-- Disease Info -->
-                            <div class="disease-section">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="mb-0 fw-medium section-title" data-translate="disease">Disease Detected:</h5>
-                                    <span class="badge disease-badge fw-normal">
-                                        <i class="bi bi-bug-fill me-2"></i><span data-translate="disease-name">Early Blight</span>
-                                    </span>
-                                </div>
-                                <!-- Treatment Button -->
-                                <div class="text-center mt-4">
-                                    <a href="#" class="btn btn-outline-danger px-4 py-2" data-translate="treatment">
-                                        <i class="bi bi-clipboard2-pulse me-2"></i>View Treatment Options
-                                    </a>
-                                </div>
+                        <!-- Recommendations Section (hidden by default) -->
+                        <div id="recommendationsSection" style="display: none;">
+                            <div class="text-center mt-4">
+                                <div class="blank-space blank-space-btn" id="viewRecommendationsBtn"></div>
                             </div>
                         </div>
                     </div>
@@ -635,6 +645,7 @@
         let startX, startY;
         let cropX, cropY, cropWidth, cropHeight;
         let scanType = null; // 'soil' or 'plant'
+        let currentLang = 'en';
         
         // Language translations
         const translations = {
@@ -655,16 +666,15 @@
                 // Results page translations
                 result_title: "GreenGuardians Scan Results",
                 result_subtitle: "Detailed analysis of your crop health",
+                disease_type: "Disease Type:",
                 accuracy: "Accuracy:",
                 status: "Plant Status:",
                 infected: "Infected",
                 healthy: "Healthy",
-                disease: "Disease Detected:",
-                "disease-name": "Early Blight",
-                treatment: "View Treatment Options",
-                "healthy-title": "Your plant looks healthy!",
-                "healthy-message": "No signs of disease detected",
-                back: "Back to Scanner"
+                recommendations: "View Recommendations",
+                back: "Back to Scanner",
+                recommendations_title: "Treatment Recommendations",
+                close: "Close"
             },
             am: {
                 title: "GreenGuardians",
@@ -683,16 +693,15 @@
                 // Results page translations
                 result_title: "የGreenGuardians የስክራን ውጤቶች",
                 result_subtitle: "የእርሻዎ ጤና ዝርዝር ትንተና",
+                disease_type: "የበሽታ አይነት:",
                 accuracy: "ትክክለኛነት:",
                 status: "የእርሻ ሁኔታ:",
                 infected: "ተበከለ",
                 healthy: "ጤናማ",
-                disease: "የታወቀ በሽታ:",
-                "disease-name": "ፀደር ብላይት",
-                treatment: "የህክምና �ማራጮችን ይመልከቱ",
-                "healthy-title": "እርሻዎ ጤናማ ይመስላል!",
-                "healthy-message": "ምንም የበሽታ ምልክቶች አልታዩም",
-                back: "ወደ ስከን መሣሪያ ተመለስ"
+                recommendations: "ምክሮችን ይመልከቱ",
+                back: "ወደ ስከን መሣሪያ ተመለስ",
+                recommendations_title: "የሕክምና ምክሮች",
+                close: "ዝጋ"
             },
             om: {
                 title: "GreenGuardians",
@@ -711,21 +720,21 @@
                 // Results page translations
                 result_title: "GreenGuardians Xiyyeeffannoo Sa'aawaa",
                 result_subtitle: "Fayyaa qonnaa kee ilaalchisee xiinxala guutuu",
+                disease_type: "Gosa dhukkubaa:",
                 accuracy: "Sirna qabatamaa:",
                 status: "Haala qonnaa:",
                 infected: "Dhukkubaan qabe",
                 healthy: "Fayyaa",
-                disease: "Dhukkuba argame:",
-                "disease-name": "Blight Duraa",
-                treatment: "Filannoo raawwii ilaali",
-                "healthy-title": "Qonnaan kee fayyaa ta'ee jira!",
-                "healthy-message": "Mallattoo dhukkubaa hin argamne",
-                back: "Sa'aawaa irra deebi'i"
+                recommendations: "Gorsa ilaali",
+                back: "Sa'aawaa irra deebi'i",
+                recommendations_title: "Gorsa Yaalii",
+                close: "Cufi"
             }
         };
 
         // Function to change language
         function changeLanguage(lang) {
+            currentLang = lang;
             // Update active button
             document.querySelectorAll('.language-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
@@ -753,6 +762,7 @@
                 document.getElementById('cancelCropBtn').innerHTML = `<i class="bi bi-x-circle"></i> ${translations[lang].cancel || 'Cancel'}`;
                 document.getElementById('applyCropBtn').innerHTML = `<i class="bi bi-check-circle"></i> ${translations[lang].submit || 'Apply'}`;
                 document.getElementById('backToScannerBtn').innerHTML = `<i class="bi bi-arrow-left me-2"></i>${translations[lang].back || 'Back to Scanner'}`;
+                document.getElementById('viewRecommendationsBtn').innerHTML = `<i class="bi bi-clipboard2-pulse me-2"></i>${translations[lang].recommendations || 'View Recommendations'}`;
             }
         }
 
@@ -1003,19 +1013,180 @@
             document.getElementById('scanningContainer').style.display = 'none';
             document.getElementById('resultsPage').style.display = 'block';
             
-            // For demo purposes, randomly show healthy or infected result
-            const isHealthy = Math.random() > 0.5;
+            // Show loading spinner while "processing"
+            document.getElementById('loadingSpinner').style.display = 'flex';
             
-            if (isHealthy) {
-                document.getElementById('healthyResult').style.display = 'block';
-                document.getElementById('infectedResult').style.display = 'none';
+            // Simulate processing delay
+            setTimeout(() => {
+                // Hide loading spinner
+                document.getElementById('loadingSpinner').style.display = 'none';
+                
+                // For demo purposes, we'll show blank results as requested
+                updateResultsFromBackend({
+                    diseaseType: "",
+                    accuracy: "",
+                    status: ""
+                });
+                
+                // Scroll to top of results
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 1500);
+        }
+        
+        // Function to update results from backend (to be called when you have actual data)
+        function updateResultsFromBackend(data) {
+            // Update disease type
+            if (data.diseaseType) {
+                document.getElementById('diseaseTypeResult').className = 'badge disease-badge fw-normal';
+                document.getElementById('diseaseTypeResult').innerHTML = 
+                    `<i class="bi bi-bug-fill me-2"></i><span>${data.diseaseType}</span>`;
             } else {
-                document.getElementById('healthyResult').style.display = 'none';
-                document.getElementById('infectedResult').style.display = 'block';
+                document.getElementById('diseaseTypeResult').className = 'blank-space blank-space-lg';
+                document.getElementById('diseaseTypeResult').innerHTML = '';
             }
             
-            // Scroll to top of results
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Update accuracy
+            if (data.accuracy) {
+                document.getElementById('accuracyResult').className = 'badge bg-success bg-opacity-10 text-success accuracy-badge fw-normal';
+                document.getElementById('accuracyResult').innerHTML = 
+                    `<i class="bi bi-percent me-2"></i><span>${data.accuracy}</span>`;
+            } else {
+                document.getElementById('accuracyResult').className = 'blank-space';
+                document.getElementById('accuracyResult').innerHTML = '';
+            }
+            
+            // Update plant status and handle recommendations button
+            const statusBadge = document.getElementById('statusBadge');
+            const recommendationsSection = document.getElementById('recommendationsSection');
+            
+            if (data.status) {
+                if (data.status === 'infected') {
+                    // For infected plants
+                    statusBadge.className = 'badge infected-status accuracy-badge fw-normal';
+                    statusBadge.innerHTML = 
+                        `<i class="bi bi-exclamation-triangle-fill status-icon"></i>
+                         <span>${translations[currentLang].infected || 'Infected'}</span>`;
+                    
+                    // Show recommendations button
+                    recommendationsSection.style.display = 'block';
+                    
+                    // Store disease type for recommendations
+                    recommendationsSection.dataset.diseaseType = data.diseaseType || '';
+                } else {
+                    // For healthy plants
+                    statusBadge.className = 'badge healthy-status accuracy-badge fw-normal';
+                    statusBadge.innerHTML = 
+                        `<i class="bi bi-check-circle-fill status-icon"></i>
+                         <span>${translations[currentLang].healthy || 'Healthy'}</span>`;
+                    
+                    // Hide recommendations button
+                    recommendationsSection.style.display = 'none';
+                }
+            } else {
+                statusBadge.className = 'blank-space';
+                statusBadge.innerHTML = '';
+                recommendationsSection.style.display = 'none';
+            }
+        }
+        
+        // Function to get recommendations based on disease type
+        function getDiseaseRecommendations(diseaseType) {
+            const recommendations = {
+                en: {
+                    'Leaf Rust': [
+                        'Apply fungicides containing triazoles or strobilurins',
+                        'Remove and destroy infected leaves',
+                        'Plant resistant varieties if available',
+                        'Ensure proper spacing between plants for air circulation',
+                        'Avoid overhead watering to reduce leaf wetness'
+                    ],
+                    'Powdery Mildew': [
+                        'Apply sulfur or potassium bicarbonate-based fungicides',
+                        'Improve air circulation around plants',
+                        'Water plants at the base, not on leaves',
+                        'Remove severely infected plant parts',
+                        'Use resistant varieties if available'
+                    ],
+                    'default': [
+                        'Remove and destroy infected plant material',
+                        'Improve growing conditions (light, water, nutrients)',
+                        'Consider using organic fungicides',
+                        'Rotate crops to prevent disease buildup',
+                        'Consult with local agricultural extension for specific advice'
+                    ]
+                },
+                am: {
+                    'Leaf Rust': [
+                        'ትራይአዞል ወይም ስትሮቢሉሪን የያዙ ፈንገሳ መድሃኒቶችን ይተግብሩ',
+                        'የተበከሉ ቅጠሎችን ያስወግዱ እና ያጠፉ',
+                        'ከሆነ የተቋቋሙ ዝርያዎችን ይተክሉ',
+                        'ለአየር እንቅስቃሴ በተክሎች መካከል ትክክለኛ ርቀት ያስቀምጡ',
+                        'የቅጠል እርጥበት ለመቀነስ ከላይ የሚፈሰውን የውሃ መጠጣት ያስወግዱ'
+                    ],
+                    'default': [
+                        'የተበከለውን የተክል ገንዘብ ያስወግዱ እና ያጠፉ',
+                        'የተሻለ የተክል እድገት ሁኔታዎችን (ብርሃን, ውሃ, ምግብ) ያሻሽሉ',
+                        'ኦርጋኒክ ፈንገሳ መድሃኒቶችን ለመጠቀም ያስቡ',
+                        'የበሽታ ግጭትን ለመከላከል አትክልቶችን ይሽከረከሩ',
+                        'ለተወሰኑ ምክሮች ከአካባቢያዊ የስር አበባ ማስፋፊያ ጋር ያነጋግሩ'
+                    ]
+                },
+                om: {
+                    'default': [
+                        'Qaama biyyeen qabeenyi balleessaa fi balleessaa',
+                        'Haala guddina biyyaa (ifaa, bishaan, nyaata) fooyyessaa',
+                        'Fungicides organii fayyadamaa yaadu',
+                        'Balaan qabeenyaa ittisuu fiixaa irraa qotee bulaa',
+                        'Gorsa adda addaa argachuuf extension qonnaa naannoo keessan waliin mari\'achuuf'
+                    ]
+                }
+            };
+            
+            // Get recommendations for current language
+            const langRecs = recommendations[currentLang] || recommendations.en;
+            
+            // Return specific recommendations if available, otherwise default
+            return langRecs[diseaseType] || langRecs['default'];
+        }
+        
+        // Function to show recommendations in a modal
+        function showRecommendationsModal(recommendations) {
+            // Create modal HTML
+            const modalHTML = `
+                <div class="modal fade" id="recommendationsModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-success text-white">
+                                <h5 class="modal-title" data-translate="recommendations_title">Treatment Recommendations</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <ol class="list-group list-group-numbered">
+                                    ${recommendations.map(rec => `<li class="list-group-item">${rec}</li>`).join('')}
+                                </ol>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal" data-translate="close">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add modal to body
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // Initialize and show modal
+            const modal = new bootstrap.Modal(document.getElementById('recommendationsModal'));
+            modal.show();
+            
+            // Remove modal when hidden
+            document.getElementById('recommendationsModal').addEventListener('hidden.bs.modal', function() {
+                this.remove();
+            });
+            
+            // Translate modal content
+            changeLanguage(currentLang);
         }
         
         // Function to go back to scanner
@@ -1049,17 +1220,8 @@
         });
         
         document.getElementById('submitImageBtn').addEventListener('click', function() {
-            // Show loading spinner
-            document.getElementById('loadingSpinner').style.display = 'flex';
-            
-            // Simulate submission process
-            setTimeout(() => {
-                // Hide loading spinner
-                document.getElementById('loadingSpinner').style.display = 'none';
-                
-                // Show results page
-                showResultsPage();
-            }, 1500);
+            // Show results page
+            showResultsPage();
         });
         
         // Camera dialog buttons
@@ -1086,6 +1248,13 @@
         
         // Back to scanner button
         document.getElementById('backToScannerBtn').addEventListener('click', backToScanner);
+        
+        // View recommendations button
+        document.getElementById('viewRecommendationsBtn').addEventListener('click', function() {
+            const diseaseType = document.getElementById('recommendationsSection').dataset.diseaseType;
+            const recommendations = getDiseaseRecommendations(diseaseType);
+            showRecommendationsModal(recommendations);
+        });
         
         // Crop selection interaction
         const cropSelection = document.getElementById('cropSelection');
@@ -1174,6 +1343,9 @@
                     changeLanguage(this.dataset.lang);
                 });
             });
+            
+            // Set default language
+            changeLanguage('en');
         };
     </script>
 </body>
