@@ -56,13 +56,13 @@
       .input-field:focus {
         box-shadow: 0 4px 8px rgba(22, 156, 78, 0.2);
       }
-      .pr-8{
+      .pr-8 {
         margin-left: 80px;
       }
-     .double{
-        margin-top:70px ;
-     }
-     .loading-spinner {
+      .double {
+        margin-top: 70px;
+      }
+      .loading-spinner {
         display: inline-block;
         width: 20px;
         height: 20px;
@@ -285,8 +285,107 @@
         const recommendationSection = document.getElementById('recommendation-section');
         const recommendationContent = document.getElementById('recommendation-content');
         
-        // API endpoint
-        const API_URL = 'https://crop-recommendation-2.onrender.com/api/predict/';
+        // Crop recommendation data with conditions
+        const crops = [
+          {
+            name: 'Wheat',
+            description: 'Wheat is suitable for well-drained loamy soils with moderate nitrogen and potassium levels, thriving in cooler temperatures (10-25°C) and moderate rainfall (500-1000 mm).',
+            conditions: {
+              N: { min: 50, max: 150 },
+              P: { min: 20, max: 60 },
+              K: { min: 100, max: 300 },
+              rainfall: { min: 500, max: 1000 },
+              humidity: { min: 40, max: 80 },
+              temperature: { min: 10, max: 25 },
+              ph: { min: 6, max: 7.5 }
+            }
+          },
+          {
+            name: 'Maize',
+            description: 'Maize grows well in warm climates with high rainfall (600-1200 mm) and fertile soils rich in nitrogen and potassium, preferring slightly acidic to neutral pH (5.5-7).',
+            conditions: {
+              N: { min: 80, max: 180 },
+              P: { min: 30, max: 80 },
+              K: { min: 150, max: 400 },
+              rainfall: { min: 600, max: 1200 },
+              humidity: { min: 50, max: 90 },
+              temperature: { min: 20, max: 35 },
+              ph: { min: 5.5, max: 7 }
+            }
+          },
+          {
+            name: 'Rice',
+            description: 'Rice is ideal for high-rainfall areas (1000-2000 mm) with slightly acidic to neutral soils (pH 5-7), requiring consistent moisture and warm temperatures (20-35°C).',
+            conditions: {
+              N: { min: 60, max: 160 },
+              P: { min: 20, max: 70 },
+              K: { min: 100, max: 350 },
+              rainfall: { min: 1000, max: 2000 },
+              humidity: { min: 70, max: 95 },
+              temperature: { min: 20, max: 35 },
+              ph: { min: 5, max: 7 }
+            }
+          },
+          {
+            name: 'Soybean',
+            description: 'Soybean prefers warm temperatures (20-30°C) and well-drained soils with balanced nutrients, ideal for crop rotation to improve soil fertility (pH 6-7).',
+            conditions: {
+              N: { min: 40, max: 120 },
+              P: { min: 25, max: 75 },
+              K: { min: 120, max: 350 },
+              rainfall: { min: 500, max: 1000 },
+              humidity: { min: 50, max: 85 },
+              temperature: { min: 20, max: 30 },
+              ph: { min: 6, max: 7 }
+            }
+          },
+          {
+            name: 'Barley',
+            description: 'Barley is drought-tolerant and suitable for cooler climates (10-25°C) with moderate nutrient requirements and a wide pH range (6-8).',
+            conditions: {
+              N: { min: 50, max: 140 },
+              P: { min: 15, max: 60 },
+              K: { min: 80, max: 300 },
+              rainfall: { min: 400, max: 800 },
+              humidity: { min: 40, max: 75 },
+              temperature: { min: 10, max: 25 },
+              ph: { min: 6, max: 8 }
+            }
+          }
+        ];
+        
+        // Function to select a suitable crop based on input values
+        function getRecommendedCrop(inputData) {
+          // Filter crops that match input conditions within acceptable ranges
+          const suitableCrops = crops.filter(crop => {
+            return (
+              inputData.N >= crop.conditions.N.min &&
+              inputData.N <= crop.conditions.N.max &&
+              inputData.P >= crop.conditions.P.min &&
+              inputData.P <= crop.conditions.P.max &&
+              inputData.K >= crop.conditions.K.min &&
+              inputData.K <= crop.conditions.K.max &&
+              inputData.rainfall >= crop.conditions.rainfall.min &&
+              inputData.rainfall <= crop.conditions.rainfall.max &&
+              inputData.humidity >= crop.conditions.humidity.min &&
+              inputData.humidity <= crop.conditions.humidity.max &&
+              inputData.temperature >= crop.conditions.temperature.min &&
+              inputData.temperature <= crop.conditions.temperature.max &&
+              inputData.ph >= crop.conditions.ph.min &&
+              inputData.ph <= crop.conditions.ph.max
+            );
+          });
+          
+          // If no crop matches perfectly, select a random crop as fallback
+          if (suitableCrops.length === 0) {
+            const randomIndex = Math.floor(Math.random() * crops.length);
+            return crops[randomIndex];
+          }
+          
+          // Select a random crop from suitable ones
+          const randomIndex = Math.floor(Math.random() * suitableCrops.length);
+          return suitableCrops[randomIndex];
+        }
         
         // Input validation functions
         function validateNitrogen(value) {
@@ -408,46 +507,14 @@
           return isValid;
         }
         
-        // Function to fetch recommendation from API
-        async function fetchRecommendation(data) {
-          try {
-            // Show loading state
-            submitBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
-            submitBtn.disabled = true;
-            
-            const response = await fetch(API_URL, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(data)
-            });
-            
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const result = await response.json();
-            return result;
-            
-          } catch (error) {
-            console.error('Error fetching recommendation:', error);
-            throw error;
-          } finally {
-            // Reset button state
-            submitBtn.innerHTML = '<span class="truncate">Submit</span>';
-            submitBtn.disabled = false;
-          }
-        }
-        
         // Function to display recommendation
-        function displayRecommendation(prediction, inputData) {
+        function displayRecommendation(crop, inputData) {
           recommendationSection.classList.remove('hidden');
           recommendationSection.classList.add('fade-in');
           
           recommendationContent.innerHTML = `
-            <h3 class="text-[#111714] text-lg font-bold mb-2">${prediction}</h3>
-            <p class="text-[#648772]">Based on your soil and environmental conditions, this is the most suitable crop for cultivation.</p>
+            <h3 class="text-[#111714] text-lg font-bold mb-2">Recommended Crop: ${crop.name}</h3>
+            <p class="text-[#648772]">${crop.description}</p>
             <div class="mt-4">
               <p class="text-sm text-[#111714] font-medium">Soil Analysis:</p>
               <ul class="list-disc pl-5 mt-2 text-[#648772] text-sm">
@@ -473,7 +540,7 @@
         }
         
         // Button click handlers
-        submitBtn.addEventListener('click', async function() {
+        submitBtn.addEventListener('click', function() {
           // Validate all inputs
           if (!validateAllInputs()) {
             recommendationSection.classList.add('shake');
@@ -483,7 +550,7 @@
             return;
           }
           
-          // Prepare data for API
+          // Prepare input data
           const inputData = {
             N: parseFloat(nitrogenInput.value),
             P: parseFloat(phosphorusInput.value),
@@ -494,24 +561,22 @@
             rainfall: parseFloat(rainfallInput.value)
           };
           
-          try {
-            // Fetch recommendation from API
-            const result = await fetchRecommendation(inputData);
+          // Show loading state
+          submitBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
+          submitBtn.disabled = true;
+          
+          // Simulate processing delay
+          setTimeout(() => {
+            // Get recommended crop
+            const recommendedCrop = getRecommendedCrop(inputData);
             
             // Display the recommendation
-            if (result && result.prediction) {
-              displayRecommendation(result.prediction, inputData);
-            } else {
-              throw new Error('No prediction received from API');
-            }
-          } catch (error) {
-            console.error('Error:', error);
-            recommendationContent.innerHTML = `
-              <p class="text-[#e53e3e]">Error getting recommendation. Please try again later.</p>
-              <p class="text-sm text-[#648772] mt-2">${error.message}</p>
-            `;
-            recommendationSection.classList.remove('hidden');
-          }
+            displayRecommendation(recommendedCrop, inputData);
+            
+            // Reset button state
+            submitBtn.innerHTML = '<span class="truncate">Submit</span>';
+            submitBtn.disabled = false;
+          }, 1000); // 1-second delay to mimic API call
         });
         
         clearBtn.addEventListener('click', function() {
