@@ -10,7 +10,6 @@
     />
 
     <title>AgriRec Crop Recommendation</title>
-     <link rel="icon" type="image/png" href="https://cdn.qwenlm.ai/output/076a6d91-8c80-4fcf-960a-5fd1f188c6cb/t2i/70ef825b-dad5-4ca0-98a8-06d98c496a69/1754742173.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiMDc2YTZkOTEtOGM4MC00ZmNmLTk2MGEtNWZkMWYxODhjNmNiIiwicmVzb3VyY2VfaWQiOiIxNzU0NzQyMTczIiwicmVzb3VyY2VfY2hhdF9pZCI6IjU1Njk1ZTliLTE2YjUtNGUxNS04ODQxLTc3NjFkMTU2YTQyZCJ9.GuDs8rWn9YmKucb6bjdrMvhdKT4kSxDQBNdY0DrOoeM">
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -63,12 +62,50 @@
      .double{
         margin-top:70px ;
      }
+     .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(0,0,0,.3);
+        border-radius: 50%;
+        border-top-color: #169c4e;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
     </style>
   </head>
   <body>
     <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Work Sans", "Noto Sans", sans-serif;'>
       <div class="layout-container flex h-full grow flex-col">
-       >
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f4f2] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#111714]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-[#111714] text-lg font-bold leading-tight tracking-[-0.015em]">AgriRec</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#111714] text-sm font-medium leading-normal" href="./index.html">Home</a>
+              <a class="text-[#111714] text-sm font-medium leading-normal" href="./learn.html">Learn More</a>
+            </div>
+            <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f4f2] text-[#111714] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5" id="help-btn">
+              <div class="text-[#111714]" data-icon="Question" data-size="20px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                  <path d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+                </svg>
+              </div>
+            </button>
+          </div>
+        </header>
         <div class="flex flex-1 justify-center py-5 px-10">
           <!-- Soil Nutrients Section -->
           <div class="w-1/2 pr-8 double">
@@ -88,7 +125,7 @@
                     placeholder="Enter nitrogen value"
                     class="input-field form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#169c4e] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
                     type="number"
-                    id="nitrogen-input"
+                    id="N"
                   />
                 </div>
                 <div id="nitrogen-error" class="error-message hidden">Please enter a valid nitrogen value (0-200)</div>
@@ -100,7 +137,7 @@
                     placeholder="Enter phosphorus value"
                     class="input-field form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#169c4e] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
                     type="number"
-                    id="phosphorus-input"
+                    id="P"
                   />
                 </div>
                 <div id="phosphorus-error" class="error-message hidden">Please enter a valid phosphorus value (0-100)</div>
@@ -112,7 +149,7 @@
                     placeholder="Enter potassium value"
                     class="input-field form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#169c4e] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
                     type="number"
-                    id="potassium-input"
+                    id="K"
                   />
                 </div>
                 <div id="potassium-error" class="error-message hidden">Please enter a valid potassium value (0-500)</div>
@@ -138,7 +175,7 @@
                     placeholder="Enter rainfall value"
                     class="input-field form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#169c4e] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
                     type="number"
-                    id="rainfall-input"
+                    id="rainfall"
                   />
                 </div>
                 <div id="rainfall-error" class="error-message hidden">Please enter a valid rainfall value (0-3000)</div>
@@ -150,7 +187,7 @@
                     placeholder="Enter humidity value"
                     class="input-field form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#169c4e] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
                     type="number"
-                    id="humidity-input"
+                    id="humidity"
                   />
                 </div>
                 <div id="humidity-error" class="error-message hidden">Please enter a valid humidity value (0-100)</div>
@@ -162,7 +199,7 @@
                     placeholder="Enter temperature value"
                     class="input-field form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#169c4e] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
                     type="number"
-                    id="temperature-input"
+                    id="temperature"
                   />
                 </div>
                 <div id="temperature-error" class="error-message hidden">Please enter a valid temperature (-20 to 50)</div>
@@ -174,7 +211,7 @@
                     placeholder="Enter pH value"
                     class="input-field form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5e0] bg-white focus:border-[#169c4e] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
                     type="number"
-                    id="ph-input"
+                    id="ph"
                   />
                 </div>
                 <div id="ph-error" class="error-message hidden">Please enter a valid pH value (0-14)</div>
@@ -222,13 +259,13 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         // Get all input elements
-        const nitrogenInput = document.getElementById('nitrogen-input');
-        const phosphorusInput = document.getElementById('phosphorus-input');
-        const potassiumInput = document.getElementById('potassium-input');
-        const rainfallInput = document.getElementById('rainfall-input');
-        const humidityInput = document.getElementById('humidity-input');
-        const temperatureInput = document.getElementById('temperature-input');
-        const phInput = document.getElementById('ph-input');
+        const nitrogenInput = document.getElementById('N');
+        const phosphorusInput = document.getElementById('P');
+        const potassiumInput = document.getElementById('K');
+        const rainfallInput = document.getElementById('rainfall');
+        const humidityInput = document.getElementById('humidity');
+        const temperatureInput = document.getElementById('temperature');
+        const phInput = document.getElementById('ph');
         
         // Get all error message elements
         const nitrogenError = document.getElementById('nitrogen-error');
@@ -248,13 +285,8 @@
         const recommendationSection = document.getElementById('recommendation-section');
         const recommendationContent = document.getElementById('recommendation-content');
         
-        // Sample crop data (in a real app, this would come from an API)
-        const cropData = [
-          { name: "Rice", description: "Rice is well-suited for your soil conditions with high nitrogen and moderate phosphorus levels. It thrives in warm, humid climates with adequate rainfall." },
-          { name: "Wheat", description: "Wheat is a good match for your soil's nutrient profile. It prefers moderate temperatures and can grow well in your region's conditions." },
-          { name: "Maize", description: "Maize would grow excellently in your soil with its current potassium and phosphorus levels. It requires warm temperatures and moderate rainfall." },
-          { name: "Soybean", description: "Soybeans are a good choice as they can fix nitrogen in the soil. They grow well in your temperature range and soil pH." }
-        ];
+        // API endpoint
+        const API_URL = 'https://crop-recommendation-2.onrender.com/api/predict/';
         
         // Input validation functions
         function validateNitrogen(value) {
@@ -369,47 +401,110 @@
           return isValid;
         }
         
-        // Button click handlers
-        submitBtn.addEventListener('click', function() {
-          // Validate all inputs
-          if (!validateAllInputs()) {
-            return;
+        // Function to fetch recommendation from API
+        async function fetchRecommendation(data) {
+          try {
+            // Show loading state
+            submitBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
+            submitBtn.disabled = true;
+            
+            const response = await fetch(API_URL, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data)
+            });
+            
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            return result;
+            
+          } catch (error) {
+            console.error('Error fetching recommendation:', error);
+            throw error;
+          } finally {
+            // Reset button state
+            submitBtn.innerHTML = '<span class="truncate">Submit</span>';
+            submitBtn.disabled = false;
           }
-          
-          // Simulate getting a recommendation (in a real app, this would be an API call)
-          const randomCrop = cropData[Math.floor(Math.random() * cropData.length)];
-          
-          // Show recommendation section
+        }
+        
+        // Function to display recommendation
+        function displayRecommendation(prediction, inputData) {
           recommendationSection.classList.remove('hidden');
           recommendationSection.classList.add('fade-in');
           
-          // Update recommendation content
           recommendationContent.innerHTML = `
-            <h3 class="text-[#111714] text-lg font-bold mb-2">${randomCrop.name}</h3>
-            <p class="text-[#648772]">${randomCrop.description}</p>
+            <h3 class="text-[#111714] text-lg font-bold mb-2">${prediction}</h3>
+            <p class="text-[#648772]">Based on your soil and environmental conditions, this is the most suitable crop for cultivation.</p>
             <div class="mt-4">
               <p class="text-sm text-[#111714] font-medium">Soil Analysis:</p>
               <ul class="list-disc pl-5 mt-2 text-[#648772] text-sm">
-                <li>Nitrogen: ${nitrogenInput.value} mg/kg</li>
-                <li>Phosphorus: ${phosphorusInput.value} mg/kg</li>
-                <li>Potassium: ${potassiumInput.value} mg/kg</li>
-                <li>pH: ${phInput.value}</li>
+                <li>Nitrogen: ${inputData.N} mg/kg</li>
+                <li>Phosphorus: ${inputData.P} mg/kg</li>
+                <li>Potassium: ${inputData.K} mg/kg</li>
+                <li>pH: ${inputData.ph}</li>
               </ul>
             </div>
             <div class="mt-4">
               <p class="text-sm text-[#111714] font-medium">Environmental Factors:</p>
               <ul class="list-disc pl-5 mt-2 text-[#648772] text-sm">
-                <li>Rainfall: ${rainfallInput.value} mm</li>
-                <li>Humidity: ${humidityInput.value}%</li>
-                <li>Temperature: ${temperatureInput.value}°C</li>
+                <li>Rainfall: ${inputData.rainfall} mm</li>
+                <li>Humidity: ${inputData.humidity}%</li>
+                <li>Temperature: ${inputData.temperature}°C</li>
               </ul>
             </div>
           `;
           
-          // Remove fade-in class after animation completes
           setTimeout(() => {
             recommendationSection.classList.remove('fade-in');
           }, 500);
+        }
+        
+        // Button click handlers
+        submitBtn.addEventListener('click', async function() {
+          // Validate all inputs
+          if (!validateAllInputs()) {
+            recommendationSection.classList.add('shake');
+            setTimeout(() => {
+              recommendationSection.classList.remove('shake');
+            }, 500);
+            return;
+          }
+          
+          // Prepare data for API
+          const inputData = {
+            N: parseFloat(nitrogenInput.value),
+            P: parseFloat(phosphorusInput.value),
+            K: parseFloat(potassiumInput.value),
+            temperature: parseFloat(temperatureInput.value),
+            humidity: parseFloat(humidityInput.value),
+            ph: parseFloat(phInput.value),
+            rainfall: parseFloat(rainfallInput.value)
+          };
+          
+          try {
+            // Fetch recommendation from API
+            const result = await fetchRecommendation(inputData);
+            
+            // Display the recommendation
+            if (result && result.prediction) {
+              displayRecommendation(result.prediction, inputData);
+            } else {
+              throw new Error('No prediction received from API');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+            recommendationContent.innerHTML = `
+              <p class="text-[#e53e3e]">Error getting recommendation. Please try again later.</p>
+              <p class="text-sm text-[#648772] mt-2">${error.message}</p>
+            `;
+            recommendationSection.classList.remove('hidden');
+          }
         });
         
         clearBtn.addEventListener('click', function() {
