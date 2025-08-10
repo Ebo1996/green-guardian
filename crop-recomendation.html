@@ -290,36 +290,43 @@
         
         // Input validation functions
         function validateNitrogen(value) {
+          if (value === '') return false;
           const num = parseFloat(value);
           return !isNaN(num) && num >= 0 && num <= 200;
         }
         
         function validatePhosphorus(value) {
+          if (value === '') return false;
           const num = parseFloat(value);
           return !isNaN(num) && num >= 0 && num <= 100;
         }
         
         function validatePotassium(value) {
+          if (value === '') return false;
           const num = parseFloat(value);
           return !isNaN(num) && num >= 0 && num <= 500;
         }
         
         function validateRainfall(value) {
+          if (value === '') return false;
           const num = parseFloat(value);
           return !isNaN(num) && num >= 0 && num <= 3000;
         }
         
         function validateHumidity(value) {
+          if (value === '') return false;
           const num = parseFloat(value);
           return !isNaN(num) && num >= 0 && num <= 100;
         }
         
         function validateTemperature(value) {
+          if (value === '') return false;
           const num = parseFloat(value);
           return !isNaN(num) && num >= -20 && num <= 50;
         }
         
         function validatePH(value) {
+          if (value === '') return false;
           const num = parseFloat(value);
           return !isNaN(num) && num >= 0 && num <= 14;
         }
