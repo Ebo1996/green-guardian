@@ -1,280 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HealthWise Recommendations</title>
-<link rel="icon" type="image/png" href="https://cdn.qwenlm.ai/output/076a6d91-8c80-4fcf-960a-5fd1f188c6cb/t2i/70ef825b-dad5-4ca0-98a8-06d98c496a69/1754742173.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiMDc2YTZkOTEtOGM4MC00ZmNmLTk2MGEtNWZkMWYxODhjNmNiIiwicmVzb3VyY2VfaWQiOiIxNzU0NzQyMTczIiwicmVzb3VyY2VfY2hhdF9pZCI6IjU1Njk1ZTliLTE2YjUtNGUxNS04ODQxLTc3NjFkMTU2YTQyZCJ9.GuDs8rWn9YmKucb6bjdrMvhdKT4kSxDQBNdY0DrOoeM">
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic&display=swap">
-
-  <!-- Tailwind (optional) -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-  <style>
-    /* Green Theme */
-    .recommendation-card {
-      transition: all 0.3s ease;
-      min-height: 500px;
-      background-color: #006400;
-      border-radius: 12px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      color: #fff;
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.8);
-    }
-
-    .recommendation-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9);
-    }
-
-    .btn-primary {
-      transition: all 0.3s ease;
-      background-color: #008000;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    .btn-primary:hover {
-      background-color: #006400;
-    }
-
-    .language-btn {
-      margin: 0 5px;
-      border-radius: 20px;
-      font-weight: bold;
-      transition: all 0.3s;
-      background-color: #008000;
-      color: white;
-      border: 1px solid #008000;
-    }
-
-    .language-btn:hover {
-      background-color: #006400;
-      border-color: #006400;
-    }
-
-    .language-btn.active {
-      transform: scale(1.1);
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      background-color: #006400;
-    }
-
-    .language-btn.btn-outline-primary {
-      background-color: transparent;
-      color: #008000;
-    }
-
-    .language-btn.btn-outline-primary:hover {
-      background-color: #008000;
-      color: white;
-    }
-
-    .loading-spinner {
-      display: none;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .recommendation-item {
-      padding: 1rem;
-      margin-bottom: 1rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-    }
-
-    /* Fonts for languages */
-    .amharic-text {
-      font-family: 'Noto Sans Ethiopic', sans-serif;
-    }
-
-    .oromo-text {
-      font-family: 'Noto Sans', sans-serif;
-    }
-
-    /* Back to Home button */
-    .back-to-home {
-      position: fixed;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      background-color: #008000;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      transition: background-color 0.3s ease;
-      z-index: 2000;
-    }
-
-    .back-to-home:hover {
-      background-color: #006400;
-    }
-  </style>
-</head>
-<body class="bg-white" style="font-family: Inter, 'Noto Sans', sans-serif;">
-
-  <!-- Language Switcher -->
-  <div class="language-switcher position-absolute top-0 end-0 p-3">
-    <div class="btn-group" role="group">
-      <button type="button" class="language-btn btn btn-sm btn-primary active" data-lang="en">English</button>
-      <button type="button" class="language-btn btn btn-sm btn-outline-primary" data-lang="am">አማርኛ</button>
-      <button type="button" class="language-btn btn btn-sm btn-outline-primary" data-lang="om">Afaan Oromoo</button>
-    </div>
-  </div>
-
-  <!-- Back to Home -->
-  <a href="./index.html" class="back-to-home">⬅ Back to Home</a>
-
-  <!-- Page Content -->
-  <div class="layout-container flex h-full grow flex-col">
-    <div class="px-4 px-md-5 flex flex-1 justify-center py-5">
-      <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-        <h1 id="page-title" class="text-dark text-center pb-3 pt-6 fw-bold">Recommendation Page</h1>
-        <div class="p-4">
-          <div class="recommendation-card content-area" id="recommendation-container">
-            <div class="flex w-full items-end justify-between gap-4 p-4">
-              <div class="flex flex-1 flex-col gap-1">
-                <p id="recommendation-title" class="text-white fw-bold fs-4">Loading recommendations...</p>
-                <div id="recommendation-content" class="text-white fs-6">
-                  <!-- API content -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="flex px-4 py-3 justify-center">
-          <button id="report-button" class="btn-primary d-flex align-items-center">
-            <span id="report-button-text">Go to Report Page</span>
-            <div id="loading-spinner" class="loading-spinner ms-2"></div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // Language data
-    const translations = {
-      en: {
-        title: "Recommendation Page",
-        loading: "Loading recommendations...",
-        errorTitle: "Error loading recommendations",
-        errorContent: "We couldn't load your recommendations at this time. Please try again later.",
-        noRecommendations: "No specific recommendations available at this time.",
-        consultDoctor: "Please check back later or consult with your healthcare provider.",
-        reportButton: "Go to Report Page",
-        recommendations: [
-          { title: "Exercise Regularly", description: "Aim for at least 30 minutes of moderate exercise daily to improve cardiovascular health.", additionalInfo: "Suggested activities: brisk walking, swimming, cycling" },
-          { title: "Balanced Diet", description: "Include a variety of fruits, vegetables, whole grains, and lean proteins in your meals.", additionalInfo: "Try to reduce processed foods and sugars" },
-          { title: "Hydration", description: "Drink at least 8 glasses of water daily to maintain proper hydration.", additionalInfo: "Increase intake during hot weather or physical activity" }
-        ]
-      },
-      am: {
-        title: "የምክር ገጽ",
-        loading: "ምክሮች በመጫን ላይ...",
-        errorTitle: "ምክሮችን በማምጣት ላይ ስህተት",
-        errorContent: "በአሁኑ ጊዜ ምክሮችዎን ማምጣት አልቻልንም። እባክዎ ቆይተው እንደገና ይሞክሩ።",
-        noRecommendations: "በአሁኑ ጊዜ ምንም የተወሰኑ ምክሮች የሉም።",
-        consultDoctor: "እባክዎ ቆይተው እንደገና ይፈትሹ ወይም ከጤና አጠባበቅ ሰጪዎ ጋር ይወያዩ።",
-        reportButton: "ወደ ሪፖርት ገጽ ይሂዱ",
-        recommendations: [
-          { title: "በየጊዜው የአካል ብቃት እንቅስቃሴ", description: "የልብ ጤናን ለማሻሻል ቢያንስ በቀን 30 ደቂቃ የሚቆይ የአካል ብቃት ልመድ።", additionalInfo: "ፈጣን መራመድ፣ የማዳን፣ ብስክሌት መንዳት" },
-          { title: "ተመጣጣኝ ምግብ", description: "በምግብዎ ውስጥ የተለያዩ ፍራፍሬዎችን፣ አትክልቶችን፣ ሙሉ እህሎችን እና ከፍተኛ ፕሮቲን ያለው ምግብ ያካትቱ።", additionalInfo: "የተሰራ ምግብ እና ስኳር መቀነስ ይሞክሩ" },
-          { title: "የውሃ መጠጣት", description: "ቢያንስ 8 ብርጭቆ ውሃ በቀን ጠጥተው።", additionalInfo: "በሙቀት ወቅት ወይም በአካል ብቃት ዘንግተው መጠጣትን ይጨምሩ" }
-        ]
-      },
-      om: {
-        title: "Yaadaa Paajii",
-        loading: "Yaadaa kan argamsiifamu...",
-        errorTitle: "Dogoggora argamsiisuu yaadaa",
-        errorContent: "Yaadaa keessan argamsiifachuu hindandeenye. Mee irra deebi'ii yaalaa.",
-        noRecommendations: "Yaadaa mirkanaa'aa ykn adda addaa yeroo ammaa hin jirre.",
-        consultDoctor: "Mee irra deebi'ii ilaalaa ykn hojjataa fayyaa keessan waliin mari'achaa.",
-        reportButton: "Paajii Ripoortii Geessuu",
-        recommendations: [
-          { title: "Sochii Qaamaa Yeroo Yeroo", description: "Guyyaa guyyaatti daqiiqaa 30 sochii qaamaa gahaa gochaa.", additionalInfo: "Deemuu dhaabbataan, uffataa, baaskelii" },
-          { title: "Nyaata Walqixaa", description: "Miraa fiqqee, qoccoo, qamadii guutuu fi poroteenii gahaa nyaata keessatti hammachaa.", additionalInfo: "Nyaata hojjetamee fi suukkarrii hir'isu" },
-          { title: "Bishaan Dhuguu", description: "Guyyaa guyyaatti bishaan kophaa 8 dhugaa.", additionalInfo: "Yeroo qilleensaa ho'aatti bishaan dabalataa" }
-        ]
-      }
-    };
-
-    let currentLang = 'en';
-
-    function changeLanguage(lang) {
-      currentLang = lang;
-      document.querySelectorAll('.language-btn').forEach(btn => {
-        if (btn.dataset.lang === lang) {
-          btn.classList.remove('btn-outline-primary');
-          btn.classList.add('btn-primary', 'active');
-        } else {
-          btn.classList.add('btn-outline-primary');
-          btn.classList.remove('btn-primary', 'active');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Plant Disease Identification</title>
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --light-green: #e8f5e9;
+            --white: #ffffff;
+            --dark-text: #333333;
         }
-      });
-      document.getElementById('page-title').textContent = translations[lang].title;
-      document.getElementById('report-button-text').textContent = translations[lang].reportButton;
-      displayRecommendations({ title: "Your Recommendations", content: translations[currentLang].recommendations });
-    }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-green);
+            color: var(--dark-text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+        
+        .disease-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        
+        .card-header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .health .card-header {
+            background-color: #4caf50;
+        }
+        
+        .affected .card-header {
+            background-color: #d32f2f;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .info-row {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: var(--primary-green);
+            flex: 1;
+        }
+        
+        .info-value {
+            text-align: right;
+            flex: 1;
+        }
+        
+        .treatment-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .treatment-title {
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .refresh-btn {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            background-color: #1b5e20;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-green);
+            color: var(--white);
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Coffee Plant Disease Identification</h1>
+        </header>
+        
+        <div id="diseaseDisplay">
+            <!-- Single disease card will be inserted here by JavaScript -->
+        </div>
+        
+        <button class="refresh-btn" onclick="displayRandomDisease()">Check Another Plant</button>
+    </div>
+    
+    <footer>
+        <p>© 2025 Coffee Plant Health Monitor | Using AI for healthier crops</p>
+    </footer>
 
-    function displayRecommendations(data) {
-      document.getElementById('recommendation-title').textContent = data.title;
-      const container = document.getElementById('recommendation-content');
-      container.innerHTML = '';
-      if (Array.isArray(data.content)) {
-        data.content.forEach(item => {
-          const div = document.createElement('div');
-          div.className = 'recommendation-item';
-          if (currentLang === 'am') div.classList.add('amharic-text');
-          if (currentLang === 'om') div.classList.add('oromo-text');
-          div.innerHTML = `<h3 class="fw-bold mb-1">${item.title}</h3>
-                           <p>${item.description}</p>
-                           ${item.additionalInfo ? `<p class="small opacity-75">${item.additionalInfo}</p>` : ''}`;
-          container.appendChild(div);
-        });
-      }
-    }
+    <script>
+        // Disease data
+        const diseases = [
+            {
+                name: "Phoma",
+                status: "Affected",
+                accuracy: "92%",
+                organicTreatment: "Apply copper-based fungicides or baking soda solution. Remove and destroy infected plant parts.",
+                chemicalTreatment: "Use systemic fungicides like Triazoles or Strobilurins. Follow manufacturer's instructions."
+            },
+            {
+                name: "Miner",
+                status: "Affected",
+                accuracy: "87%",
+                organicTreatment: "Neem oil spray or introduce natural predators like parasitic wasps. Remove heavily infested leaves.",
+                chemicalTreatment: "Apply Abamectin or Spinosad-based insecticides. Rotate chemicals to prevent resistance."
+            },
+            {
+                name: "Leaf Rust",
+                status: "Affected",
+                accuracy: "95%",
+                organicTreatment: "Bordeaux mixture or sulfur sprays. Improve air circulation and reduce leaf wetness.",
+                chemicalTreatment: "Triazole fungicides (e.g., Propiconazole) applied preventatively during rainy seasons."
+            },
+            {
+                name: "Cercospora",
+                status: "Affected",
+                accuracy: "89%",
+                organicTreatment: "Copper fungicides or potassium bicarbonate. Prune to improve air circulation.",
+                chemicalTreatment: "Chlorothalonil or Mancozeb applied at first signs of disease, repeat every 10-14 days."
+            },
+            {
+                name: "Healthy",
+                status: "Unaffected",
+                accuracy: "98%",
+                organicTreatment: "Maintain good cultural practices: proper spacing, balanced nutrition, and regular monitoring.",
+                chemicalTreatment: "No chemical treatment needed. Focus on preventive measures and plant health maintenance."
+            }
+        ];
 
-    document.addEventListener('DOMContentLoaded', () => {
-      changeLanguage('en');
-      document.querySelectorAll('.language-btn').forEach(btn => {
-        btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
-      });
-      displayRecommendations({ title: "Your Recommendations", content: translations[currentLang].recommendations });
+        // Function to display a random disease
+        function displayRandomDisease() {
+            const container = document.getElementById('diseaseDisplay');
+            const randomIndex = Math.floor(Math.random() * diseases.length);
+            const disease = diseases[randomIndex];
+            
+            container.innerHTML = `
+                <div class="disease-card ${disease.name.toLowerCase()} ${disease.status === 'Affected' ? 'affected' : ''}">
+                    <div class="card-header">${disease.name}</div>
+                    <div class="card-body">
+                        <div class="info-row">
+                            <span class="info-label">Status:</span>
+                            <span class="info-value">${disease.status}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Accuracy:</span>
+                            <span class="info-value">${disease.accuracy}</span>
+                        </div>
+                        
+                        <div class="treatment-section">
+                            <div class="treatment-title">Organic Treatment:</div>
+                            <p>${disease.organicTreatment}</p>
+                        </div>
+                        
+                        <div class="treatment-section">
+                            <div class="treatment-title">Chemical Treatment:</div>
+                            <p>${disease.chemicalTreatment}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
 
-      document.getElementById('report-button').addEventListener('click', () => {
-        const spinner = document.getElementById('loading-spinner');
-        document.getElementById('report-button').disabled = true;
-        spinner.style.display = 'block';
-        setTimeout(() => window.location.href = './report-page.html', 1000);
-      });
-    });
-  </script>
+        // Initialize the page with a random disease
+        window.onload = displayRandomDisease;
+    </script>
 </body>
 </html>
