@@ -446,49 +446,15 @@
                 <button id="cropImageBtn" class="btn">
                     <i class="bi bi-crop"></i> Crop
                 </button>
-                <button id="submitImageBtn" class="btn">
-                    <i class="bi bi-check-circle"></i> Submit
-                </button>
+                <a id="submitImageBtn" href="./recommendation-pag.html" class="btn bi bi-check-circle">
+    Submit
+</a>
+
             </div>
             
             <!-- Scan Buttons with Dropdown -->
             <div class="scan-buttons" id="scanButtonsContainer">
-                <div class="d-grid gap-2 d-md-block text-center position-relative">
-                    <button class="btn btn-success px-4 py-3 rounded-pill shadow dropdown-toggle fs-5" 
-                            type="button" 
-                            id="scanDropdown" 
-                            data-bs-toggle="dropdown" 
-                            aria-expanded="false"
-                            data-translate="scan_soil">
-                        <i class="bi bi-camera me-2"></i> Scan for soil
-                    </button>
-                    
-                    <!-- Scan Options -->
-                    <ul class="dropdown-menu shadow-lg p-0 mt-2 mx-auto" style="width: 200px">
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" id="takePhotoBtn">
-                                <i class="bi bi-camera fs-5"></i>
-                                <span data-translate="take_photo">Take Photo</span>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider my-0"></li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handleScanOption('upload')">
-                                <i class="bi bi-upload fs-5"></i>
-                                <span data-translate="upload_device">Upload from Device</span>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider my-0"></li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handleScanOption('drive')">
-                                <i class="bi bi-cloud-arrow-up fs-5"></i>
-                                <span data-translate="google_drive">Google Drive</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Scan Plant Button -->
+                <!-- Scan Plant Button (now first) -->
                 <div class="d-grid gap-2 d-md-block text-center position-relative">
                     <button class="btn btn-success px-4 py-3 rounded-pill shadow dropdown-toggle fs-5" 
                             type="button" 
@@ -517,6 +483,43 @@
                         <li><hr class="dropdown-divider my-0"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="handlePlantScanOption('drive')">
+                                <i class="bi bi-cloud-arrow-up fs-5"></i>
+                                <span data-translate="google_drive">Google Drive</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Scan Soil Button (now second) -->
+                <div class="d-grid gap-2 d-md-block text-center position-relative">
+                    <button class="btn btn-success px-4 py-3 rounded-pill shadow dropdown-toggle fs-5" 
+                            type="button" 
+                            id="scanDropdown" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false"
+                            data-translate="scan_soil"
+                            onclick="alert('Soil scanning feature is not yet available. Please try again later.'); return false;">
+                        <i class="bi bi-camera me-2"></i> Scan for soil
+                    </button>
+                    
+                    <!-- Scan Options -->
+                    <ul class="dropdown-menu shadow-lg p-0 mt-2 mx-auto" style="width: 200px">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" id="takePhotoBtn" onclick="alert('Soil scanning feature is not yet available. Please try again later.'); return false;">
+                                <i class="bi bi-camera fs-5"></i>
+                                <span data-translate="take_photo">Take Photo</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider my-0"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="alert('Soil scanning feature is not yet available. Please try again later.'); return false;">
+                                <i class="bi bi-upload fs-5"></i>
+                                <span data-translate="upload_device">Upload from Device</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider my-0"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 px-3 py-3" href="#" onclick="alert('Soil scanning feature is not yet available. Please try again later.'); return false;">
                                 <i class="bi bi-cloud-arrow-up fs-5"></i>
                                 <span data-translate="google_drive">Google Drive</span>
                             </a>
@@ -991,6 +994,12 @@
         
         // Function to handle file selection
         function handleFileSelection(file, type) {
+            // Check if the file is a PNG (only for plant scans)
+            if (type === 'plant' && !file.name.toLowerCase().endsWith('.png')) {
+                alert('The detected coffee picture is not yet available. Please try again with a PNG image.');
+                return;
+            }
+            
             // Show loading spinner
             document.getElementById('loadingSpinner').style.display = 'flex';
             
@@ -1009,6 +1018,15 @@
         
         // Function to show results page
         function showResultsPage() {
+            // First check if we have a plant image and it's PNG
+            if (scanType === 'plant') {
+                const imageSrc = document.getElementById('imagePreview').src;
+                if (!imageSrc.toLowerCase().endsWith('.png') && !imageSrc.startsWith('data:image/png')) {
+                    alert('The detected coffee picture is not yet available. Please try again with a PNG image.');
+                    return;
+                }
+            }
+            
             // Hide scanning container and show results container
             document.getElementById('scanningContainer').style.display = 'none';
             document.getElementById('resultsPage').style.display = 'block';
@@ -1021,12 +1039,24 @@
                 // Hide loading spinner
                 document.getElementById('loadingSpinner').style.display = 'none';
                 
-                // For demo purposes, we'll show blank results as requested
-                updateResultsFromBackend({
-                    diseaseType: "",
-                    accuracy: "",
-                    status: ""
-                });
+                // For plant scans with PNG, show all diseases
+                if (scanType === 'plant') {
+                    updateResultsFromBackend({
+                        diseaseType: "Phoma, Miner, Leaf Rust, Cercospora",
+                        accuracy: "92%",
+                        status: "infected"
+                    });
+                    
+                    // Store disease type for recommendations page
+                    document.getElementById('recommendationsSection').dataset.diseaseType = "Phoma, Miner, Leaf Rust, Cercospora";
+                } else {
+                    // For other cases (shouldn't happen for plant scans due to earlier check)
+                    updateResultsFromBackend({
+                        diseaseType: "",
+                        accuracy: "",
+                        status: ""
+                    });
+                }
                 
                 // Scroll to top of results
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1068,10 +1098,10 @@
                          <span>${translations[currentLang].infected || 'Infected'}</span>`;
                     
                     // Show recommendations button
-                    recommendationsSection.style.display = 'block';
+                    document.getElementById('recommendationsSection').style.display = 'block';
                     
                     // Store disease type for recommendations
-                    recommendationsSection.dataset.diseaseType = data.diseaseType || '';
+                    document.getElementById('recommendationsSection').dataset.diseaseType = data.diseaseType || '';
                 } else {
                     // For healthy plants
                     statusBadge.className = 'badge healthy-status accuracy-badge fw-normal';
@@ -1080,12 +1110,12 @@
                          <span>${translations[currentLang].healthy || 'Healthy'}</span>`;
                     
                     // Hide recommendations button
-                    recommendationsSection.style.display = 'none';
+                    document.getElementById('recommendationsSection').style.display = 'none';
                 }
             } else {
                 statusBadge.className = 'blank-space';
                 statusBadge.innerHTML = '';
-                recommendationsSection.style.display = 'none';
+                document.getElementById('recommendationsSection').style.display = 'none';
             }
         }
         
@@ -1106,6 +1136,13 @@
                         'Water plants at the base, not on leaves',
                         'Remove severely infected plant parts',
                         'Use resistant varieties if available'
+                    ],
+                    'Phoma, Miner, Leaf Rust, Cercospora': [
+                        'Apply broad-spectrum fungicides effective against multiple diseases',
+                        'Prune affected areas to improve air circulation',
+                        'Ensure proper plant nutrition to boost immunity',
+                        'Use mulch to prevent soil-borne pathogens',
+                        'Rotate crops to break disease cycles'
                     ],
                     'default': [
                         'Remove and destroy infected plant material',
@@ -1254,6 +1291,9 @@
             const diseaseType = document.getElementById('recommendationsSection').dataset.diseaseType;
             const recommendations = getDiseaseRecommendations(diseaseType);
             showRecommendationsModal(recommendations);
+            
+            // Store disease type for recommendations page
+            localStorage.setItem('diseaseType', diseaseType);
         });
         
         // Crop selection interaction
