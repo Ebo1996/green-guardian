@@ -5,11 +5,19 @@ __pycache__/
 *.pyd
 .Python
 backend/venv/
+backend/env/
 backend/.env
+backend/.env.production
 backend/staticfiles/
 backend/media/
 *.log
 db.sqlite3
+
+# ML Training Data (keep models, ignore data)
+backend/data/*.csv
+
+# HuggingFace cache (auto-downloaded)
+.cache/huggingface/
 
 # Node / Next.js
 frontend/node_modules/

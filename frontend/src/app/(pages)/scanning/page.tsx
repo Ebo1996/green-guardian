@@ -15,6 +15,8 @@ interface ScanResult {
 }
 
 export default function ScanningPage() {
+  const MAX_SIZE_MB = 10
+  
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -28,6 +30,14 @@ export default function ScanningPage() {
       setError('Please select a valid image file.')
       return
     }
+    
+    // Warn about large files
+    const sizeMB = file.size / (1024 * 1024)
+    if (sizeMB > MAX_SIZE_MB) {
+      setError(`File too large (${sizeMB.toFixed(1)} MB). Maximum size is ${MAX_SIZE_MB} MB.`)
+      return
+    }
+    
     setSelectedFile(file)
     setError(null)
     setResult(null)
@@ -138,11 +148,16 @@ export default function ScanningPage() {
                   <img
                     src={preview}
                     alt="Preview"
-                    className="max-h-64 mx-auto rounded-lg shadow-md border-2 border-green-400 object-contain"
+                    className="max-h-80 mx-auto rounded-lg shadow-md border-2 border-green-400 object-contain"
                   />
-                  <p className="mt-3 text-sm text-green-700 font-medium">
-                    ✓ {selectedFile?.name}
-                  </p>
+                  <div className="mt-4 space-y-2">
+                    <p className="text-sm text-green-700 font-medium">
+                      ✓ {selectedFile?.name}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {selectedFile && `Size: ${(selectedFile.size / 1024).toFixed(1)} KB`}
+                    </p>
+                  </div>
                 </div>
               ) : (
                 <div>
@@ -154,7 +169,7 @@ export default function ScanningPage() {
                   <p className="text-gray-700 font-semibold mb-1">Drag & drop your plant image here</p>
                   <p className="text-gray-400 text-sm mb-4">or click to browse files</p>
                   <span className="text-xs text-gray-400 bg-gray-100 px-3 py-1 rounded-full">
-                    JPG, PNG, WEBP supported
+                    JPG, PNG, WEBP • Max 10 MB
                   </span>
                 </div>
               )}
@@ -239,6 +254,21 @@ export default function ScanningPage() {
                 </div>
                 <h2 className="text-2xl font-bold text-green-700">Scan Results</h2>
                 <p className="text-gray-500 text-sm mt-1">Detailed analysis of your plant health</p>
+                
+                {/* Low confidence warning */}
+                {result.accuracy < 60 && (
+                  <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-700 text-sm">
+                    <div className="flex items-center justify-center gap-2">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      <span className="font-semibold">Low Confidence Detection</span>
+                    </div>
+                    <p className="mt-1 text-xs">
+                      The model is less certain about this diagnosis. Consider retaking the photo with better lighting or a clearer view of the affected area.
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Uploaded Image */}

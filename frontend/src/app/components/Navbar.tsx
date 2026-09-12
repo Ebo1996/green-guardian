@@ -19,9 +19,10 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
+    { href: '/scanning', label: 'Disease Scanner' },
     { href: '/crop-recommendation', label: 'Crop Recommendation' },
-    { href: '/recommendation', label: 'Recommendation' },
-    { href: '/report', label: 'Report' },
+    { href: '/history', label: 'Scan History' },
+    { href: '/how-to-use', label: 'How to Use' },
   ]
 
   const isActive = (href: string) => {

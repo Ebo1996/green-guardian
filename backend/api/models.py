@@ -1,7 +1,10 @@
 from django.db import models
+from django_mongodb_backend.fields import ObjectIdAutoField
 
 
 class PlantScan(models.Model):
+    id = ObjectIdAutoField(primary_key=True)
+    
     STATUS_CHOICES = [
         ('Healthy', 'Healthy'),
         ('Infected', 'Infected'),
@@ -23,6 +26,8 @@ class PlantScan(models.Model):
 
 
 class CropRecommendation(models.Model):
+    id = ObjectIdAutoField(primary_key=True)
+    
     nitrogen = models.FloatField()
     phosphorus = models.FloatField()
     potassium = models.FloatField()

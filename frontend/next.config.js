@@ -9,6 +9,8 @@ const nextConfig = {
       { protocol: 'https', hostname: 'orchardly.co' },
       { protocol: 'https', hostname: 'helios-i.mashable.com' },
       { protocol: 'https', hostname: 'cdn.qwenlm.ai' },
+      { protocol: 'https', hostname: 'i.pravatar.cc' },
+      { protocol: 'https', hostname: 'pravatar.cc' },
       { protocol: 'http', hostname: 'localhost' },
     ],
   },

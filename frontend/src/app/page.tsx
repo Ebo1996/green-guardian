@@ -1,146 +1,69 @@
-import Image from 'next/image'
+'use client'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-const features = [
-  {
-    image: 'https://cdn3.saiwa.ai/Blog/plant_disease_detection_using_image_processing_featured_image_5cbddca5_a831_4b39_b9c8_e9b02a914f4c_9818cf5400.jpg',
-    badge: 'AI-Powered',
-    title: 'Image-based Plant Disease Detection',
-    description: 'Accurate and rapid identification of plant diseases using advanced image analysis technology.',
-    alt: 'AI analyzing plant leaves for disease detection',
-  },
-  {
-    image: 'https://camo.githubusercontent.com/1bdf0f0577d91db85f8f22e7f8ed20e301498a172302c0d4455b58669114195c/68747470733a2f2f6d656469612e6c6963646e2e636f6d2f646d732f696d6167652f76322f4335313132415145366466527a5633454a74412f61727469636c652d636f7665725f696d6167652d736872696e6b5f3630305f323030302f61727469636c652d636f7665725f696d6167652d736872696e6b5f3630305f323030302f302f313535373738373830353739393f653d3231343734383336343726763d6265746126743d5f33394447695868377236307046704a4176486c756454794652344d726143616e4c325353377532787255',
-    badge: 'Smart',
-    title: 'Personalized Crop Recommendations',
-    description: 'Tailored recommendations for crop management based on detected diseases and plant health.',
-    alt: 'Farmer receiving crop recommendations on tablet',
-  },
-  {
-    image: 'https://www.csm.tech/storage/uploads/news/65c1bdcab8b9c1707195850Thumb.jpg',
-    badge: 'Easy-to-Use',
-    title: 'Farmer-friendly Interface',
-    description: 'Intuitive and easy-to-use platform designed for farmers of all technical backgrounds.',
-    alt: 'Farmer using mobile app in field',
-  },
-  {
-    image: 'https://orchardly.co/grow/wp-content/uploads/2023/09/ph-1024x587.jpg.webp',
-    badge: 'Precision',
-    title: 'Soil Nutrient & pH Detection',
-    description: 'Enter soil ingredient values and the system classifies soil type and suggests the best crops to grow.',
-    alt: 'Soil testing with digital device',
-  },
+const plants = [
+  ['Tomato', 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=300'], ['Potato', 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300'], ['Corn', 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=300'], ['Grape', 'https://images.unsplash.com/photo-1474946320615-8f36b93de0a0?w=300'], ['Apple', 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300'], ['Pepper', 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=300'], ['Strawberry', 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=300'], ['Peach', 'https://images.unsplash.com/photo-1595743825637-01c3e1c44d73?w=300'], ['Cherry', 'https://images.unsplash.com/photo-1528821128474-27f963b062bf?w=300'], ['Soybean', 'https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?w=300'], ['Squash', 'https://images.unsplash.com/photo-1570586437263-ab629fccc818?w=300'], ['Blueberry', 'https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=300'], ['Raspberry', 'https://images.unsplash.com/photo-1577069861033-55d04cec4ef5?w=300'], ['Orange', 'https://images.unsplash.com/photo-1547514701-42782101795e?w=300'], ['Coffee', 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=300'],
+]
+const crops = ['🌾 Rice','🌽 Maize','🫘 Chickpea','🫘 Kidneybeans','🌿 Pigeonpeas','🌱 Mothbeans','🌱 Mungbean','🌑 Blackgram','🟤 Lentil','🍎 Pomegranate','🍌 Banana','🥭 Mango','🍇 Grapes','🍉 Watermelon','🍈 Muskmelon','🍏 Apple','🍊 Orange','🧡 Papaya','🥥 Coconut','🤍 Cotton','🪢 Jute','☕ Coffee']
+const faqs = [
+  ['How accurate is the plant disease detection?', 'Our MobileNetV2 CNN model is trained on the PlantVillage dataset and achieves high accuracy across 38 disease classes covering 14 plant species.'],
+  ['Which plants and crops are supported?', 'We support 15 plant species for disease detection including tomato, potato, corn, grape, apple, pepper, strawberry, peach, cherry, squash, blueberry, raspberry, soybean, orange, and coffee. For crop recommendation we support 22 crops including rice, maize, chickpea, banana, mango, and more.'],
+  ['Is GreenGuardians free to use?', 'Yes, completely free. No subscription, no account required. Just upload your plant photo and get instant results.'],
+  ['Do I need to create an account?', 'No account is needed to use plant scanning or crop recommendation. Just open the app and start.'],
+  ['How do I get the best scan results?', 'Use a clear, well-lit photo focused on a single leaf showing the symptoms. Avoid blurry images or photos taken in low light. Close-up shots of 15–30cm work best.'],
+  ['What is crop recommendation based on?', 'Our RandomForest model trained on 2200 soil and climate samples recommends the best crop based on your nitrogen, phosphorus, potassium levels, temperature, humidity, pH, and rainfall data.'],
 ]
 
-const stats = [
-  { value: '91.3%', label: 'Accuracy Rate' },
-  { value: '10K+', label: 'Farmers Served' },
-  { value: '5+', label: 'Plant Diseases' },
-  { value: '24/7', label: 'Support' },
-]
+function Leaf({ className = 'h-6 w-6' }: { className?: string }) { return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M20.8 3.2C11.6 3.2 4.5 6.8 4.5 13.3c0 3.7 2.7 6.1 6.1 6.1 6.5 0 10.2-7.1 10.2-16.2Z"/><path d="M3.5 21c3.7-5.8 7.4-8.5 12.2-11.2"/></svg> }
+function Arrow() { return <span aria-hidden="true">→</span> }
+function SectionTitle({ children, eyebrow }: { children: React.ReactNode; eyebrow?: string }) { return <div className="mx-auto mb-12 max-w-2xl text-center">{eyebrow && <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-green-600">{eyebrow}</p>}<h2 className="text-balance text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{children}</h2><div className="mx-auto mt-5 h-1 w-14 rounded-full bg-green-500" /></div> }
 
-export default function HomePage() {
-  return (
-    <>
-      {/* Hero Section */}
-      <section
-        className="relative flex items-center justify-center text-center text-white"
-        style={{
-          background: "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=2071&q=80') center/cover no-repeat",
-          minHeight: '60vh',
-          padding: '100px 20px',
-        }}
-      >
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Empowering Farmers with Smart Plant Disease Detection
-          </h1>
-          <p className="text-xl md:text-2xl opacity-90 mb-8">
-            Scan. Detect. Act. Grow healthy crops with confidence.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/scanning"
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3.5 rounded-full text-lg shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all animate-pulse"
-              style={{ animationDuration: '2s' }}
-            >
-              Plant Detection
-            </Link>
-            <Link
-              href="/crop-recommendation"
-              className="border-2 border-white text-white hover:bg-white hover:text-green-700 font-semibold px-8 py-3.5 rounded-full text-lg transition-all hover:-translate-y-1"
-            >
-              Crop Recommendation
-            </Link>
-          </div>
-        </div>
-      </section>
+export default function Page() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [showTop, setShowTop] = useState(false)
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [totalScans, setTotalScans] = useState<number | null>(null)
+  
+  useEffect(() => { const onScroll = () => { setScrolled(window.scrollY > 10); setShowTop(window.scrollY > 400) }; onScroll(); window.addEventListener('scroll', onScroll); return () => window.removeEventListener('scroll', onScroll) }, [])
+  
+  useEffect(() => {
+    // Fetch total scan count from backend
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/scans/`)
+      .then(res => res.json())
+      .then(data => setTotalScans(data.length))
+      .catch(() => setTotalScans(null))
+  }, [])
+  
+  const nav = [['Home','#home'],['How It Works','#how-it-works'],['Diseases','#diseases'],['Crops','#crops'],['FAQ','#faq']]
+  return <main className="overflow-hidden bg-white text-gray-900">
+    <style>{`@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
+    <nav className={`fixed inset-x-0 top-0 z-50 transition-shadow ${scrolled ? 'bg-white/95 shadow-sm backdrop-blur' : 'bg-white'}`}><div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8"><Link href="#home" className="flex items-center gap-2 text-lg font-bold text-green-700"><span className="rounded-xl bg-green-100 p-2"><Leaf /></span>GreenGuardians</Link><div className="hidden items-center gap-7 md:flex">{nav.map(([label, href]) => <Link key={href} href={href} className="text-sm font-medium text-gray-600 transition-colors hover:text-green-600">{label}</Link>)}</div><div className="hidden items-center gap-3 md:flex"><Link href="/scanning" className="rounded-full bg-green-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-green-700">Start Scanning</Link></div><button onClick={() => setMenuOpen(!menuOpen)} className="rounded-lg p-2 text-gray-700 md:hidden" aria-label="Toggle navigation" aria-expanded={menuOpen}><span className="block h-0.5 w-6 bg-current" /><span className="my-1.5 block h-0.5 w-6 bg-current" /><span className="block h-0.5 w-6 bg-current" /></button></div>{menuOpen && <div className="border-t border-gray-100 bg-white px-5 pb-5 md:hidden">{nav.map(([label, href]) => <Link onClick={() => setMenuOpen(false)} key={href} href={href} className="block border-b border-gray-100 py-3 text-sm font-medium text-gray-700">{label}</Link>)}<div className="flex gap-3 pt-4"><Link href="/scanning" className="w-full rounded-full bg-green-600 py-2 text-center text-sm font-semibold text-white">Start Scanning</Link></div></div>}</nav>
 
-      {/* Features Section */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Core Features</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 flex flex-col"
-            >
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={feature.image}
-                  alt={feature.alt}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-                <span className="absolute top-3 right-3 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                  {feature.badge}
-                </span>
-              </div>
-              <div className="p-5 flex-1">
-                <h5 className="font-semibold text-gray-800 mb-2">{feature.title}</h5>
-                <p className="text-gray-500 text-sm leading-relaxed">{feature.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+    <section id="home" className="relative flex min-h-screen items-center justify-center bg-cover bg-center px-5 pt-20" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920')" }}><div className="absolute inset-0 bg-black/55" /><div className="relative z-10 max-w-4xl text-center text-white"><div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-300/30 bg-green-500/20 px-4 py-2 text-xs font-semibold text-green-200">🌿 AI-Powered Plant Health Platform</div><h1 className="text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl">Protect Your Crops<br />with <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">AI</span></h1><p className="mx-auto mt-6 max-w-2xl text-pretty text-base leading-7 text-gray-200 sm:text-lg">Instant plant disease detection and smart crop recommendations powered by machine learning — free for every farmer</p><div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><Link href="/scanning" className="rounded-full bg-green-600 px-7 py-3.5 font-semibold transition hover:bg-green-500">Scan a Plant <Arrow /></Link><Link href="/crop-recommendation" className="rounded-full border border-white/70 px-7 py-3.5 font-semibold transition hover:bg-white hover:text-gray-900">Get Crop Advice</Link></div><div className="mt-9 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-gray-200"><span className="flex items-center gap-2"><i className="h-2 w-2 animate-pulse rounded-full bg-green-400" />AI Model Online</span><span>·</span><span>🛡 Free Forever</span><span>·</span><span>🌿 No Account Needed</span>{totalScans !== null && totalScans > 0 && <><span>·</span><span>✓ {totalScans.toLocaleString()} Plants Scanned</span></>}</div></div><a href="#how-it-works" className="absolute bottom-7 left-1/2 -translate-x-1/2 animate-bounce text-white" aria-label="Scroll down"><svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m6 9 6 6 6-6" /></svg></a></section>
 
-      {/* Stats Section */}
-      <section className="container mx-auto px-4 py-8 pb-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="bg-white rounded-xl shadow-md p-6 text-center hover:-translate-y-1 hover:shadow-lg transition-all"
-            >
-              <h3 className="text-4xl font-bold text-green-600 mb-2">{stat.value}</h3>
-              <p className="text-gray-600 font-medium">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+    <section className="bg-green-800 px-5 py-10 text-white"><div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 text-center md:grid-cols-4 md:gap-4">{[['38','Disease Classes Detected'],['22','Crops Supported'],['99.5%','Model Accuracy'],['Free','Always & Forever']].map(([n,l]) => <div key={l}><div className="text-3xl font-bold sm:text-4xl">{n}</div><div className="mt-1 text-xs font-medium text-green-300 sm:text-sm">{l}</div></div>)}</div></section>
 
-      {/* Mission Section */}
-      <section className="container mx-auto px-4 pb-16">
-        <div
-          className="rounded-2xl p-12 text-center text-white"
-          style={{ background: 'linear-gradient(135deg, #28a745 0%, #218838 100%)' }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold leading-snug">
-            We're on a mission to revolutionize agriculture with technology,
-            making farming more efficient and sustainable.
-          </h2>
-        </div>
-      </section>
+    <section id="how-it-works" className="bg-gray-50 px-5 py-20 sm:py-28"><SectionTitle eyebrow="Simple by design">How It Works</SectionTitle><div className="relative mx-auto grid max-w-6xl gap-6 md:grid-cols-3 md:gap-8"><div className="absolute left-[17%] right-[17%] top-20 hidden border-t-2 border-dashed border-green-200 md:block" />{[['📸','Upload a Photo','Take a clear photo of your plant leaf and upload it directly from your phone or computer'],['🤖','AI Analyses It','Our MobileNetV2 CNN model analyses your image across 38 disease categories in seconds'],['💊','Get Treatment Advice','Receive organic and chemical treatment recommendations tailored to the detected disease']].map(([icon,title,copy],i) => <article key={title} className="relative z-10 rounded-2xl bg-white p-7 text-center shadow-md"><div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-lg font-bold text-white">{i+1}</div><div className="mb-4 text-4xl">{icon}</div><h3 className="mb-3 text-xl font-bold">{title}</h3><p className="text-sm leading-6 text-gray-600">{copy}</p></article>)}</div></section>
 
-      {/* CTA Section */}
-      <div className="text-center pb-16">
-        <Link
-          href="/how-to-use"
-          className="bg-green-600 hover:bg-green-700 text-white font-semibold px-10 py-4 rounded-full text-lg shadow-md hover:-translate-y-1 hover:shadow-lg transition-all inline-block"
-        >
-          Learn More
-        </Link>
-      </div>
-    </>
-  )
+    <section className="bg-white px-5 py-20 sm:py-28"><div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">{[['https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800','Powered by MobileNetV2 CNN','Plant Disease Detection','Spot symptoms early and receive clear treatment guidance before disease spreads.','Start Scanning'],['https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800','99.5% Accurate','Smart Crop Recommendation','Turn your soil and climate data into a confident, data-backed planting decision.','Get Recommendation']].map(([image,badge,title,copy,button]) => <article key={title} className="relative min-h-[420px] overflow-hidden rounded-2xl"><img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" /><div className="relative flex min-h-[420px] flex-col justify-end p-7 text-white"><span className="mb-3 w-fit rounded-full bg-green-500/90 px-3 py-1 text-xs font-bold">{badge}</span><h3 className="text-3xl font-bold">{title}</h3><p className="mt-3 max-w-md text-sm leading-6 text-gray-200">{copy}</p><Link href={title.startsWith('Plant') ? '/scanning' : '/crop-recommendation'} className="mt-5 w-fit rounded-full bg-green-500 px-5 py-2.5 text-sm font-bold transition hover:bg-green-400">{button} <Arrow /></Link></div></article>)}</div></section>
+
+    <section id="crops" className="bg-white px-5 pb-20 sm:pb-28"><SectionTitle eyebrow="Built for your field">Supported Plants & Crops</SectionTitle><div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">{plants.map(([name,image]) => <article key={name} className="overflow-hidden rounded-xl border border-gray-100 bg-white text-center shadow-sm transition hover:-translate-y-1 hover:shadow-md"><img src={image} alt={name} className="h-24 w-full object-cover" /><div className="p-3"><h3 className="text-sm font-bold">{name}</h3><span className="mt-2 inline-block rounded-full bg-green-100 px-2.5 py-1 text-[10px] font-bold text-green-700">Supported</span></div></article>)}</div><div className="mx-auto mt-12 max-w-full overflow-hidden rounded-2xl bg-green-50 py-4"><div className="flex w-max gap-3" style={{ animation: 'scroll 20s linear infinite' }}>{[...crops,...crops].map((crop,i) => <span key={`${crop}-${i}`} className="rounded-full border border-green-100 bg-white px-4 py-2 text-sm font-medium text-green-800 shadow-sm">{crop}</span>)}</div></div></section>
+
+    <section id="diseases" className="bg-gray-50 px-5 py-20 sm:py-28"><SectionTitle eyebrow="Early warning, better harvests">Diseases We Detect</SectionTitle><div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">{[['border-red-500','bg-red-100 text-red-700','🍅','Tomato Late Blight','Caused by Phytophthora infestans — spreads rapidly in cool wet conditions'],['border-orange-500','bg-orange-100 text-orange-700','🥔','Potato Early Blight','Caused by Alternaria solani — produces dark bullseye lesions on lower leaves'],['border-amber-500','bg-amber-100 text-amber-700','🌽','Corn Common Rust','Caused by Puccinia sorghi — produces brown powdery pustules on leaf surfaces']].map(([border,badge,icon,title,copy]) => <article key={title} className={`rounded-2xl border-t-4 ${border} bg-white p-7 shadow-sm`}><div className="flex items-center justify-between"><span className="text-4xl">{icon}</span><span className={`rounded-full ${badge} px-3 py-1 text-xs font-bold`}>Infected</span></div><h3 className="mt-6 text-xl font-bold">{title}</h3><p className="mt-3 text-sm leading-6 text-gray-600">{copy}</p></article>)}</div><Link href="/scanning" className="mx-auto mt-10 block w-fit font-semibold text-green-700 transition hover:text-green-500">Scan your plant to detect all 38 diseases <Arrow /></Link></section>
+
+    <section className="bg-white px-5 py-20 sm:py-28"><SectionTitle>Healthy vs Infected — See the Difference</SectionTitle><div className="mx-auto max-w-5xl overflow-hidden rounded-2xl shadow-xl"><div className="grid md:grid-cols-2"><div className="relative"><img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=600" alt="Healthy tomato plant" className="h-64 w-full object-cover" /><span className="absolute left-4 top-4 rounded-full bg-green-500 px-3 py-1 text-xs font-bold text-white">✓ Healthy</span></div><div className="relative"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600" alt="Infected plant" className="h-64 w-full object-cover" /><span className="absolute left-4 top-4 rounded-full bg-red-500 px-3 py-1 text-xs font-bold text-white">⚠ Infected</span></div></div></div><p className="mt-6 text-center text-sm text-gray-600">Upload your plant photo and our AI will tell you which side yours is on</p></section>
+
+    <section className="bg-green-50 px-5 py-20 sm:py-28"><SectionTitle eyebrow="Real results in real fields">Trusted by Farmers</SectionTitle><div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">{[['11','Abebe Girma','📍 Amhara, Ethiopia','This app helped me identify late blight on my tomatoes before it spread to the whole field. Incredible tool.'],['32','Fatima Al-Hassan','📍 Kano, Nigeria','The crop recommendation was spot on for our soil conditions. We planted rice and had our best harvest in years.'],['54','Rajesh Kumar','📍 Punjab, India','Simple to use, even on a basic smartphone. The treatment advice is practical and actually works.']].map(([avatar,name,location,quote]) => <article key={name} className="rounded-2xl bg-white p-7 shadow-md"><div className="flex items-center gap-4"><img src={`https://i.pravatar.cc/80?img=${avatar}`} alt={name} className="h-12 w-12 rounded-full object-cover" /><div><h3 className="font-bold">{name}</h3><p className="text-xs text-gray-500">{location}</p></div></div><div className="mt-5 text-sm text-amber-400">★★★★★</div><p className="mt-3 text-sm italic leading-6 text-gray-600">&ldquo;{quote}&rdquo;</p></article>)}</div></section>
+
+    <section className="bg-white px-5 py-16"><p className="mb-6 text-center text-xs font-bold uppercase tracking-[0.2em] text-gray-500">Built with cutting-edge technology</p><div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-3">{['🟢 Next.js 14','🐍 Django REST','🔥 PyTorch','🤗 Hugging Face','🐘 PostgreSQL','🌲 scikit-learn'].map(x => <span key={x} className="rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-600">{x}</span>)}</div></section>
+
+    <section id="faq" className="bg-gray-50 px-5 py-20 sm:py-28"><SectionTitle>Frequently Asked Questions</SectionTitle><div className="mx-auto max-w-3xl space-y-3">{faqs.map(([question,answer],i) => <div key={question} className="rounded-xl border border-gray-100 bg-white shadow-sm"><button className="flex w-full items-center justify-between gap-5 p-5 text-left font-semibold" onClick={() => setOpenFaq(openFaq === i ? null : i)} aria-expanded={openFaq === i}><span>{question}</span><svg className={`h-5 w-5 shrink-0 text-green-600 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m6 9 6 6 6-6" /></svg></button><div className={`grid transition-[grid-template-rows] duration-300 ${openFaq === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}><div className="overflow-hidden"><p className="px-5 pb-5 text-sm leading-6 text-gray-600">{answer}</p></div></div></div>)}</div></section>
+
+    <section className="bg-gradient-to-r from-green-700 to-emerald-500 px-5 py-20 text-center text-white"><h2 className="text-balance text-3xl font-bold sm:text-4xl">Start Protecting Your Farm Today</h2><p className="mt-4 text-green-50">Free AI-powered plant analysis — no account needed</p><Link href="/scanning" className="mt-8 inline-block rounded-full border-2 border-white px-8 py-3.5 font-bold transition hover:bg-white hover:text-green-700">Scan Your Plant Now <Arrow /></Link><p className="mt-5 text-sm text-green-100">or</p><Link href="/crop-recommendation" className="text-sm font-semibold underline underline-offset-4">Get a crop recommendation <Arrow /></Link></section>
+
+    {showTop && <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-white shadow-lg transition-all hover:scale-110 hover:bg-green-700" aria-label="Back to top"><svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m18 15-6-6-6 6" /></svg></button>}
+  </main>
 }
