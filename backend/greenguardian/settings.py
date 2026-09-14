@@ -20,7 +20,15 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-me')
 
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
+# ALLOWED_HOSTS with proper wildcard handling
+ALLOWED_HOSTS_STR = config('ALLOWED_HOSTS', default='*')
+if ALLOWED_HOSTS_STR == '*':
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS_STR.split(',')]
+    # Add Render domain explicitly
+    if not any('onrender.com' in host for host in ALLOWED_HOSTS):
+        ALLOWED_HOSTS.extend(['green-guardian-qdiq.onrender.com', '*.onrender.com'])
 
 INSTALLED_APPS = [
     # Django MongoDB compatible apps only
