@@ -3,6 +3,7 @@ from .models import PlantScan, CropRecommendation
 
 
 class PlantScanSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)  # MongoDB ObjectId as string
     image_url = serializers.SerializerMethodField()
 
     class Meta:
@@ -20,6 +21,8 @@ class PlantScanSerializer(serializers.ModelSerializer):
 
 
 class CropRecommendationSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)  # MongoDB ObjectId as string
+    
     class Meta:
         model = CropRecommendation
         fields = '__all__'

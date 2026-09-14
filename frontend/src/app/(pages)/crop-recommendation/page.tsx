@@ -79,27 +79,77 @@ export default function CropRecommendationPage() {
   const validate = (): boolean => {
     const newErrors: Partial<FormState> = {}
 
-    const fields: (keyof FormState)[] = ['nitrogen', 'phosphorus', 'potassium', 'rainfall', 'humidity', 'temperature', 'ph']
-    fields.forEach((field) => {
-      const val = form[field].trim()
-      if (!val) {
-        newErrors[field] = 'This field is required'
-      } else if (isNaN(Number(val)) || Number(val) < 0) {
-        newErrors[field] = 'Enter a valid positive number'
-      }
-    })
+    // Nitrogen validation (typical range: 0-140 kg/ha)
+    if (!form.nitrogen.trim()) {
+      newErrors.nitrogen = 'Nitrogen value is required'
+    } else if (isNaN(Number(form.nitrogen)) || Number(form.nitrogen) < 0) {
+      newErrors.nitrogen = 'Please enter a valid positive number'
+    } else if (Number(form.nitrogen) > 200) {
+      newErrors.nitrogen = 'Nitrogen value seems too high (typical range: 0-140 kg/ha)'
+    }
 
-    if (form.ph && !isNaN(Number(form.ph))) {
-      const phVal = Number(form.ph)
-      if (phVal < 0 || phVal > 14) {
-        newErrors.ph = 'pH must be between 0 and 14'
+    // Phosphorus validation (typical range: 5-145 kg/ha)
+    if (!form.phosphorus.trim()) {
+      newErrors.phosphorus = 'Phosphorus value is required'
+    } else if (isNaN(Number(form.phosphorus)) || Number(form.phosphorus) < 0) {
+      newErrors.phosphorus = 'Please enter a valid positive number'
+    } else if (Number(form.phosphorus) > 200) {
+      newErrors.phosphorus = 'Phosphorus value seems too high (typical range: 5-145 kg/ha)'
+    }
+
+    // Potassium validation (typical range: 5-205 kg/ha)
+    if (!form.potassium.trim()) {
+      newErrors.potassium = 'Potassium value is required'
+    } else if (isNaN(Number(form.potassium)) || Number(form.potassium) < 0) {
+      newErrors.potassium = 'Please enter a valid positive number'
+    } else if (Number(form.potassium) > 250) {
+      newErrors.potassium = 'Potassium value seems too high (typical range: 5-205 kg/ha)'
+    }
+
+    // Rainfall validation (typical range: 20-300 mm)
+    if (!form.rainfall.trim()) {
+      newErrors.rainfall = 'Rainfall value is required'
+    } else if (isNaN(Number(form.rainfall)) || Number(form.rainfall) < 0) {
+      newErrors.rainfall = 'Please enter a valid positive number'
+    } else if (Number(form.rainfall) > 400) {
+      newErrors.rainfall = 'Rainfall value seems too high (typical range: 20-300 mm)'
+    }
+
+    // Humidity validation (0-100%)
+    if (!form.humidity.trim()) {
+      newErrors.humidity = 'Humidity value is required'
+    } else if (isNaN(Number(form.humidity))) {
+      newErrors.humidity = 'Please enter a valid number'
+    } else {
+      const humidityVal = Number(form.humidity)
+      if (humidityVal < 0 || humidityVal > 100) {
+        newErrors.humidity = 'Humidity must be between 0 and 100%'
       }
     }
 
-    if (form.humidity && !isNaN(Number(form.humidity))) {
-      const humidityVal = Number(form.humidity)
-      if (humidityVal < 0 || humidityVal > 100) {
-        newErrors.humidity = 'Humidity must be between 0 and 100'
+    // Temperature validation (typical range: 8-43°C)
+    if (!form.temperature.trim()) {
+      newErrors.temperature = 'Temperature value is required'
+    } else if (isNaN(Number(form.temperature))) {
+      newErrors.temperature = 'Please enter a valid number'
+    } else {
+      const tempVal = Number(form.temperature)
+      if (tempVal < -10 || tempVal > 60) {
+        newErrors.temperature = 'Temperature value seems unusual (typical range: 8-43°C)'
+      }
+    }
+
+    // pH validation (0-14)
+    if (!form.ph.trim()) {
+      newErrors.ph = 'pH value is required'
+    } else if (isNaN(Number(form.ph))) {
+      newErrors.ph = 'Please enter a valid number'
+    } else {
+      const phVal = Number(form.ph)
+      if (phVal < 0 || phVal > 14) {
+        newErrors.ph = 'pH must be between 0 and 14'
+      } else if (phVal < 3.5 || phVal > 9.5) {
+        newErrors.ph = 'pH value is extreme (typical agricultural range: 3.5-9.5)'
       }
     }
 
@@ -109,9 +159,20 @@ export default function CropRecommendationPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setForm((prev) => ({ ...prev, [name]: value }))
-    if (errors[name as keyof FormState]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }))
+    
+    // Allow empty string, numbers, and decimal point
+    if (value === '' || /^[0-9]*\.?[0-9]*$/.test(value)) {
+      setForm((prev) => ({ ...prev, [name]: value }))
+      if (errors[name as keyof FormState]) {
+        setErrors((prev) => ({ ...prev, [name]: undefined }))
+      }
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Prevent form submission on Enter key
+    if (e.key === 'Enter') {
+      e.preventDefault()
     }
   }
 
@@ -169,23 +230,26 @@ export default function CropRecommendationPage() {
     unit?: string
   }) => (
     <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+      <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-1.5">
         {label} {unit && <span className="text-gray-400 font-normal text-xs">({unit})</span>}
       </label>
       <div className="relative">
         <input
-          type="number"
+          id={name}
+          type="text"
           name={name}
           value={form[name]}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          step="any"
+          inputMode="decimal"
+          autoComplete="off"
           className={`w-full px-4 py-3 rounded-xl border-2 text-sm outline-none transition-all focus:border-green-500 focus:ring-2 focus:ring-green-100 hover:-translate-y-0.5 hover:shadow-md ${
             errors[name] ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-white'
           }`}
         />
         {unit && (
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full pointer-events-none">
             {unit}
           </span>
         )}
