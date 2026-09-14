@@ -22,6 +22,19 @@ Empowering farmers with real machine learning models for instant plant disease d
 
 ---
 
+## 🎬 Demo
+
+https://github.com/user-attachments/assets/your-video-id-here
+
+> **Note:** Upload your `Screen Recording 2026-09-14 135650.mp4` by:
+> 1. Go to this README on GitHub
+> 2. Click "Edit" (pencil icon)
+> 3. Drag and drop the video file here
+> 4. GitHub will automatically upload it and give you a URL
+> 5. Replace the URL above with the generated link
+
+---
+
 ## 📊 Project Stats
 
 ![GitHub Stars](https://img.shields.io/github/stars/Ebo1996/green-guardian?style=social)
