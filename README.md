@@ -24,14 +24,16 @@ Empowering farmers with real machine learning models for instant plant disease d
 
 ## 🎬 Demo
 
-https://github.com/user-attachments/assets/your-video-id-here
+> **Demo video coming soon!** Upload your screen recording to:
+> - **YouTube** (recommended for easy embedding)
+> - **GitHub Releases** (for larger files > 100MB)
+> - Or use a GIF/shorter video (<25MB) for direct embedding
+>
+> Your `Screen Recording 2026-09-14 135650.mp4` (168MB) is too large for direct GitHub upload.
 
-> **Note:** Upload your `Screen Recording 2026-09-14 135650.mp4` by:
-> 1. Go to this README on GitHub
-> 2. Click "Edit" (pencil icon)
-> 3. Drag and drop the video file here
-> 4. GitHub will automatically upload it and give you a URL
-> 5. Replace the URL above with the generated link
+**To add the video:**
+1. Upload to YouTube and use: `[![Demo Video](thumbnail.png)](https://youtube.com/your-video)`
+2. Or compress the video to under 100MB and drag-drop it here when editing on GitHub
 
 ---
 
