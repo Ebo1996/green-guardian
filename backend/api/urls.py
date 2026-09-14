@@ -6,5 +6,5 @@ urlpatterns = [
     path('scan/', views.PlantScanView.as_view(), name='plant-scan'),
     path('crop-recommend/', views.CropRecommendationView.as_view(), name='crop-recommend'),
     path('scans/', views.ScanHistoryView.as_view(), name='scan-history'),
-    path('scans/<int:pk>/', views.ReportDetailView.as_view(), name='report-detail'),
+    path('scans/<str:pk>/', views.ReportDetailView.as_view(), name='report-detail'),  # Changed to str for MongoDB ObjectId
 ]
