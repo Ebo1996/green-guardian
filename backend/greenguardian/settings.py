@@ -114,19 +114,21 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django_mongodb_backend.fields.ObjectIdAutoField'
 
 # CORS — allow Next.js dev and prod origins
+# Temporarily allow all origins for debugging
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
     default='http://localhost:3000,http://127.0.0.1:3000,https://green-guardian-five.vercel.app'
 ).split(',')
 
 # Only use CORS_ALLOW_ALL_ORIGINS in development
-if DEBUG:
-    CORS_ALLOW_ALL_ORIGINS = True
-else:
-    CORS_ALLOW_ALL_ORIGINS = False
-    # In production, ensure Vercel origin is allowed
-    if 'https://green-guardian-five.vercel.app' not in CORS_ALLOWED_ORIGINS:
-        CORS_ALLOWED_ORIGINS.append('https://green-guardian-five.vercel.app')
+# if DEBUG:
+#     CORS_ALLOW_ALL_ORIGINS = True
+# else:
+#     CORS_ALLOW_ALL_ORIGINS = False
+#     # In production, ensure Vercel origin is allowed
+#     if 'https://green-guardian-five.vercel.app' not in CORS_ALLOWED_ORIGINS:
+#         CORS_ALLOWED_ORIGINS.append('https://green-guardian-five.vercel.app')
 
 # Django REST Framework
 REST_FRAMEWORK = {
