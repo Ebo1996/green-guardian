@@ -10,10 +10,10 @@ Empowering farmers with real machine learning models for instant plant disease d
 
 This project is collaboratively developed by:
 
-- **[Ebisa Berhanu](https://github.com/Ebo1996)** - Full Stack Development, ML Integration
-- **[Anam Tesfa](https://github.com/anotesfa)** - Backend Development, API Design
-- **[Fenet Gizaw](https://github.com/Fenet254)** - Frontend Development, UI/UX
-- **[Solomon Tesfaye](https://github.com/AmSaved)** - ML Models, Data Processing
+- **[Ebisa Berhanu](https://github.com/Ebo1996)**
+- **[Anam Tesfa](https://github.com/anotesfa)**
+- **[Fenet Gizaw](https://github.com/Fenet254)**
+- **[Solomon Tesfaye](https://github.com/AmSaved)**
 
 ---
 
@@ -372,7 +372,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 **Copyright © 2025 GreenGuardians Team**
 
-Made with ❤️ by [Ebisa Berhanu](https://github.com/Ebo1996), [Anam Tesfa](https://github.com/anotesfa), [Fenet Gizaw](https://github.com/Fenet254), and [Solomon Tesfaye](https://github.com/AmSaved).
+Made with ❤️ by Ebisa Berhanu, Anam Tesfa, Fenet Gizaw, and Solomon Tesfaye.
 
 ---
 
@@ -426,10 +426,10 @@ For questions, suggestions, or collaboration opportunities:
 - **Discussions**: [GitHub Discussions](https://github.com/your-repo/discussions)
 
 ### Connect with the Team:
-- 💼 [Ebisa Berhanu](https://github.com/Ebo1996)
-- 💼 [Anam Tesfa](https://github.com/anotesfa)
-- 💼 [Fenet Gizaw](https://github.com/Fenet254)
-- 💼 [Solomon Tesfaye](https://github.com/AmSaved)
+- [Ebisa Berhanu](https://github.com/Ebo1996)
+- [Anam Tesfa](https://github.com/anotesfa)
+- [Fenet Gizaw](https://github.com/Fenet254)
+- [Solomon Tesfaye](https://github.com/AmSaved)
 
 ---
 
