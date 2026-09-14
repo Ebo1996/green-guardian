@@ -1,8 +1,35 @@
+<div align="center">
+
 # GreenGuardians 🌿
 
 **AI-Powered Plant Disease Detection & Crop Recommendation Platform**
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
+[![Django](https://img.shields.io/badge/Django-5.2-092E20?logo=django)](https://www.djangoproject.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.14-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Vercel](https://img.shields.io/badge/Deployed-Vercel-black?logo=vercel)](https://vercel.com)
+[![Render](https://img.shields.io/badge/Backend-Render-46E3B7?logo=render&logoColor=white)](https://render.com)
+
 Empowering farmers with real machine learning models for instant plant disease detection and intelligent crop recommendations based on soil and environmental data.
+
+[Live Demo](#) • [Documentation](#-documentation) • [Report Bug](https://github.com/Ebo1996/green-guardian/issues) • [Request Feature](https://github.com/Ebo1996/green-guardian/issues)
+
+</div>
+
+---
+
+## 📊 Project Stats
+
+![GitHub Stars](https://img.shields.io/github/stars/Ebo1996/green-guardian?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/Ebo1996/green-guardian?style=social)
+![GitHub Issues](https://img.shields.io/github/issues/Ebo1996/green-guardian)
+![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Ebo1996/green-guardian)
+![Code Size](https://img.shields.io/github/languages/code-size/Ebo1996/green-guardian)
+![Last Commit](https://img.shields.io/github/last-commit/Ebo1996/green-guardian)
 
 ---
 
@@ -439,3 +466,16 @@ For questions, suggestions, or collaboration opportunities:
 ---
 
 **© 2025 GreenGuardians Team | Licensed under MIT License**
+
+<div align="center">
+
+Made with ❤️ for farmers and agriculture worldwide 🌾
+
+[![GitHub](https://img.shields.io/badge/GitHub-Ebo1996-181717?logo=github)](https://github.com/Ebo1996)
+[![GitHub](https://img.shields.io/badge/GitHub-anotesfa-181717?logo=github)](https://github.com/anotesfa)
+[![GitHub](https://img.shields.io/badge/GitHub-Fenet254-181717?logo=github)](https://github.com/Fenet254)
+[![GitHub](https://img.shields.io/badge/GitHub-AmSaved-181717?logo=github)](https://github.com/AmSaved)
+
+⭐ Star this repo if you find it helpful! ⭐
+
+</div>
