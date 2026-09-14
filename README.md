@@ -22,20 +22,6 @@ Empowering farmers with real machine learning models for instant plant disease d
 
 ---
 
-## 🎬 Demo
-
-https://github.com/user-attachments/assets/demo-video
-
-> **To add your compressed video (55MB):**
-> 1. Go to https://github.com/Ebo1996/green-guardian/edit/main/README.md
-> 2. Find this section (line ~28)
-> 3. Delete the placeholder URL above
-> 4. Drag and drop your compressed video file here
-> 5. GitHub will upload it and auto-generate the embed URL
-> 6. Save the file - done! 🎉
-
----
-
 ## 📊 Project Stats
 
 ![GitHub Stars](https://img.shields.io/github/stars/Ebo1996/green-guardian?style=social)
