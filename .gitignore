@@ -29,3 +29,7 @@ frontend/.env*.local
 # OS
 .DS_Store
 Thumbs.db
+
+# Demo videos (too large for GitHub)
+*.mp4
+Screen Recording*.mp4
