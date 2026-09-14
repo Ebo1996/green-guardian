@@ -391,16 +391,6 @@ Made with ❤️ by Ebisa Berhanu, Anam Tesfa, Fenet Gizaw, and Solomon Tesfaye.
 
 ---
 
-## 📚 Documentation
-
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Complete deployment guide
-- **[PRODUCTION_READINESS.md](PRODUCTION_READINESS.md)** - Production checklist
-- **[ML_MODELS_SUMMARY.md](ML_MODELS_SUMMARY.md)** - ML model details
-- **[MONGODB_MIGRATION.md](MONGODB-MIGRATION.md)** - MongoDB setup guide
-- **[IMPROVEMENTS.md](IMPROVEMENTS.md)** - Feature changelog
-
----
-
 ## 🏆 Project Highlights
 
 - ✅ **2 ML Models**: Pre-trained CNN + Custom RandomForest
