@@ -311,34 +311,40 @@ def _load_disease_classifier():
     Uses the locally cached Hugging Face weights — no pipeline() needed,
     which avoids the transformers v5 image-processor compatibility issue.
     
-    NOTE: Disabled for Render free tier due to memory constraints.
-    PyTorch + MobileNetV2 requires ~400MB which exceeds free tier limits.
+    NOTE: Only loads in DEBUG mode (local development).
+    Disabled in production due to Render free tier memory constraints.
+    PyTorch + MobileNetV2 requires ~400MB which exceeds 512MB free tier limits.
     """
-    # Temporarily disabled for Render free tier deployment
-    logger.warning(
-        "[GreenGuardians] Disease model loading disabled for free tier deployment. "
-        "PyTorch models require too much memory (>400MB) for Render's 512MB free tier."
-    )
-    return None
+    from django.conf import settings
     
-    # Uncomment below for paid tier or local development:
-    # try:
-    #     import torch
-    #     from transformers import MobileNetV2ForImageClassification, MobileNetV2Config
-    #     model = MobileNetV2ForImageClassification.from_pretrained(
-    #         HF_DISEASE_MODEL,
-    #         local_files_only=False,
-    #     )
-    #     model.eval()
-    #     logger.info("[GreenGuardians] Plant disease classifier loaded: %s", HF_DISEASE_MODEL)
-    #     return model
-    # except Exception as exc:
-    #     logger.error(
-    #         "[GreenGuardians] Failed to load disease classifier (%s): %s. "
-    #         "Ensure `transformers` and `torch` are installed.",
-    #         HF_DISEASE_MODEL, exc,
-    #     )
-    #     return None
+    # Only load disease model in DEBUG mode (local development)
+    if not settings.DEBUG:
+        logger.warning(
+            "[GreenGuardians] Disease model loading disabled in production. "
+            "PyTorch models require too much memory (>400MB) for Render's 512MB free tier."
+        )
+        return None
+    
+    # Load model for local development
+    try:
+        import torch
+        from transformers import MobileNetV2ForImageClassification
+        
+        logger.info("[GreenGuardians] Loading disease model for local development...")
+        model = MobileNetV2ForImageClassification.from_pretrained(
+            HF_DISEASE_MODEL,
+            local_files_only=False,
+        )
+        model.eval()
+        logger.info("[GreenGuardians] Plant disease classifier loaded: %s", HF_DISEASE_MODEL)
+        return model
+    except Exception as exc:
+        logger.error(
+            "[GreenGuardians] Failed to load disease classifier (%s): %s. "
+            "Ensure `transformers` and `torch` are installed.",
+            HF_DISEASE_MODEL, exc,
+        )
+        return None
 
 
 # Module-level singletons — initialised once when Django imports this module
@@ -425,6 +431,29 @@ class PlantScanView(APIView):
             ])
 
             pil_image   = PILImage.open(image_file).convert('RGB')
+            
+            # Basic validation: check if image contains plant-like features
+            # Simple heuristic: detect skin tones (common in human/animal photos)
+            import numpy as np
+            img_array = np.array(pil_image.resize((224, 224)))
+            
+            if len(img_array.shape) == 3:
+                r, g, b = img_array[:,:,0], img_array[:,:,1], img_array[:,:,2]
+                
+                # Skin tone detection (catches most human/animal photos)
+                skin_pixels = np.sum((r > 95) & (g > 40) & (b > 20) & 
+                                   (r > g) & (r > b) & 
+                                   (np.abs(r.astype(int) - g.astype(int)) > 15))
+                total_pixels = img_array.shape[0] * img_array.shape[1]
+                skin_ratio = skin_pixels / total_pixels
+                
+                # If more than 30% of the image is skin-toned, reject it
+                if skin_ratio > 0.3:
+                    return Response(
+                        {'error': 'Please upload a plant leaf image. This system is designed for plant disease detection only, not for humans or animals.'},
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
+            
             tensor      = preprocess(pil_image).unsqueeze(0)   # shape: [1, 3, 224, 224]
 
             with torch.no_grad():
