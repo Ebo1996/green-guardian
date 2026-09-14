@@ -24,16 +24,15 @@ Empowering farmers with real machine learning models for instant plant disease d
 
 ## 🎬 Demo
 
-> **Demo video coming soon!** Upload your screen recording to:
-> - **YouTube** (recommended for easy embedding)
-> - **GitHub Releases** (for larger files > 100MB)
-> - Or use a GIF/shorter video (<25MB) for direct embedding
->
-> Your `Screen Recording 2026-09-14 135650.mp4` (168MB) is too large for direct GitHub upload.
+https://github.com/user-attachments/assets/demo-video
 
-**To add the video:**
-1. Upload to YouTube and use: `[![Demo Video](thumbnail.png)](https://youtube.com/your-video)`
-2. Or compress the video to under 100MB and drag-drop it here when editing on GitHub
+> **To add your compressed video (55MB):**
+> 1. Go to https://github.com/Ebo1996/green-guardian/edit/main/README.md
+> 2. Find this section (line ~28)
+> 3. Delete the placeholder URL above
+> 4. Drag and drop your compressed video file here
+> 5. GitHub will upload it and auto-generate the embed URL
+> 6. Save the file - done! 🎉
 
 ---
 
