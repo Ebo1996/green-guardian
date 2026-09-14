@@ -310,27 +310,35 @@ def _load_disease_classifier():
     Load the MobileNetV2 plant disease model directly with PyTorch.
     Uses the locally cached Hugging Face weights — no pipeline() needed,
     which avoids the transformers v5 image-processor compatibility issue.
+    
+    NOTE: Disabled for Render free tier due to memory constraints.
+    PyTorch + MobileNetV2 requires ~400MB which exceeds free tier limits.
     """
-    try:
-        import torch
-        from transformers import MobileNetV2ForImageClassification, MobileNetV2Config
-
-        # Use cached local snapshot path so no network call is needed
-        model = MobileNetV2ForImageClassification.from_pretrained(
-            HF_DISEASE_MODEL,
-            local_files_only=False,   # download if not cached
-        )
-        model.eval()                  # inference mode — disables dropout etc.
-
-        logger.info("[GreenGuardians] Plant disease classifier loaded: %s", HF_DISEASE_MODEL)
-        return model
-    except Exception as exc:
-        logger.error(
-            "[GreenGuardians] Failed to load disease classifier (%s): %s. "
-            "Ensure `transformers` and `torch` are installed.",
-            HF_DISEASE_MODEL, exc,
-        )
-        return None
+    # Temporarily disabled for Render free tier deployment
+    logger.warning(
+        "[GreenGuardians] Disease model loading disabled for free tier deployment. "
+        "PyTorch models require too much memory (>400MB) for Render's 512MB free tier."
+    )
+    return None
+    
+    # Uncomment below for paid tier or local development:
+    # try:
+    #     import torch
+    #     from transformers import MobileNetV2ForImageClassification, MobileNetV2Config
+    #     model = MobileNetV2ForImageClassification.from_pretrained(
+    #         HF_DISEASE_MODEL,
+    #         local_files_only=False,
+    #     )
+    #     model.eval()
+    #     logger.info("[GreenGuardians] Plant disease classifier loaded: %s", HF_DISEASE_MODEL)
+    #     return model
+    # except Exception as exc:
+    #     logger.error(
+    #         "[GreenGuardians] Failed to load disease classifier (%s): %s. "
+    #         "Ensure `transformers` and `torch` are installed.",
+    #         HF_DISEASE_MODEL, exc,
+    #     )
+    #     return None
 
 
 # Module-level singletons — initialised once when Django imports this module
