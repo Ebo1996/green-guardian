@@ -20,7 +20,12 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-me')
 
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
+# ALLOWED_HOSTS - Always allow Render domain explicitly
+ALLOWED_HOSTS = ['green-guardian-qdiq.onrender.com', 'localhost', '127.0.0.1', '.onrender.com']
+# Add any additional hosts from environment variable
+ADDITIONAL_HOSTS = config('ALLOWED_HOSTS', default='').strip()
+if ADDITIONAL_HOSTS and ADDITIONAL_HOSTS != '*':
+    ALLOWED_HOSTS.extend([h.strip() for h in ADDITIONAL_HOSTS.split(',') if h.strip()])
 
 INSTALLED_APPS = [
     # Django MongoDB compatible apps only
@@ -117,16 +122,21 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django_mongodb_backend.fields.ObjectIdAutoField'
 
 # CORS — allow Next.js dev and prod origins
+# Temporarily allow all origins for debugging
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:3000,http://127.0.0.1:3000'
+    default='http://localhost:3000,http://127.0.0.1:3000,https://green-guardian-five.vercel.app'
 ).split(',')
 
 # Only use CORS_ALLOW_ALL_ORIGINS in development
-if DEBUG:
-    CORS_ALLOW_ALL_ORIGINS = True
-else:
-    CORS_ALLOW_ALL_ORIGINS = False
+# if DEBUG:
+#     CORS_ALLOW_ALL_ORIGINS = True
+# else:
+#     CORS_ALLOW_ALL_ORIGINS = False
+#     # In production, ensure Vercel origin is allowed
+#     if 'https://green-guardian-five.vercel.app' not in CORS_ALLOWED_ORIGINS:
+#         CORS_ALLOWED_ORIGINS.append('https://green-guardian-five.vercel.app')
 
 # Django REST Framework
 REST_FRAMEWORK = {

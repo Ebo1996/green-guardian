@@ -1,8 +1,46 @@
+<div align="center">
+
 # GreenGuardians 🌿
 
 **AI-Powered Plant Disease Detection & Crop Recommendation Platform**
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
+[![Django](https://img.shields.io/badge/Django-5.2-092E20?logo=django)](https://www.djangoproject.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.14-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Vercel](https://img.shields.io/badge/Deployed-Vercel-black?logo=vercel)](https://vercel.com)
+[![Render](https://img.shields.io/badge/Backend-Render-46E3B7?logo=render&logoColor=white)](https://render.com)
+
 Empowering farmers with real machine learning models for instant plant disease detection and intelligent crop recommendations based on soil and environmental data.
+
+[Live Demo](#) • [Documentation](#-documentation) • [Report Bug](https://github.com/Ebo1996/green-guardian/issues) • [Request Feature](https://github.com/Ebo1996/green-guardian/issues)
+
+</div>
+
+---
+
+## 📊 Project Stats
+
+![GitHub Stars](https://img.shields.io/github/stars/Ebo1996/green-guardian?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/Ebo1996/green-guardian?style=social)
+![GitHub Issues](https://img.shields.io/github/issues/Ebo1996/green-guardian)
+![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Ebo1996/green-guardian)
+![Code Size](https://img.shields.io/github/languages/code-size/Ebo1996/green-guardian)
+![Last Commit](https://img.shields.io/github/last-commit/Ebo1996/green-guardian)
+
+---
+
+## 👥 Authors
+
+This project is collaboratively developed by:
+
+- **[Ebisa Berhanu](https://github.com/Ebo1996)**
+- **[Anam Tesfa](https://github.com/anotesfa)**
+- **[Fenet Gizaw](https://github.com/Fenet254)**
+- **[Solomon Tesfaye](https://github.com/AmSaved)**
 
 ---
 
@@ -357,7 +395,11 @@ This project is for educational and portfolio purposes. Contributions are welcom
 
 ## 📄 License
 
-© 2025 GreenGuardians. Educational/Portfolio Project.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+**Copyright © 2025 GreenGuardians Team**
+
+Made with ❤️ by Ebisa Berhanu, Anam Tesfa, Fenet Gizaw, and Solomon Tesfaye.
 
 ---
 
@@ -373,16 +415,6 @@ This project is for educational and portfolio purposes. Contributions are welcom
 - [ ] Community forum for farmers
 - [ ] Integration with agricultural marketplaces
 - [ ] Real-time disease alerts by region
-
----
-
-## 📚 Documentation
-
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Complete deployment guide
-- **[PRODUCTION_READINESS.md](PRODUCTION_READINESS.md)** - Production checklist
-- **[ML_MODELS_SUMMARY.md](ML_MODELS_SUMMARY.md)** - ML model details
-- **[MONGODB_MIGRATION.md](MONGODB-MIGRATION.md)** - MongoDB setup guide
-- **[IMPROVEMENTS.md](IMPROVEMENTS.md)** - Feature changelog
 
 ---
 
@@ -403,12 +435,47 @@ This project is for educational and portfolio purposes. Contributions are welcom
 
 ---
 
-## 📧 Contact
+## 📧 Contact & Support
 
-For questions or suggestions, please open an issue on GitHub.
+For questions, suggestions, or collaboration opportunities:
 
-**Live Demo**: Coming soon!
+- **Open an Issue**: [GitHub Issues](https://github.com/your-repo/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-repo/discussions)
+
+### Connect with the Team:
+- [Ebisa Berhanu](https://github.com/Ebo1996)
+- [Anam Tesfa](https://github.com/anotesfa)
+- [Fenet Gizaw](https://github.com/Fenet254)
+- [Solomon Tesfaye](https://github.com/AmSaved)
 
 ---
 
+## 🌟 Acknowledgments
+
+- **PlantVillage Dataset** - For disease detection training data
+- **Kaggle Community** - For crop recommendation dataset
+- **Hugging Face** - For pre-trained MobileNetV2 model
+- **Open Source Community** - For amazing tools and frameworks
+
+---
+
+**Live Demo**: Coming soon!
+
 **⭐ If you find this project helpful, please consider giving it a star!**
+
+---
+
+**© 2025 GreenGuardians Team | Licensed under MIT License**
+
+<div align="center">
+
+Made with ❤️ for farmers and agriculture worldwide 🌾
+
+[![GitHub](https://img.shields.io/badge/GitHub-Ebo1996-181717?logo=github)](https://github.com/Ebo1996)
+[![GitHub](https://img.shields.io/badge/GitHub-anotesfa-181717?logo=github)](https://github.com/anotesfa)
+[![GitHub](https://img.shields.io/badge/GitHub-Fenet254-181717?logo=github)](https://github.com/Fenet254)
+[![GitHub](https://img.shields.io/badge/GitHub-AmSaved-181717?logo=github)](https://github.com/AmSaved)
+
+⭐ Star this repo if you find it helpful! ⭐
+
+</div>
