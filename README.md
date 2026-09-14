@@ -6,6 +6,17 @@ Empowering farmers with real machine learning models for instant plant disease d
 
 ---
 
+## 👥 Authors
+
+This project is collaboratively developed by:
+
+- **[Ebisa Berhanu](https://github.com/Ebo1996)** - Full Stack Development, ML Integration
+- **[Anam Tesfa](https://github.com/anotesfa)** - Backend Development, API Design
+- **[Fenet Gizaw](https://github.com/Fenet254)** - Frontend Development, UI/UX
+- **[Solomon Tesfaye](https://github.com/AmSaved)** - ML Models, Data Processing
+
+---
+
 ## 🚀 Features
 
 - **🦠 Plant Disease Detection** — Upload a photo, get instant diagnosis across **38 disease classes** using MobileNetV2 CNN
@@ -357,7 +368,11 @@ This project is for educational and portfolio purposes. Contributions are welcom
 
 ## 📄 License
 
-© 2025 GreenGuardians. Educational/Portfolio Project.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+**Copyright © 2025 GreenGuardians Team**
+
+Made with ❤️ by [Ebisa Berhanu](https://github.com/Ebo1996), [Anam Tesfa](https://github.com/anotesfa), [Fenet Gizaw](https://github.com/Fenet254), and [Solomon Tesfaye](https://github.com/AmSaved).
 
 ---
 
@@ -403,12 +418,34 @@ This project is for educational and portfolio purposes. Contributions are welcom
 
 ---
 
-## 📧 Contact
+## 📧 Contact & Support
 
-For questions or suggestions, please open an issue on GitHub.
+For questions, suggestions, or collaboration opportunities:
 
-**Live Demo**: Coming soon!
+- **Open an Issue**: [GitHub Issues](https://github.com/your-repo/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-repo/discussions)
+
+### Connect with the Team:
+- 💼 [Ebisa Berhanu](https://github.com/Ebo1996)
+- 💼 [Anam Tesfa](https://github.com/anotesfa)
+- 💼 [Fenet Gizaw](https://github.com/Fenet254)
+- 💼 [Solomon Tesfaye](https://github.com/AmSaved)
 
 ---
 
+## 🌟 Acknowledgments
+
+- **PlantVillage Dataset** - For disease detection training data
+- **Kaggle Community** - For crop recommendation dataset
+- **Hugging Face** - For pre-trained MobileNetV2 model
+- **Open Source Community** - For amazing tools and frameworks
+
+---
+
+**Live Demo**: Coming soon!
+
 **⭐ If you find this project helpful, please consider giving it a star!**
+
+---
+
+**© 2025 GreenGuardians Team | Licensed under MIT License**
