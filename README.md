@@ -26,26 +26,16 @@ Empowering farmers with real machine learning models for instant plant disease d
 
 <div align="center">
 
-### 📹 Watch GreenGuardians in Action
+https://github.com/user-attachments/assets/0b5923f0-b6ab-43e1-8a26-978608046192
 
-**[📥 Download Demo Video (7.93 MB)](./Screen%20Recording.mp4)**
+**🌿 Watch GreenGuardians detect plant diseases and recommend optimal crops using AI!**
 
 </div>
 
-> **To make the video play inline on GitHub:**
-> 1. Go to https://github.com/Ebo1996/green-guardian/issues/new
-> 2. Drag and drop `Screen Recording.mp4` into the comment box
-> 3. GitHub will upload it and give you a URL starting with `https://github.com/user-attachments/assets/`
-> 4. Copy that URL and replace the placeholder below
-> 5. The video will then play inline in the README!
-
-<!-- Replace this line with the GitHub-hosted video URL from step 4 above -->
-<!-- Example: https://github.com/user-attachments/assets/your-video-id.mp4 -->
-
 **Features Demonstrated:**
-- ✅ Plant disease detection with MobileNetV2 AI model
-- ✅ Crop recommendation using soil parameters
-- ✅ Real-time inference and detailed reports
+- ✅ Plant disease detection with MobileNetV2 AI model (92%+ accuracy)
+- ✅ Crop recommendation using soil parameters (99.5% accuracy)
+- ✅ Real-time inference and detailed treatment reports
 - ✅ Mobile-responsive design
 - ✅ PDF/CSV export functionality
 
