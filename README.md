@@ -22,6 +22,14 @@ Empowering farmers with real machine learning models for instant plant disease d
 
 ---
 
+## 🎬 Demo
+
+https://github.com/Ebo1996/green-guardian/raw/main/Screen%20Recording.mp4
+
+> **See GreenGuardians in action!** Watch the demo showcasing plant disease detection and crop recommendation features.
+
+---
+
 ## 📊 Project Stats
 
 ![GitHub Stars](https://img.shields.io/github/stars/Ebo1996/green-guardian?style=social)
